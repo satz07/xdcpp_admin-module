@@ -1,0 +1,74 @@
+<div xmlns:th="http://www.thymeleaf.org" class="navbar-custom">
+    <div class="container-fluid">
+        <ul class="list-unstyled topnav-menu float-right mb-0">
+            <!-- WEB3 migration changes - Web2/Web3 Toggle -->
+            <li class="dropdown d-none d-lg-inline-block">
+                <div class="nav-link" style="padding: 0.5rem 1rem;">
+                    <div class="d-flex align-items-center flex-column">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="mr-2" style="font-size: 0.875rem; font-weight: 500;">Web2</span>
+                            <label class="switch mb-0">
+                                <input type="checkbox" id="web3Toggle" onchange="toggleWeb3(this)">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="ml-2" style="font-size: 0.875rem; font-weight: 500;">Web3</span>
+                        </div>
+                        <!-- Table name indicator -->
+                        <div id="tableNameIndicator" style="font-size: 0.75rem; color: #6c757d; font-style: italic; min-height: 1rem;">
+                            <span id="currentTableName">-</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown d-none d-lg-inline-block">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
+                    <i class="mdi mdi-fullscreen noti-icon font-26"></i>
+                </a>
+            </li>
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="mdi mdi-bell-outline font-26"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                    <div class="dropdown-item noti-title"> <h5 class="m-0"> Notification </h5> </div>
+                </div>
+            </li>
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img th:src="@{/images/users/user-1.jpg}" alt="user-image" class="rounded-circle">
+                    <span class="pro-user-name ml-1" th:text="${#request.userPrincipal.principal.username}"></span>
+                    <i class="mdi mdi-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                    <a th:href="@{/logout}" class="dropdown-item notify-item">
+                        <i class="fe-log-out"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <div class="logo-box px-3">
+            <a href="#" class="logo logo-light text-center">
+                <span class="logo-sm pt-3"> <img th:src="@{/img/xdc-inverted-primary-icon.png}" alt="XDC Payments" height="24" class="xdc-logo-sm"> </span>
+                <span class="logo-lg pt-2 xdc-logo-lg"> <img th:src="@{/img/xdc-payments-logo-light.svg}" alt="XDC Payments" class="xdc-header-logo" onerror="this.onerror=null; this.src='/img/xdc-payments-logo.png';" /> </span>
+            </a>
+        </div>
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+            <li>
+                <button class="button-menu-mobile waves-effect waves-light">
+                    <i class="fe-menu"></i>
+                </button>
+            </li>
+            <li>
+                <a class="navbar-toggle nav-link" data-toggle="collapse" data-target="#topnav-menu-content">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</div>

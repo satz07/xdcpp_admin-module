@@ -1,0 +1,270 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Roles</a></li>
+                                    <li class="breadcrumb-item active"><a href="/role/list">Add Role</a></li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Add Role</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end page title -->
+                <form action="#" th:action="@{/role/create}" class="needs-validation" novalidate autocomplete="off"
+                      th:object="${role}" method="post">
+                    <div th:if="${confirmationMessage}" class="alert alert-success"
+                         role="alert" th:text=${confirmationMessage}></div>
+
+                    <div th:if="${errorMessage}"
+                         class="alert alert-danger" role="alert"
+                         th:text="${errorMessage}"></div>
+
+                    <div th:if="${#fields.hasErrors('roleName')}"
+                         th:errors="*{roleName}"
+                         class="validation-message alert alert-danger" role="alert"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">General Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="roleName">Role Name</label>
+                                            <input type="text" th:field="*{roleName}" class="form-control"
+                                                   id="roleName" name="*roleName" required minlength="2" maxlength="60">
+                                            <div class="invalid-feedback">
+                                                Enter Role Name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="groupRoleMappings">Group</label>
+
+                                            <select class="selectpicker show-tick border form-control" required
+                                                    th:field="*{groupRoleMappings}" id="groupRoleMappings"
+                                                    name="*groupRoleMappings" data-live-search="true"
+                                                    title="Select Group" data-style="btn">
+                                                <option th:each="group : ${groups}" th:value="${group.id}"
+                                                        th:text="${group.groupName}"  selected="${group.id == groupRoleMappings}"/>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="roleDescription">Description</label>
+                                            <textarea class="form-control" type="text" id="roleDescription"
+                                                      th:field="*{roleDescription}" cols="30" rows="5"
+                                                      placeholder="Add description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Mapping</h5>
+                                <div id="feature_content">
+                                    <div class="mapparent" id="function_1">
+                                        <div class="row align-items-center mapping">
+                                            <div class="col-md-6" th:each="a, stat : ${functionsMaster}">
+                                                <div class="form-group mb-3">
+                                                    <label>Functions</label>
+                                                    <select class="selectpicker show-tick border"
+                                                            required
+                                                            title="Select Function" data-style="btn"
+                                                            data-dropup-auto="false"
+                                                            th:field="*{functionMastersLists[__${stat.index}__].functionMasters}" id="1"
+                                                            onchange="getFeaturesList(this.value,this.id)">
+                                                        <option th:each="function : ${functions}"
+                                                                th:value="${function.id}"
+                                                                th:text="${function.functionMasterName}"/>
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Invalid
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6" th:each="a, stats : ${featuresMaster}">
+                                                <div class="form-group mb-3">
+                                                    <label>Features</label>
+                                                    <div class="d-flex">
+                                                        <select th:field="*{featuresMastersLists[__${stats.index}__].featuresMasters}"
+                                                                id="roleFeatureMappings_1"
+                                                                name="*{featuresMastersLists[__${stats.index}__]}"
+                                                                class="selectpicker show-tick border roleFeatureMappings"  multiple required  title="Select Features" data-style="btn" data-dropup-auto="false">
+                                                            <!--<option th:each="feature : ${features}"
+                                                                    th:value="${feature.id}"
+                                                                    th:text="${feature.featureName}"/>-->
+                                                        </select>
+                                                        <a href="javascript:void(0);" class="action-icon ml-2 deletemap" onclick="deleteFunctionFeature('1')">
+                                                            <i class="mdi mdi-delete"></i></a>
+                                                    </div>
+                                                    <div class="invalid-feedback">
+                                                        Invalid
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mapchild"></div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-outline-primary" type="button" onclick="addMoreFeatures()">
+                                        Add More
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Role</button>
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                    <input type="hidden" id="count" name="count" value="1">
+                </form>
+
+            </div> <!-- container -->
+            <!-- Modal -->
+            <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body p-4">
+                            <div class="text-center">
+                                <i class="dripicons-information h1 text-info"></i>
+                                <h4 class="mt-2">Heads up!</h4>
+                                <p class="mt-3">Are you sure you want to delete?</p>
+                                <button type="button" class="btn btn-primary my-2 confirm-deletemap"
+                                        data-dismiss="modal" onclick="deleteFirstItem()">Yes
+                                </button>
+                                <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No
+                                </button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body p-4">
+                            <div class="text-center">
+                                <i class="dripicons-checkmark h1 text-secondarycolor"></i>
+                                <h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+                                <p class="mt-3 text-secondarycolor">Mapping Deleted</p>
+                                <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div> <!-- content -->
+        <!-- Footer Start -->
+        <footer th:replace="base/footer :: footer"></footer>
+        <!-- end Footer -->
+    </div>
+
+</div>
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script type="text/javascript">
+	function getFeaturesList(functionId,bindId) {
+		$.ajax({
+			type: 'GET',
+			url: '/load/features/' + functionId,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					s += '<option value="' + result[i].id + '">' + result[i].featureName + '</option>';
+				}
+				$('#roleFeatureMappings_'+bindId).html(s);
+				$('.selectpicker').selectpicker('refresh');
+			}
+		});
+	}
+
+	var tempGlobalItem=null;
+	function deleteFunctionFeature(removeId) {
+	    if(removeId == "1"){
+            tempGlobalItem=removeId;
+            //$("#function_"+removeId).remove();
+        }else{
+            $("#function_"+removeId).remove();
+        }
+	}
+    function deleteFirstItem() {
+        $("#function_"+tempGlobalItem).remove();
+    }
+</script>
+<script th:inline="javascript">
+function addMoreFeatures() {
+    var countVal = $("#count").val();
+    var idVal = parseInt(countVal)+parseInt(1);
+    $("#count").val(parseInt(countVal)+parseInt(1));
+    var message = [[${functions}]];
+     var featureData = '<div class="mapparent" id="function_'+idVal+'">';
+         featureData += '<div class="row align-items-center mapping">';
+         featureData += '<div class="col-md-6">';
+         featureData += '<div class="form-group mb-3">';
+         featureData += '<label >Functions</label>';
+         featureData += '<select class="form-control" required title="Select Function" name="functionMastersLists['+countVal+'].functionMasters" id="'+idVal+'" onchange="getFeaturesList(this.value,this.id)">';
+         featureData += '<option value="0">Select Feature</option>';
+         for(var i = 0; i < message.length; i++) {
+            featureData += '<option value="' + message[i].id + '">' + message[i].functionMasterName + '</option>';
+         }
+         featureData += '</select>';
+         featureData += '<div class="invalid-feedback">';
+         featureData += '</div>';
+         featureData += '</div>';
+         featureData += '</div>';
+         featureData += '<div class="col-md-6">';
+         featureData += '<div class="form-group mb-3">';
+         featureData += '<label>Features</label>';
+         featureData += '<div class="d-flex">';
+         featureData += '<select id="roleFeatureMappings_'+idVal+'" name="featuresMastersLists['+countVal+'].featuresMasters" class="selectpicker show-tick border roleFeatureMappings"  multiple required  title="Select Features" data-style="btn" data-dropup-auto="false">';
+         //featureData += '<option value="0">Select Feature</option>';
+         featureData += '</select>';
+         featureData += '<a href="javascript:void(0);" class="action-icon ml-2 deletemap" onclick="deleteFunctionFeature('+idVal+')"><i class="mdi mdi-delete"></i></a>';
+         featureData += '</div>';
+         featureData += '<div class="invalid-feedback">';
+         featureData += '</div>';
+         featureData += '</div>';
+         featureData += '</div>';
+         featureData += '</div>';
+         featureData += '<div class="mapchild"></div>';
+         featureData += '</div>';
+         $("#feature_content").append(featureData);
+         $('.selectpicker').selectpicker('refresh');
+}
+</script>
+</html>

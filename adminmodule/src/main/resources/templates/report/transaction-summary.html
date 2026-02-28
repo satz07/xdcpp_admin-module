@@ -1,0 +1,502 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base/list_header :: head"></head>
+
+<div id="wrapper">
+	<div th:replace="base/top_header" :: div></div>
+	<div th:replace="base/left_menu" :: div></div>
+
+	<div class="content-page">
+		<div class="content">
+
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-12">
+						<div class="page-title-box">
+							<div class="page-title-right">
+								<ol class="breadcrumb m-0">
+									<li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+									<li class="breadcrumb-item active">Transaction Summary</li>
+								</ol>
+							</div>
+							<h4 class="page-title">Transaction Summary</h4>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<form th:action="@{/summary/list}" method="post"
+							class="needs-validation" novalidate autocomplete="off">
+							<div class="mb-3"></div>
+							<div class="form-group mb-3 form-inline mr-3 d-inline-flex">
+								<label for="trns-number" class="mr-3">Transaction Number</label>
+								<input class="form-control" type="text" th:name="transactionId"
+									id="transactionId">
+							</div>
+							<button class="btn btn-outline-primary" type="submit">Search</button>
+
+						</form>
+						<div class="row mb-3">
+							<div class="col-lg-4">
+								<div class="nav nav-pills flex-column nav-pills-tab text-center"
+									id="v-pills-tab" role="tablist" aria-orientation="vertical">
+									<a class="nav-link active shadow show py-2"
+										id="custom-v-pills-remitterdetails-tab" data-toggle="pill"
+										href="#custom-v-pills-remitterdetails" role="tab"
+										aria-controls="custom-v-pills-remitterdetails"
+										aria-selected="true"> <i
+										class="mdi mdi-account-circle d-block font-24"></i> Remitter
+										Details
+									</a> <a class="nav-link mt-2 shadow py-2"
+										id="custom-v-pills-trns-dtls-tab" data-toggle="pill"
+										href="#custom-v-pills-trns-dtls" role="tab"
+										aria-controls="custom-v-pills-trns-dtls" aria-selected="false">
+										<i class="mdi mdi-barcode d-block font-24"></i> Transaction
+										Details
+									</a> <a class="nav-link mt-2 shadow py-2"
+										id="custom-v-pills-trns-calc-tab" data-toggle="pill"
+										href="#custom-v-pills-trns-calc" role="tab"
+										aria-controls="custom-v-pills-trns-calc" aria-selected="false">
+										<i class="mdi mdi-file-clock d-block font-24"></i> Transaction
+										Calculation
+									</a> <a class="nav-link mt-2 shadow py-2"
+										id="custom-v-pills-recipient-dtls-tab" data-toggle="pill"
+										href="#custom-v-pills-recipient-dtls" role="tab"
+										aria-controls="custom-v-pills-recipient-dtls"
+										aria-selected="false"> <i
+										class="mdi mdi-account-group d-block font-24"></i> Recipient
+										Details
+									</a><!--  <a class="nav-link mt-2 shadow py-2"
+										id="custom-v-pills-promo-benefit-tab" data-toggle="pill"
+										href="#custom-v-pills-promo-benefit" role="tab"
+										aria-controls="custom-v-pills-promo-benefit"
+										aria-selected="false"> <i
+										class="mdi mdi-cash-multiple d-block font-24"></i> Promo
+										Benefit
+									</a> --> <!-- <a class="nav-link mt-2 shadow py-2"
+										id="custom-v-pills-collection-bnkcrdt-cnf-tab"
+										data-toggle="pill"
+										href="#custom-v-pills-collection-bnkcrdt-cnf" role="tab"
+										aria-controls="custom-v-pills-collection-bnkcrdt-cnf"
+										aria-selected="false"> <i
+										class="mdi mdi-ticket-confirmation d-block font-24"></i>
+										Collection Bank Credit Confirmation
+									</a> -->
+								</div>
+							</div>
+							<div th:if="${not #lists.isEmpty(transactionLists)}">
+								<div th:each="transactionList : ${transactionLists}">
+									<div class="col-lg-12">
+										<div class="tab-content px-3 pt-2">
+											<div class="tab-pane fade active show"
+												id="custom-v-pills-remitterdetails" role="tabpanel"
+												aria-labelledby="custom-v-pills-remitterdetails-tab">
+												<div>
+													<h4 class="header-title">Remitter Details</h4>
+													<div class="table-responsive">
+														<table
+															class="m-0 nowrap table table-bordered table-centered table-hover w-100 table-striped">
+															<tbody>
+																<tr>
+																	<th>Name</th>
+																	<td th:text="${transactionList.remitterFullname}"></td>
+															</tr>
+																<tr>
+																	<th>User Category</th>
+																<td th:text="PERSONAL"></td>
+															</tr>
+																<tr>
+																	<th>Partner Name</th>
+																	<td>XDC Payments</td>
+
+
+																</tr>
+																<tr>
+																	<th>Registration Date and Time</th>
+																	<!-- <td	th:text="${transactionList.personalDetails.createAt}"></td>-->
+																	<td th:text="${transactionList.personalDetails.createAt}"></td> 
+															</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="custom-v-pills-trns-dtls"
+												role="tabpanel"
+												aria-labelledby="custom-v-pills-trns-dtls-tab">
+												<div>
+													<h4 class="header-title">Transaction Details</h4>
+													<div>
+														<table
+															class="m-0 nowrap table table-bordered table-centered table-hover w-100 table-striped">
+															<tbody>
+																<tr>
+																	<th>Transaction Number</th>
+																	<td th:text="${transactionList.referenceNo}"></td>
+																</tr>
+																<tr>
+																	<th>Booking Date and Time</th>
+																	<!--<td th:text="${transactionList.registrationDate}"></td>-->
+																	<td th:text="${transactionList.bookingDate}"></td>
+																</tr>
+																<tr>
+																	<th>Payment Mode</th>
+																	<td th:text="${transactionList.userCal.paymentMode}"></td>
+																</tr>
+																<tr>
+																	<th>Transaction Status</th>
+																	<td th:text="${transactionList.userCal.status}"></td>
+																</tr>
+																<tr>
+																	<th>Disbursement Date and Time</th>
+																	<td th:text="${transactionList.disbursementDateTime}"></td>
+																</tr>
+																<tr>
+																	<th>Disbursement Bank</th>
+																	<td>YES Bank</td>
+																</tr>
+																<tr>
+																	<th>Disbursement Reference</th>
+																	<td th:text="${transactionList.utrNumber}"></td>
+																</tr>
+																<tr>
+																	<th>UTR time stamp</th>
+																	<td th:text="${transactionList.utrTime}"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="custom-v-pills-trns-calc"
+												role="tabpanel"
+												aria-labelledby="custom-v-pills-trns-calc-tab">
+												<div>
+													<h4 class="header-title">Transaction Calculation</h4>
+													<div class="table-responsive">
+														<table
+															class="m-0 nowrap table table-bordered table-centered table-hover w-100 table-striped">
+															<tr>
+																<th>Originating Currency and Amount</th>
+																<td
+																	th:text="${transactionList.userCal.fromCurrencyCode}"></td>
+															</tr>
+															<tr>
+																<th>FX Base Rate</th>
+																<td th:text="${transactionList.fxBaseRate}"></td>
+															</tr>
+															<tr>
+																<th>Margin</th>
+																<td th:text="${transactionList.margin}"></td>
+															</tr>
+															<tr>
+																<th>Exchange Rate</th>
+																<td
+																	th:text="${transactionList.userCal.toCurrencyValue}"></td>
+															</tr>
+															<tr>
+																<th>Exchange Rate Benefit</th>
+																<td th:text="TBD"></td>
+															</tr>
+															<tr>
+																<th>Exchange Rate Applied</th>
+																<td th:text="TBD"></td>
+															</tr>
+															<tr>
+																<th>Total Transfer Fees</th>
+																<td th:text="${transactionList.userCal.transactionFee}"></td>
+															</tr>
+															<tr>
+																<th>Transfer Fee Benefit</th>
+																<td th:text="TBD"></td>
+															</tr>
+															<tr>
+																<th>Transfer Fee Applied</th>
+																<td th:text="TBD"></td>
+															</tr>
+															<tr>
+																<th>Lumpsum Benefit</th>
+																<td th:text="TBD"></td>
+															</tr>
+															<tr>
+																<th>Net Conversion Amount</th>
+																<td th:text="TBD"></td>
+															</tr>
+															<tr>
+																<th>Disbursement Currency and Amount</th>
+																<!--<td th:text="${transactionList.userCal.transactionFee}"></td>-->
+																<td th:text="${transactionList.userCal.toCurrencyCode} + ' ' + ${transactionList.userCal.totalConvertedValue}"></td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="custom-v-pills-recipient-dtls"
+												role="tabpanel"
+												aria-labelledby="custom-v-pills-recipient-dtls-tab">
+												<div>
+													<h4 class="header-title">Recipient Details</h4>
+													<div class="table-responsive">
+														<table
+															class="m-0 nowrap table table-bordered table-centered table-hover w-100 table-striped">
+															<tr>
+																<th>Recipient Name</th>
+																<td
+																	th:text="${transactionList.beneficiaryUser.fullName}"></td>
+															</tr>
+															<tr>
+																<th>Relationship</th>
+<!--																<td	th:text="${transactionList.relationship}"></td>-->
+																<td	th:text="${transactionList.beneficiaryUser.beneficiaryRelationship}"></td>
+
+															</tr>
+															<tr>
+																<th>Beneficiary Nickname</th>
+																<td	th:text="${transactionList.beneficiaryUser.nickName}"></td>
+															</tr>
+															<tr>
+																<th>Purpose</th>
+																<td	th:text="${transactionList.beneficiaryUser.purpose}"></td>
+															</tr>
+														<!-- 	<tr>
+																<th>Address</th>
+																<td th:text="${transactionList.beneficiaryUser.address}"></td>
+
+															</tr>
+															<tr>
+																<th>Country</th>
+																<td th:text="${transactionList.beneficiaryUser.country}"></td>
+
+															</tr> -->
+															<tr>
+																<th>Delivery Mode</th>
+																<td th:text="${transactionList.userCal.receiveMode}"></td>
+															</tr>
+															<tr>
+																<th>Bank IFSC</th>
+																<td th:text="${transactionList.account.ifscCode}"></td>
+															</tr>
+															<tr>
+																<th>Bank Name</th>
+																<td th:text="${transactionList.account.branchName}"></td>
+															</tr>
+															<tr>
+																<th>Account Number</th>
+																<td th:text="${transactionList.account.accountNumber}"></td>
+															</tr>
+															<!-- <tr>
+																<th>VPA Handle</th>
+																<td th:text="TBD"></td>
+															</tr> -->
+															<!-- <tr>
+																<th>Mobile Number</th>
+																<td
+																	th:text="${transactionList.beneficiaryUser.mobileNumber}"></td>
+															</tr>
+															<tr>
+																<th>Email Address</th>
+																<td th:text="${transactionList.beneficiaryUser.email}"></td>
+															</tr> -->
+														</table>
+													</div>
+												</div>
+											</div>
+										<!-- 	<div class="tab-pane fade" id="custom-v-pills-promo-benefit"
+												role="tabpanel"
+												aria-labelledby="custom-v-pills-promo-benefit-tab">
+												<div>
+													<h4 class="header-title">Promo Benefit</h4>
+													<div class="table-responsive">
+														<table
+															class="m-0 nowrap table table-bordered table-centered table-hover w-100 table-striped">
+															<tr>
+																<th>Promo Code</th>
+																<td>SPECIAL26</td>
+															</tr>
+															<tr>
+																<th>Exchange Rate Benefit</th>
+																<td>INR 19</td>
+															</tr>
+															<tr>
+																<th>Transfer Fee Benefit</th>
+																<td>INR 498.50</td>
+															</tr>
+															<tr>
+																<th>Lumpsum Benefit</th>
+																<td>INR 249.25</td>
+															</tr>
+															<tr>
+																<th>Total Benefit to Remitter</th>
+																<td>INR 766.75</td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</div> -->
+											<div class="tab-pane fade"
+												id="custom-v-pills-collection-bnkcrdt-cnf" role="tabpanel"
+												aria-labelledby="custom-v-pills-collection-bnkcrdt-cnf-tab">
+												<div>
+													<h4 class="header-title">Collection Bank Credit
+														Confirmation</h4>
+													<div class="table-responsive">
+														<table
+															class="m-0 nowrap table table-bordered table-centered table-hover w-100 table-striped">
+															<tr>
+																<th>Value Date</th>
+																<td></td>
+															</tr>
+															<tr>
+																<th>Transaction Type</th>
+																<td></td>
+															</tr>
+															<tr>
+																<th>Currency</th>
+																<td></td>
+															</tr>
+															<tr>
+																<th>Amount Received</th>
+																<td></td>
+															</tr>
+															<tr>
+																<th>Transaction Number</th>
+																<td></td>
+															</tr>
+															<tr>
+																<th>Bank Reference</th>
+																<td></td>
+															</tr>
+															<tr>
+																<th>Account Name</th>
+																<td th:text="${transactionList.account.accountType}"></td>
+															</tr>
+															<tr>
+																<th>Account Number</th>
+																<td th:text="${transactionList.account.accountNumber}"></td>
+															</tr>
+															<tr>
+																<th>Bank Code</th>
+																<td th:text="${transactionList.account.ifscCode}"></td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="trnsstatus" class="modal fade" tabindex="-1" role="dialog"
+				aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Transaction
+								Status</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">�</button>
+						</div>
+						<div class="modal-body p-4">Transaction satus details shown
+							here</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="confirm-delete" class="modal fade" tabindex="-1"
+				role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body p-4">
+							<div class="text-center">
+								<i class="dripicons-information h1 text-info"></i>
+								<h4 class="mt-2">Heads up!</h4>
+								<p class="mt-3">Are you sure you want to delete?</p>
+								<button type="button"
+									class="btn btn-primary my-2 confirm-deletemap"
+									data-dismiss="modal">Yes</button>
+								<button type="button" class="btn btn-outline-primary my-2"
+									data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="success-alert-modal" class="modal fade" tabindex="-1"
+				role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body p-4">
+							<div class="text-center">
+								<i class="dripicons-checkmark h1 text-secondarycolor"></i>
+								<h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+								<p class="mt-3 text-secondarycolor">Mapping Deleted</p>
+								<button type="button" class="btn btn-outline-primary my-2"
+									data-dismiss="modal">Continue</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<footer th:replace="base/footer :: footer"></footer>
+
+	<div id="notification-modal" class="modal fade" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body p-4">
+					<div class="text-center">
+						<h4 class="mt-2">Authorize</h4>
+						<p class="mt-3">Fee</p>
+						<button type="button" class="btn btn-primary my-2"
+							data-dismiss="modal">Yes</button>
+						<button type="button" class="btn btn-outline-primary my-2"
+							data-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script
+	th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/libs/admin-resources/rwd-table/rwd-table.min.js}"></script>
+<script th:src="@{/js/pages/responsive-table.init.js}"></script>
+<script th:src="@{/libs/footable/footable.all.min.js}"></script>
+</html>

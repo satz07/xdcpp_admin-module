@@ -1,0 +1,673 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+                 
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">compliance</a></li>
+                                            <li class="breadcrumb-item active">Checker</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">compliance (Checker)</h4>
+                                </div>
+                            </div>
+                        </div>   
+                        <!-- end title -->
+                     
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box">
+                                    <div class="row">
+                                        <div class="col-lg-8"> <h4 class="header-title mb-4">Compliance Checker</h4> </div>
+                                        <div class="col-lg-4 text-right">
+                                            <a  data-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="filters">Filter <i class="mdi mdi-filter-variant font-20"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3 collapse" id="filters">
+                                        <div class="col-md-3 mt-1">
+                                            <select class="selectpicker show-tick border" id="acc_type" title="Select Partner Type" data-style="btn" data-dropup-auto="false">
+                                                <option value="Partner 1">Partner 1</option>
+                                                <option value="Partner 2">Partner 2</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mt-1">
+                                            <input class="form-control" type="text" placeholder="Login Id">
+                                        </div>
+                                        <div class="col-md-3 mt-1">
+                                            <input class="form-control" type="text" placeholder="Enter Transaction number">
+                                        </div>
+                                        <div class="col-md-3 mt-1">
+                                            <select class="selectpicker show-tick border" title="Sending Country" data-style="btn" data-dropup-auto="false">
+                                                <option value="AUS">AUS</option>
+                                                <option value="INR">INR</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mt-1">
+                                            <input class="form-control" type="date" placeholder="Enter date">
+                                        </div>
+                                        <div class="col-md-3 mt-1">
+                                            <select data-size="3" class="selectpicker show-tick border"  title="Select Satus" data-style="btn" data-dropup-auto="false">
+                                                <option value="Process">Process</option>
+                                                <option value="Reject">Reject</option>
+                                                <option value="User Action">User Action</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tablewrap table-responsive">
+                                        <table class="table table-hover m-0 table-centered w-100 viewtable drpdwn"  id="scroll-horizontal-datatable">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>Date and Time</th>
+                                                    <th>Transaction Number</th>
+                                                    <th>Login ID</th>
+                                                    <th>Risk Profile</th>
+                                                    <th>Name</th>
+                                                    <th>Currency</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>User Action</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>10-11-2020 12:56 </td>
+                                                    <td><a href="javascript:void(0);" data-target="#referencedetails" data-toggle="modal">HGFT74786253</a></td>
+                                                    <td><a href="javascript:void(0);"  data-target="#transactionreferencedetails" data-toggle="modal">somebody@fynte.com</a></td>
+                                                    <td><span class="badge bg-soft-warning text-warning">Medium</span></td>
+                                                    <td>Anil Kumar</td>
+                                                    <td>AUD</td>
+                                                    <td>600</td>
+                                                    <td>
+                                                        <select class="form-control stts">
+                                                            <option disabled hidden>Select Status</option>
+                                                            <option value="Process">Process</option>
+                                                            <option value="Reject" selected>Reject</option>
+                                                            <option value="User Action">User Action</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><a href="javascript:void(0);" class="useract d-none ml-2" data-target="#useractions" data-toggle="modal">Add User Action</a></td>
+                                                    <td>
+                                                        <a href="javascript:void(0);" class="action-icon" title="view" data-target="#viewdetails" data-toggle="modal"> <i class="mdi font-24 mdi mdi-eye-outline text-dark"></i></a>
+                                                        <a href="javascript:void(0);" class="action-icon" title="Add Comment" data-target="#commenttog" data-toggle="modal"> <i class="mdi font-24 mdi mdi-comment-eye-outline text-dark"></i></a>
+                                                        <a href="javascript:void(0);" class="action-icon" title="Submit"> <i class="mdi font-24 mdi mdi-check-bold text-success"></i></a>
+                                                        <a href="javascript:void(0);" class="action-icon" title="Reset"><i class="mdi font-24 mdi mdi-cancel text-danger"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10-11-2020 12:56 </td>
+                                                    <td><a href="javascript:void(0);" data-target="#referencedetails" data-toggle="modal">HGFT74786253</a></td>
+                                                    <td><a href="javascript:void(0);"  data-target="#transactionreferencedetails" data-toggle="modal">somebody@fynte.com</a></td>
+                                                    <td><span class="badge bg-soft-danger text-danger">High</span></td>
+                                                    <td>Anil Kumar</td>
+                                                    <td>AUD</td>
+                                                    <td>600</td>
+                                                    <td>
+                                                        <select class="form-control stts">
+                                                            <option disabled hidden>Select Status</option>
+                                                            <option value="Process">Process</option>
+                                                            <option value="Reject">Reject</option>
+                                                            <option value="User Action" selected>User Action</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><a href="javascript:void(0);" class="useract ml-2" data-target="#useractions" data-toggle="modal">View User Action</a></td>
+                                                    <td>
+                                                        <a href="javascript:void(0);" class="action-icon" title="view" data-target="#viewdetails" data-toggle="modal"> <i class="mdi font-24 mdi mdi-eye-outline text-dark"></i></a>
+                                                        <a href="javascript:void(0);" class="action-icon" title="Add Comment" data-target="#commenttog" data-toggle="modal"> <i class="mdi font-24 mdi mdi-comment-eye-outline text-dark"></i></a>
+                                                        <a href="javascript:void(0);" class="action-icon" title="Submit"> <i class="mdi font-24 mdi mdi-check-bold text-success"></i></a>
+                                                        <a href="javascript:void(0);" class="action-icon" title="Reset"><i class="mdi font-24 mdi mdi-cancel text-danger"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <script>document.write(new Date().getFullYear())</script> © AndRemit 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-md-right footer-links d-none d-sm-block">
+                                    <a href="javascript:void(0);">Help</a>
+                                    <a href="javascript:void(0);">Contact Admin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- end Footer -->
+                <div id="viewdetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog  modal-full-width">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">View Detail</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4 pt-0 bg-light">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Customer Profile</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Remitter KYC online verification completed</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">No duplicate registration found</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">No remitter is sharing the same address</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">No remitter is sharing the same mobile number</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Sanction Screening</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Remitter sanction screening cleared</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Recipient sanction screening cleared</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Remitter internal list screening cleared</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Recipient internal list screening cleared</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Enhanced Due Diligence</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Customer limit is within the defined limits</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">No change in customer transacting pattern</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Customer has not circumvented EDD</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Customer has transacted in the last 365 days</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Risk Profile</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Customer is not categorised as High Risk</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Location</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Registration country same as IP country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Transaction country same as IP country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold text-danger">Registration and transaction IP country are the same</td><td><i class="mdi mdi-cancel text-danger"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Sending Bank</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Sending account name matched with remitter name</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">No other remitter same with same sending bank account</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Recipient</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Recipient name matched with the account name</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold text-danger">Recipient has not been modified</td><td><i class="mdi mdi-cancel text-danger"></td></tr>
+                                                <tr><td class="font-weight-bold">Recipient modification and addition location are the same</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">No other remitter is sending to the same recipient</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Remitter is not sending to a new country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Remitter nationality and receive country are the same</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Remitter and recipient seem to be related</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Remitter does not have multiple unrelated recipient</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">No transactions to multiple recipient in last 180 days</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">High Risk Country</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td>Transaction IP is not from high risk country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td>Registration is not from high risk country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td>Receipient is not from high risk country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td>User filled nationality is not from high risk country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td>User fetched nationality is not from high risk country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <p class="text-uppercase mb-0 bg-light p-2 font-weight-bold">Prohibited Country</p>
+                                            <table class="table table-hover mb-0">
+                                                <tr><td class="font-weight-bold">Transaction IP is not from prohibited country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Registration is not from prohibited country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">Receipient is not from prohibited country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">User filled nationality is not from prohibited country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                                <tr><td class="font-weight-bold">User fetched nationality is not from prohibited country</td><td><i class="mdi mdi-check-bold text-dark"></td></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <div id="referencedetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog  modal-full-width">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Remitter Details</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4 pt-0 bg-light">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="card mb-2">
+                                            <p class="text-uppercase mt-2 mb-0 bg-light p-2 font-weight-bold">Transaction Status</p>
+                                            <p class="p-2">Payment Pending</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="card">
+                                            <p class="text-uppercase mt-2 mb-0 bg-light p-2 font-weight-bold">Latest Transaction Summary</p>
+                                            <div class="p-2">
+                                                <div class="row"><div class="col-4 font-weight-bold">Transaction reference number</div><div class="col-8">HGFT74786253</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Tranfer Method</div><div class="col-8">Bank Account</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Transaction Fees</div><div class="col-8">10 AUD</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Exchange Rate</div><div class="col-8">1 INR = 0.014 AUD</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Sending amount</div><div class="col-8">10,000 INR</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Receiving amount</div><div class="col-8">4 AUD</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Delivery Time</div><div class="col-8">24hrs</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-5">
+                                        <div class="card">
+                                            <p class="text-uppercase mt-2 mb-0 bg-light p-2 font-weight-bold">Transaction Summary</p>
+                                            <div class="p-2">
+                                                <div class="row"><div class="col-4 font-weight-bold">Transaction Number</div><div class="col-8">ABHL8765498</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Booking Date and Time</div><div class="col-8">9/10/20 17:21</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Payment Mode</div><div class="col-8">Debit Card</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">IP Address</div><div class="col-8">101.23.04.22</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">IP Location</div><div class="col-8">Sydney</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Booking Amount</div><div class="col-8">AUD 2,750</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Exchange Rate</div><div class="col-8">50.25</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Transfer Fee</div><div class="col-8">AUD 5</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Service Charge</div><div class="col-8">INR 100</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Transfer Fee Benefit</div><div class="col-8">AUD 0</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Exchange Rate Benefit</div><div class="col-8">0</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Final Amount Benefit</div><div class="col-8">INR 0</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Net Conversion Amount</div><div class="col-8">AUD 2,755</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Final Disbursement Amount</div><div class="col-8">INR 138,538.75</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Transaction Status</div><div class="col-8">Transaction Booked</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Purpose</div><div class="col-8">Gifting</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Relationship</div><div class="col-8">Brother</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Beneficiary Name</div><div class="col-8">Some Body</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Beneficiary Nickname</div><div class="col-8">SB</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Beneficiary AML</div><div class="col-8">False Positive</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Address</div><div class="col-8">D-23, Snehalata Park, Mahim, 400034</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Country</div><div class="col-8">India</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Email Address</div><div class="col-8">somebody@fynte.com</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Mobile Number</div><div class="col-8">917654678455</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Delivery Mode</div><div class="col-8">Account Credit</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Bank IFSC</div><div class="col-8">ICIC0000988</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                       <div class="card">
+                                        <p class="text-uppercase mb-0 mt-2 bg-light p-2 font-weight-bold">Transaction History</p>
+                                        <table class="table table-hover text-center">
+                                            <tr>
+                                                <th>Date and Time</th>
+                                                <th>Number</th>
+                                                <th>Amount</th>
+                                                <th>Beneficiary</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tbody>
+                                                <tr><td>1/1/20 10:35</td><td>ABHL8765498</td><td>AUD 2500</td><td>SB</td><td>Transaction Booked</td></tr>
+                                                <tr><td>3/1/20 21:27</td><td>GHTS6336289</td><td>AUD 1700</td><td>SB</td><td>Transaction Processed</td></tr>
+                                                <tr><td>5/1/20 17:02</td><td>HSGD9839271</td><td>AUD 250</td><td>SB</td><td>Transaction Closed</td></tr>
+                                                <tr><td>7/1/20 1:35</td><td>ASVC9837297</td><td>AUD 1200</td><td>SB</td><td>Transaction Processed</td></tr>
+                                                <tr><td>9/1/20 12:21</td><td>KLHD9853728</td><td>AUD 250</td><td>SB</td><td>Transaction Processed</td></tr>
+                                            </tbody>
+                                        </table>
+                                        <nav>
+                                            <ul class="d-flex justify-content-end pagination pagination-rounded">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                       </div>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <div id="transactionreferencedetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog  modal-full-width">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Remitter Details</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4 pt-0 bg-light">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="card">
+                                            <p class="text-uppercase mt-2 mb-0 bg-light p-2 font-weight-bold">Transaction Summary</p>
+                                            <div class="p-2">
+                                                <div class="row"><div class="col-4 font-weight-bold">Transaction Number</div><div class="col-8">ABHL8765498</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Booking Date and Time</div><div class="col-8">9/10/20 17:21</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Payment Mode</div><div class="col-8">Debit Card</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">IP Address</div><div class="col-8">101.23.04.22</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">IP Location</div><div class="col-8">Sydney</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Booking Amount</div><div class="col-8">AUD 2,750</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Exchange Rate</div><div class="col-8">50.25</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Transfer Fee</div><div class="col-8">AUD 5</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Service Charge</div><div class="col-8">INR 100</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Transfer Fee Benefit</div><div class="col-8">AUD 0</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Exchange Rate Benefit</div><div class="col-8">0</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Final Amount Benefit</div><div class="col-8">INR 0</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Net Conversion Amount</div><div class="col-8">AUD 2,755</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Final Disbursement Amount</div><div class="col-8">INR 138,538.75</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Transaction Status</div><div class="col-8">Transaction Booked</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Purpose</div><div class="col-8">Gifting</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Relationship</div><div class="col-8">Brother</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Beneficiary Name</div><div class="col-8">Some Body</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Beneficiary Nickname</div><div class="col-8">SB</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Beneficiary AML</div><div class="col-8">False Positive</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Address</div><div class="col-8">D-23, Snehalata Park, Mahim, 400034</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Country</div><div class="col-8">India</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Email Address</div><div class="col-8">somebody@fynte.com</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Mobile Number</div><div class="col-8">917654678455</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Delivery Mode</div><div class="col-8">Account Credit</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Bank IFSC</div><div class="col-8">ICIC0000988</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                       <div class="card">
+                                        <p class="text-uppercase mb-0 mt-2 bg-light p-2 font-weight-bold">Transaction History</p>
+                                        <table class="table table-hover text-center">
+                                            <tr>
+                                                <th>Date and Time</th>
+                                                <th>Number</th>
+                                                <th>Amount</th>
+                                                <th>Beneficiary</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tbody>
+                                                <tr><td>1/1/20 10:35</td><td>ABHL8765498</td><td>AUD 2500</td><td>SB</td><td>Transaction Booked</td></tr>
+                                                <tr><td>3/1/20 21:27</td><td>GHTS6336289</td><td>AUD 1700</td><td>SB</td><td>Transaction Processed</td></tr>
+                                                <tr><td>5/1/20 17:02</td><td>HSGD9839271</td><td>AUD 250</td><td>SB</td><td>Transaction Closed</td></tr>
+                                                <tr><td>7/1/20 1:35</td><td>ASVC9837297</td><td>AUD 1200</td><td>SB</td><td>Transaction Processed</td></tr>
+                                                <tr><td>9/1/20 12:21</td><td>KLHD9853728</td><td>AUD 250</td><td>SB</td><td>Transaction Processed</td></tr>
+                                            </tbody>
+                                        </table>
+                                        <nav>
+                                            <ul class="d-flex justify-content-end pagination pagination-rounded">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-4">
+                                        <div class="card mb-2">
+                                            <p class="text-uppercase mt-2 mb-0 bg-light p-2 font-weight-bold">Remitter Details</p>
+                                            <div class="p-2">
+                                                <div class="row"><div class="col-4 font-weight-bold">Name</div><div class="col-8">Some One</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Gender</div><div class="col-8">Male</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Date of Birth</div><div class="col-8">1/1/1980</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Age</div><div class="col-8">40</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Address</div><div class="col-8">10, Kingsmeed, Sydney, 40865</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Email Address</div><div class="col-8">someone@fynte.com</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Mobile Number</div><div class="col-8">6187565876</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Nationality</div><div class="col-8">Indian</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mb-2">
+                                            <p class="text-uppercase mt-2 mb-0 bg-light p-2 font-weight-bold">Account Details</p>
+                                            <div class="p-2">
+                                                <div class="row"><div class="col-4 font-weight-bold">Partner Name</div><div class="col-8">AndRemit</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Customer Segment</div><div class="col-8">Platinum</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Login ID</div><div class="col-8">someone@fynte.com</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Registration Date and Time</div><div class="col-8">7/2/20 10:53</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">IP Address</div><div class="col-8">101.23.04.22</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">IP Location</div><div class="col-8">Sydney</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Sending Country</div><div class="col-8">Australia</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Receiving Country</div><div class="col-8">India</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <p class="text-uppercase mt-2 mb-0 bg-light p-2 font-weight-bold">Due Diligence Checks	</p>
+                                            <div class="p-2">
+                                                <div class="row"><div class="col-4 font-weight-bold">Risk Level</div><div class="col-8 d-flex justify-content-between">Low<a href="#" target="_blank"><i class="mdi mdi-eye-outline"></i></a></div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">KYC ID</div><div class="col-8 d-flex justify-content-between">878288292936<a href="#" target="_blank"><i class="mdi mdi-eye-outline"></i></a></div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Remitter KYC</div><div class="col-8 d-flex justify-content-between">Verified<a href="#" target="_blank"><i class="mdi mdi-eye-outline"></i></a></div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Document Type</div><div class="col-8">Passport</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Date and Time</div><div class="col-8">7/2/20 11:47</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Remitter AML</div><div class="col-8">False Positive</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Email Verification</div><div class="col-8">Completed</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Mobile Verification</div><div class="col-8">Pending</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Occupation</div><div class="col-8">Professional</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Income</div><div class="col-8">AUD 100,000-150,000</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Source of Income</div><div class="col-8">Salary</div></div>
+                                                <div class="row"><div class="col-4 font-weight-bold">Rules</div><div class="col-8 d-flex justify-content-between">1.3, 1.5, 2.5, 5.4 - With Details <a href="#" target="_blank"><i class="mdi mdi-eye-outline"></i></a></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <div id="useractions" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog  modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">User Actions</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="mapparent">
+                                    <div class="row align-items-center mapping">
+                                        <div class="col-md-3">
+                                            <div class="form-group mb-3">
+                                                <label >Header</label>
+                                                <select class="selectpicker show-tick border" title="Select" data-style="btn" data-dropup-auto="false"  >
+                                                    <option value="Income Source" selected>Income Source</option>
+                                                    <option value="Receiver DOB">Receiver DOB</option>
+                                                    <option value="Receivers ID proof">Receivers ID proof</option>
+                                                    <option value="Adhoc">Adhoc</option>
+                                                </select>
+                                                <div class="invalid-feedback">  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group mb-3">
+                                                <label>Text to user</label>
+                                                <textarea class="form-control">Please provide any one of the below document to ascertain the source of funds
+                                                    * last 3 months bank statement
+                                                    * salary slip or paystub
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="d-flex align-items-center ml-2">
+                                                <div class="mr-3">
+                                                    <label class="mr-1 mb-0">Upload needed</label>
+                                                    <input type="checkbox" checked>
+                                                </div>
+                                                <div>
+                                                    <label class="mr-1 mb-0">Textbox needed</label>
+                                                    <input type="checkbox" checked>
+                                                </div>
+                                                <!-- <div class="col">
+                                                    <a href="javascript:void(0);" class="action-icon ml-2 deletemap"><i class="mdi mdi-delete"></i></a>
+                                                </div> -->
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="mapchild"></div>
+                                </div>
+                                <!-- <div class="text-center"><button class="btn btn-outline-primary  addMoreMapping" type="button"> Add More </button></div> -->
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <div id="commenttog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog  modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Comment</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4 text-center">
+                                <textarea cols="50" rows="5"></textarea>
+                                <div class="text-center">
+                                    <button class="btn btn-primary" type="button"> Submit </button>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <div id="rejectreason" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog  modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">&nbsp;</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body p-4">
+                                
+                                <div class="text-center">
+                                    <input type="text" class="form-control mb-2" placeholder="Enter reason for reject">
+                                    <button class="btn btn-primary" type="button" data-dismiss="modal"> Submit </button>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <div id="notification-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-body p-4">
+                                <div class="text-center">
+                                    <h4 class="mt-2">Authorize</h4>
+                                    <p class="mt-3">Fee</p>
+                                    <button type="button" class="btn btn-primary my-2" data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+                <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm shadow">
+                        <div class="modal-content">
+                            <div class="modal-body p-4">
+                                <div class="text-center">
+                                    <i class="dripicons-information h1 text-info"></i>
+                                    <h4 class="mt-2">Heads up!</h4>
+                                    <p class="mt-3">Are you sure you want to delete?</p>
+                                    <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                 <!-- Success Alert Modal -->
+                 <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm shadow">
+                        <div class="modal-content">
+                            <div class="modal-body p-4">
+                                <div class="text-center">
+                                    <i class="dripicons-checkmark h1 text-secondarycolor"></i>
+                                    <h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+                                    <p class="mt-3 text-secondarycolor">Mapping Deleted</p>
+                                    <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">Continue</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+</div>
+<div th:replace="base/script_table :: script"></div>
+</body>
+</html>

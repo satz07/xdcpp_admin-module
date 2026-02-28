@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base/list_header :: head"></head>
+
+<!-- Begin page -->
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+<!--                <form-->
+<!--                        th:action="@{/reports/signup-report}"-->
+<!--                        method="post" class="needs-validation" novalidate-->
+<!--                        autocomplete="off">-->
+                    <div th:if="${confirmationMessage}" class="alert alert-success"
+                         role="alert" th:text=${confirmationMessage}></div>
+
+                    <div th:if="${errorMessage}" class="alert alert-danger"
+                         role="alert" th:text="${errorMessage}"></div>
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a
+                                                href="javascript: void(0);">Reports</a></li>
+                                        <li class="breadcrumb-item active">Signup Summary</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">Signup Summary</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    <!-- main content -->
+                    <div class="card">
+                        <div class="card-body">
+                            <input class="form-control" type="hidden" id="regdatefrom"
+                                   th:name="page" th:value="1"> <input class="form-control"
+                                                                       type="hidden" id="regdatefrom" th:name="page-size" th:value="10">
+                            <div class="row">
+                                <div class="col-md-3 mt-2">
+                                    <label for="partnerid">Select Partner ID</label> <select
+                                        class="selectpicker show-tick border" id="partnerid"
+                                        name="partnerid" title="Select Partner ID" data-style="btn"
+                                        data-dropup-auto="false">
+                                    <option value="">Select All</option>
+                                    <option th:value="'XDC Payments'">XDC Payments</option>
+                                </select>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <label for="regdatefrom">Signup Date From</label> <input
+                                        class="form-control" type="date" id="from" name="from"  >
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <label for="regdateto">Signup Date To</label> <input
+                                        class="form-control" type="date" id="to" name="to"  >
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <label for="emailadd">Email Address</label> <input
+                                        class="form-control" id="email" type="email"
+                                        placeholder="Email Address" name="email" >
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <label for="userType">User Type</label> <select
+                                        class="selectpicker show-tick border" id="type"
+                                        title="Select UserType" data-style="btn" name="type"
+                                        data-dropup-auto="false">
+                                    <option value="">Select All</option>
+                                    <option th:value="PERSONAL">PERSONAL</option>
+                                    <option th:value="BUSINESS">BUSINESS</option>
+                                </select>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+<!--                </form>-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box" style="overflow: auto">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <h4 class="header-title mb-4">Signup Report</h4>
+                                </div>
+                                <div class="col-lg-3">
+                                    Date: &nbsp<button class="btn btn-outline-primary" onclick="dataAsc()">ASC</button>&nbsp&nbsp<button class="btn btn-outline-primary" onclick="dataDesc()">DESC</button>
+                                </div>
+                            </div>
+
+                            <table
+                                    class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable"
+                                    id="scroll-horizontal-datatable">
+                                <thead>
+                                <tr>
+                                    <th data-priority="1">Partner ID</th>
+                                    <th data-priority="1">Signup Date and Time</th>
+                                    <th data-priority="1">User Type</th>
+                                    <th data-priority="3">Email Address</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="Signup : ${Signups}">
+                                    <td th:text="'XDC Payments'"></td>
+                                    <td th:text="${#dates.format(Signup.createAt, 'dd-MMM-yyyy HH:mm:ss')}"></td>
+                                    <td th:text="${Signup.type}"></td>
+                                    <td th:text="${Signup.email}"></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end .table-responsive -->
+
+        </div>
+        <!-- end .table-rep-plugin-->
+    </div>
+
+</div>
+
+
+
+
+
+<!-- /.modal -->
+<!-- Success Alert Modal -->
+
+<!-- /.modal -->
+
+<!-- content -->
+
+<!-- Footer -->
+<footer th:replace="base/footer :: footer"></footer>
+<!-- end Footer -->
+<div id="notification-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body p-4">
+                <div class="text-center">
+                    <h4 class="mt-2">Authorize</h4>
+                    <p class="mt-3">Fee</p>
+                    <button type="button" class="btn btn-primary my-2"
+                            data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-outline-primary my-2"
+                            data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+</body>
+<script type = "text/JavaScript" src = " https://MomentJS.com/downloads/moment.js"></script>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script
+        th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/libs/admin-resources/rwd-table/rwd-table.min.js}"></script>
+<script th:src="@{/js/pages/responsive-table.init.js}"></script>
+<script th:src="@{/libs/footable/footable.all.min.js}"></script>
+<script>
+    $(document)
+        .ready(
+            function() {
+                table = $("#scroll-horizontal-datatable")
+                    .DataTable(
+                        {
+                            scrollX : !0,
+                            language : {
+                                paginate : {
+                                    previous : "<i class='mdi mdi-chevron-left'>",
+                                    next : "<i class='mdi mdi-chevron-right'>",
+                                },
+                            },
+                            drawCallback : function() {
+                                $(
+                                    ".dataTables_paginate > .pagination")
+                                    .addClass(
+                                        "pagination-rounded");
+                            },
+                            "aoColumnDefs": [{
+                                "aTargets": [1],
+                                bSortable: false,
+                            }],
+                        }),
+                    $("#state-saving-datatable")
+                        .DataTable(
+                            {
+                                stateSave : !0,
+                                language : {
+                                    paginate : {
+                                        previous : "<i class='mdi mdi-chevron-left'>",
+                                        next : "<i class='mdi mdi-chevron-right'>",
+                                    },
+                                },
+                                drawCallback : function() {
+                                    $(
+                                        ".dataTables_paginate > .pagination")
+                                        .addClass(
+                                            "pagination-rounded");
+                                },
+                            });
+
+
+                $('#partnerid, #from, #to, #type, #email').change( function() {
+
+                    var partneridVal = $("#partnerid").val();
+                    var fromVal = $("#from").val();
+                    var toVal = $("#to").val();
+                    var typeVal = $("#type").val();
+                    var email = $("#email").val();
+
+                    if ((table.column(0).search() != partneridVal) ||  (table.column(1).search() != fromVal) || (table.column(3).search() != email) || (table.column(1).search() != toVal) || (table.column(2).search() != typeVal)) {
+                        table.column(0).search(partneridVal).column(1).search(fromVal).column(1).search(toVal).column(3).search(email).column(2).search(typeVal).draw();
+                    }
+                    if ((email == ""  && fromVal == "" && toVal != "" && typeVal != "" )&& partneridVal != "") {
+                        table.column(0).search(partneridVal).draw();
+                    }
+
+                    if ((partneridVal == "" && email == "" && toVal != "" && typeVal != "" ) && fromVal != "") {
+                        table.column(1).search(fromVal).draw();
+                    }
+                    if ((partneridVal == "" && fromVal == "" &&  email!= "" && typeVal != "" ) && toVal != "") {
+                        table.column(1).search(toVal).draw();
+                    }
+                    if ((partneridVal == "" && fromVal == "" && toVal != "" && typeVal != "") && email != "") {
+                        table.column(3).search(email).draw();
+                    }
+                    if ((partneridVal == ""  && fromVal == "" && toVal != "" && email != "") && typeVal != "") {
+                        table.column(2).search(typeVal).draw();
+                    }
+                    if(partneridVal == "" && fromVal == "" && toVal == ""&& typeVal == ""&& email == "") {
+                        table.search('').columns().search('').draw();
+                    }
+                });
+            });
+</script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script>
+    function dataAsc() {
+        window.location.href="/reports/signup-report/asc";
+    }
+
+    function dataDesc() {
+        window.location.href="/reports/signup-report/desc";
+    }
+</script>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>

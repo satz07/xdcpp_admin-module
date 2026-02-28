@@ -1,0 +1,274 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="/receive">Receivemode</a></li>
+                                    <li class="breadcrumb-item active">Receivemode List</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Receivemode List</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-lg-8"> <h4 class="header-title mb-4">Manage Receivemode</h4> </div>
+                                <div class="col-lg-4 text-right" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_CREATE'')')}"><a href="/receive" class="btn btn-primary waves-effect waves-light mb-4"><i class="mdi mdi-plus mr-1"></i> Add Receivemode</a></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="userType" name="userType" title="Select User Type" required>
+                                        <option value="">Select All</option>
+                                        <option th:value="BUSINESS">Business</option>
+                                        <option th:value="PERSONAL">Personal</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="currencyCode" name="currencyCode" title="Select Currency Code" required>
+                                        <option value="">Select All</option>
+                                        <option th:each="currency : ${currencies}" th:value="${currency.currencyCode}"
+                                                th:text="${currency.currencyCode}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="paymentCode" name="paymentCode" title="Select Receivemode Description" required>
+                                        <option value="">Select All</option>
+                                        <option th:each="payment : ${payments}" th:value="${payment.description}"
+                                                th:text="${payment.description}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="status" name="status" title="Select Status">
+                                        <option value="">Select All</option>
+                                        <option th:value="ACTlVE" th:text="ACTlVE"></option>
+                                        <option th:value="INACTIVE" th:text="INACTIVE"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div th:if="${confirmationMessage}" class="alert alert-success" id="alert-success"
+                                 role="alert" th:text=${confirmationMessage}></div>
+
+                            <div th:if="${errorMessage}"
+                                 class="alert alert-danger" role="alert" id="alert-danger"
+                                 th:text="${errorMessage}"></div>
+                            <table class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable" id="scroll-horizontal-datatable">
+                                <thead>
+                                <tr>
+                                    <th>User Type</th>
+                                    <th>User Category</th>
+                                    <th>Country Code</th>
+                                    <th>Currency Code</th>
+                                    <th>Receivemode Code</th>
+                                    <th>Receivemode Description</th>
+                                    <th>Comments</th>
+                                    <th>Status</th>
+                                    <th th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_EDIT'',''RECEIVEMODE_DELETE'')')}">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="payment : ${payments}">
+                                    <td th:text="${payment.userType}"></td>
+                                    <td th:text="${payment.userCategory}"></td>
+                                    <td th:text="${payment.countries.countryCode}"></td>
+                                    <td th:text="${payment.currencies.currencyCode}"></td>
+                                    <td th:text="${payment.paymentCodeMaster.paymentCode}"></td>
+                                    <td th:text="${payment.description}"></td>
+                                    <td th:text="${payment.comments}"></td>
+                                    <td th:if="${payment.publish}"><span class="badge badge-soft-success" th:text="ACTlVE"></span></td>
+                                    <td th:unless="${payment.publish}"><span class="badge badge-soft-danger" th:text="INACTIVE"></span></td>
+                                    <td th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_EDIT'',''RECEIVEMODE_DELETE'')')}">
+                                        <a th:href="@{/receive/edit/{id}(id=${payment.id})}" class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_EDIT'')')}"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                        <a  class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_DELETE'')')}">
+                                            <i th:id="${payment.id}" class="mdi mdi-delete dellist"></i>
+                                        </a>
+                                        <!--<a href="javascript:void(0);" class="action-icon">
+                                            <i class="mdi mdi-delete dellist"></i>
+                                        </a>
+                                        <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-body p-4">
+                                                        <div class="text-center">
+                                                            <i class="dripicons-information h1 text-warning"></i>
+                                                            <h4 class="mt-2">Heads up!</h4>
+                                                            <p class="mt-3">Are you sure you want to delete?</p>
+                                                            <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal" th:id="${payment.id}" onclick="deleteConfirm(this.id)">
+                                                                Yes
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                             
+                                <div class="col-lg-12 text-right" th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}"><a href="/status" class="btn btn-primary waves-effect waves-light mb-4"><i class="mdi mdi-plus mr-1"></i> Add Status</a></div>
+                            </div>
+                    </div><!-- end col -->
+                </div>
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+        <footer th:replace="base/footer :: footer"></footer>
+
+        <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <i class="dripicons-information h1 text-warning"></i>
+                            <h4 class="mt-2">Heads up!</h4>
+                            <p class="mt-3">Are you sure you want to delete?</p>
+                            <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal" onclick="deleteConfirm(this.id)"  id="confirmDeleteAction" cid="">
+                                Yes
+                            </button>
+                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <i class="dripicons-checkmark h1 text-secondarycolor"></i>
+                            <h4 class="mt-2 text-secondarycolor"  id="modalMsg">Well Done!</h4>
+                            <p class="mt-3 text-secondarycolor"  id="modalMsg2">Deleted</p>
+                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+<script th:src="@{/js/vendor.min.js}"></script>
+<!-- third party js -->
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/js/deletePaymentAjax.js}"></script>
+<script>
+     setTimeout(function () {
+                $("#alert-danger").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#alert-danger").remove();
+                });
+              }, 3000);
+   setTimeout(function () {
+                $("#alert-success").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#alert-success").remove();
+                });
+              }, 3000);
+         function deleteConfirm() {
+  
+            
+             
+	
+	var cid=$("#confirmDeleteAction").attr("cid")
+	deleteRecieveAjaxRequest(cid)
+                  //  window.location.href="/country/delete/"+id;
+                    //window.location.reload();
+                    
+        }
+            $(document).ready(function () {
+	$(".dellist").click(function(){
+		
+		
+		del_id=this.id	
+		 $('#confirm-delete').modal('show')
+		 $("#confirmDeleteAction").attr("cid",this.id)
+	})
+               var del_id=0
+        table = $("#scroll-horizontal-datatable").DataTable({
+        scrollX: !0,
+        language: {
+            paginate: {
+            previous: "<i class='mdi mdi-chevron-left'>",
+            next: "<i class='mdi mdi-chevron-right'>",
+            },
+        },
+        drawCallback: function () {
+            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+        },
+        }),
+        $("#state-saving-datatable").DataTable({
+        stateSave: !0,
+        language: {
+            paginate: {
+            previous: "<i class='mdi mdi-chevron-left'>",
+            next: "<i class='mdi mdi-chevron-right'>",
+            },
+        },
+        drawCallback: function () {
+            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+        },
+        });
+
+        $('#userType, #currencyCode, #paymentCode, #status').change( function() {
+
+            var utypeVal = $("#userType").val();
+            var currencyVal = $("#currencyCode").val();
+            var paycodeVal = $("#paymentCode").val();
+            var statusVal = $("#status").val();
+
+            if ((table.column(0).search() != utypeVal) || (table.column(3).search() != currencyVal) || (table.column(5).search() != paycodeVal) || (table.column(7).search() != statusVal)) {
+                table.column(0).search(utypeVal).column(3).search(currencyVal).column(5).search(paycodeVal).column(7).search(statusVal).draw();
+            }
+            if ((currencyVal == "" && paycodeVal == "" && statusVal == "") && utypeVal != "") {
+                table.column(0).search(utypeVal).draw();
+            }
+            if ((utypeVal == "" && paycodeVal == "" && statusVal == "") && currencyVal != "") {
+                table.column(3).search(currencyVal).draw();
+            }
+            if ((utypeVal == "" && currencyVal == "" && statusVal == "") && paycodeVal != "") {
+                table.column(5).search(paycodeVal).draw();
+            }
+            if ((utypeVal == "" && currencyVal == "" && paycodeVal == "") && statusVal != "") {
+                table.column(7).search(statusVal).draw();
+            }
+
+            if(utypeVal == "" && currencyVal == "" && paycodeVal == "" && statusVal == "") {
+                table.search('').columns().search('').draw();
+            }
+        });
+    });
+</script>
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</body>
+</html>

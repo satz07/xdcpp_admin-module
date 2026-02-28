@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="superadmin" id="1">
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="1"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/user/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="1"/>
+            <column name="feature_type" value="USER_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="2"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/user/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="1"/>
+            <column name="feature_type" value="USER_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="3"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/user/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="1"/>
+            <column name="feature_type" value="USER_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="4"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/user"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="1"/>
+            <column name="feature_type" value="USER_CREATE" />
+        </insert>
+
+        <!--Group Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="5"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/group/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="2"/>
+            <column name="feature_type" value="GROUP_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="6"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/group/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="2"/>
+            <column name="feature_type" value="GROUP_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="7"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/group/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="2"/>
+            <column name="feature_type" value="GROUP_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="8"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/group"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="2"/>
+            <column name="feature_type" value="GROUP_CREATE" />
+        </insert>
+
+        <!--Role Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="9"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/role/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="3"/>
+            <column name="feature_type" value="ROLE_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="10"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/role/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="3"/>
+            <column name="feature_type" value="ROLE_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="11"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/role/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="3"/>
+            <column name="feature_type" value="ROLE_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="12"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/role"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="3"/>
+            <column name="feature_type" value="ROLE_CREATE" />
+        </insert>
+
+        <!--Payment Mode Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="13"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/payment/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="4"/>
+            <column name="feature_type" value="PAYMODE_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="14"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/payment/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="4"/>
+            <column name="feature_type" value="PAYMODE_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="15"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/payment/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="4"/>
+            <column name="feature_type" value="PAYMODE_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="16"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/payment"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="4"/>
+            <column name="feature_type" value="PAYMODE_CREATE" />
+        </insert>
+
+        <!--Receive Mode Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="17"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/receive/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="5"/>
+            <column name="feature_type" value="RECEIVEMODE_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="18"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/receive/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="5"/>
+            <column name="feature_type" value="RECEIVEMODE_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="19"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/receive/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="5"/>
+            <column name="feature_type" value="RECEIVEMODE_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="20"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/receive"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="5"/>
+            <column name="feature_type" value="RECEIVEMODE_CREATE" />
+        </insert>
+
+        <!--Fee Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="21"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/fee/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="6"/>
+            <column name="feature_type" value="FEE_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="22"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/fee/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="6"/>
+            <column name="feature_type" value="FEE_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="23"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/fee/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="6"/>
+            <column name="feature_type" value="FEE_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="24"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/fee"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="6"/>
+            <column name="feature_type" value="FEE_CREATE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="25"/>
+            <column name="feature_name" value="Approve"/>
+            <column name="feature_end_point" value="/fee"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="1"/>
+            <column name="function_id" valueNumeric="7"/>
+            <column name="feature_type" value="FEE_APPROVE" />
+        </insert>
+
+        <!--Global Limits Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="26"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/global/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="8"/>
+            <column name="feature_type" value="GLOBAL_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="27"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/global/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="8"/>
+            <column name="feature_type" value="GLOBAL_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="28"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/global/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="8"/>
+            <column name="feature_type" value="GLOBAL_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="29"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/global"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="8"/>
+            <column name="feature_type" value="GLOBAL_CREATE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="30"/>
+            <column name="feature_name" value="Approve"/>
+            <column name="feature_end_point" value="/fee"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="1"/>
+            <column name="function_id" valueNumeric="9"/>
+            <column name="feature_type" value="GLOBAL_APPROVE" />
+        </insert>
+
+        <!--Service Charge Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="31"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/service/charge/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="10"/>
+            <column name="feature_type" value="SERVICE_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="32"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/service/charge/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="10"/>
+            <column name="feature_type" value="SERVICE_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="33"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/service/charge/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="10"/>
+            <column name="feature_type" value="SERVICE_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="34"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/service/charge"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="10"/>
+            <column name="feature_type" value="SERVICE_CREATE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="35"/>
+            <column name="feature_name" value="Approve"/>
+            <column name="feature_end_point" value="/service/charge"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="1"/>
+            <column name="function_id" valueNumeric="11"/>
+            <column name="feature_type" value="SERVICE_APPROVE" />
+        </insert>
+
+        <!--Margin Master-->
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="36"/>
+            <column name="feature_name" value="Update"/>
+            <column name="feature_end_point" value="/margin/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="12"/>
+            <column name="feature_type" value="MARGIN_EDIT" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="37"/>
+            <column name="feature_name" value="View"/>
+            <column name="feature_end_point" value="/margin/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="12"/>
+            <column name="feature_type" value="MARGIN_VIEW" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="38"/>
+            <column name="feature_name" value="Delete"/>
+            <column name="feature_end_point" value="/margin/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="12"/>
+            <column name="feature_type" value="MARGIN_DELETE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="39"/>
+            <column name="feature_name" value="Create"/>
+            <column name="feature_end_point" value="/margin"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="12"/>
+            <column name="feature_type" value="MARGIN_CREATE" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="40"/>
+            <column name="feature_name" value="Approve"/>
+            <column name="feature_end_point" value="/margin"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="0"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="1"/>
+            <column name="function_id" valueNumeric="13"/>
+            <column name="feature_type" value="MARGIN_APPROVE" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,116 @@
+.text-secondarycolor{color:#001833}.btn{-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out}.btn:focus{-webkit-box-shadow:0 2px 6px 0 rgba(53,124,225,0.5);box-shadow:0 2px 6px 0 rgba(53,124,225,0.5)}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle,.btn-primary,.swal2-confirm.swal2-styled{background-color:#357cff !important;border-color:#357cff !important;-webkit-box-shadow:0 2px 6px 0 rgba(53,124,225,0.5);box-shadow:0 2px 6px 0 rgba(53,124,225,0.5)}.btn-primary:not(:disabled):not(.disabled).active:hover,.btn-primary:not(:disabled):not(.disabled):active:hover,.show>.btn-primary.dropdown-toggle:hover,.btn-primary:hover,.swal2-confirm.swal2-styled:hover{background-color:#fff !important;background-image:none !important;color:#357cff !important;border-color:#357cff !important}.btn-outline-primary:not(:disabled):not(.disabled).active,.btn-outline-primary:not(:disabled):not(.disabled):active,.show>.btn-outline-primary.dropdown-toggle,.btn-outline-primary{background-color:#fff;color:#357cff;border-color:#357cff}.btn-outline-primary:not(:disabled):not(.disabled).active:hover,.btn-outline-primary:not(:disabled):not(.disabled):active:hover,.show>.btn-outline-primary.dropdown-toggle:hover,.btn-outline-primary:hover{background-color:#fff;color:#357cff}.btn-outline-primary:not(:disabled):not(.disabled).active:focus,.btn-outline-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-outline-primary.dropdown-toggle:focus,.btn-outline-primary:focus{background-color:#357cff;color:#fff;-webkit-box-shadow:none;box-shadow:none}.left-side-menu #sidebar-menu>ul>li>a,.nav-second-level li a{color:#9097a7}.left-side-menu #sidebar-menu>ul>li>a:hover,.nav-second-level li a:hover{color:#fff}.left-side-menu #sidebar-menu .menuitem-active>a{color:#00acc1}.primary-text{color:#357cff}.checkboxtoggle{width:40px;height:20px;border-radius:10px;display:inline-block;cursor:pointer}.checkbox_input{display:none}.checkboxtoggle_fill{position:relative;width:40px;height:20px;border-radius:10px;background:#ddd;-webkit-transition:background .3s;transition:background .3s}.checkboxtoggle_fill:after{content:'';position:absolute;top:0;left:0;height:20px;width:20px;background:#ffffff;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.25);box-shadow:0 0 10px rgba(0,0,0,0.25);border-radius:10px;-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s, -webkit-transform .3s}.checkbox_input:checked ~ .checkboxtoggle_fill{background:#357cff}.checkbox_input:checked ~ .checkboxtoggle_fill::after{-webkit-transform:translateX(20px);transform:translateX(20px)}body[data-sidebar-size=condensed] #wrapper .left-side-menu #sidebar-menu>ul>li:hover>a,.left-side-menu{background-color:#38414a;-webkit-box-shadow:none;box-shadow:none}.searchfilter:focus-within .search-dropdown{display:block}.bootstrap-select .bs-searchbox .form-control{color:#6c757d;background:#fff !important;border-color:#b1bbc4 !important}.form-control.disabled{background:#dcdcdc;pointer-events:none;}
+#wrapper{overflow-x: hidden!important;overflow-y: scroll!important;}.dropdown-menu .inner{overflow-y: auto!important;}
+
+/* WEB3 migration changes - Web2/Web3 Toggle Switch Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #357cff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #357cff;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* WEB3 migration changes - Table Name Indicator Styles */
+#tableNameIndicator {
+  font-size: 0.75rem;
+  color: #6c757d;
+  font-style: italic;
+  min-height: 1rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+#currentTableName {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: #f8f9fa;
+  border-radius: 3px;
+  border: 1px solid #dee2e6;
+  cursor: help;
+}
+
+body.web3-mode #currentTableName {
+  background-color: #e7f3ff;
+  border-color: #357cff;
+  color: #357cff;
+}
+
+body.web2-mode #currentTableName {
+  background-color: #f8f9fa;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+/* XDC Payments header logo - dark logo, slightly larger */
+.navbar-custom .xdc-header-logo {
+  max-height: 40px;
+  width: auto;
+  height: auto;
+  max-width: 180px;
+  display: block;
+  object-fit: contain;
+}
+.navbar-custom .xdc-logo-lg {
+  padding-top: 0.5rem !important;
+  display: flex;
+  align-items: center;
+}
+.navbar-custom .xdc-logo-sm img {
+  max-height: 24px;
+  width: auto;
+}
+/*# sourceMappingURL=override.css.map */

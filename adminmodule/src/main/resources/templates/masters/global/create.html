@@ -1,0 +1,373 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="/global/list">Global Limits</a></li>
+                                    <li th:if="${global.id == null}" class="breadcrumb-item active"><a href="/global/list">Add Global Limit</a></li>
+                                    <li th:if="${global.id != null}" class="breadcrumb-item active">Edit Global Limit</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title" th:if="${global.id == null}">Add Global Limit</h4>
+                            <h4 class="page-title" th:if="${global.id != null}">Edit Global Limit</h4>
+                        </div>
+                    </div>
+                </div>
+                <form th:action="@{/global/create}" th:object="${global}" method="post" class="needs-validation" novalidate>
+                    <div th:if="${confirmationMessage}" class="alert alert-success" role="alert" th:text=${confirmationMessage}></div>
+                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+                    <div class="row">
+                      <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Partner Details</h5>
+                                     <div class="row">
+                                     <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="partnerName">Partner Name</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn"
+                                                    data-dropup-auto="false"
+                                                    th:field="*{partnerName}" id="partnerName"
+                                                    name="*partnerName" title="Select partner Name" required>
+
+                                                <option th:each="partnerNames : ${partnerName}"
+                                                        th:value="${partnerNames.id}"
+                                                        th:text="${partnerNames.partnerName}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                     </div>
+                                   </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">User Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="personal">User Type</label>
+                                            <div class="radio radio-primary mb-2">
+                                                <input type="radio" id="personal" name="userType" th:value="PERSONAL" th:field="*{userType}" required onchange="redPersonal()">
+                                                <label for="personal" class="mr-3">
+                                                    Personal
+                                                </label>
+                                                <input type="radio" id="business" name="userType" th:value="BUSINESS" th:field="*{userType}" required onchange="redBusiness()">
+                                                <label for="business" >
+                                                    Business
+                                                </label>
+                                                <div class="invalid-feedback">
+                                                    Invalid User Type
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="userCategory">User Category</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{userCategory}" id="userCategory" name="*userCategory" title="Select User Category" required>
+                                                <!-- <option value="0">Select Category</option> -->
+                                                <option th:each="category : ${userCategory}" th:value="${category}" th:text="${category}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid User Category
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Country Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="sendCountryCode">Send Country Code</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{sendCountryCode}" id="sendCountryCode" name="*sendCountryCode" title="Select Send Country Code" required>
+                                                <!-- <option value="0">Select Country</option> -->
+                                                <option th:each="country : ${countries}" th:value="${country.id}">[[${country.countryCode}]] - [[${country.countryName}]]</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Country code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="receiveCountryCode">Receive Country Code</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{receiveCountryCode}" id="receiveCountryCode" name="*receiveCountryCode" title="Select Receive Country Code" required>
+                                                <option th:each="country : ${countries}" th:value="${country.id}">[[${country.countryCode}]] - [[${country.countryName}]]</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Country code
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Currency Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="sendCurrencyCode">Send Currency Code</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{sendCurrencyCode}" id="sendCurrencyCode" name="*sendCurrencyCode" title="Select Send Currency Code" required>
+                                                
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Currency code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="receiveCurrencyCode">Receive Currency Code</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{receiveCurrencyCode}" id="receiveCurrencyCode" name="*receiveCurrencyCode" title="Select Receive Currency Code" required>
+                                                <!-- <option value="0">Select Currency</option> -->
+                                              
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Currency code
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Paymentmode Details</h5>
+                                <div class="form-group mb-3">
+                                    <label for="paymentCode">Paymode Code</label>
+                                    <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{paymentCode}" id="paymentCode" name="*paymentCode" title="Select Paymode Code" required>
+                                        <!-- <option value="0">Select Payment Code</option> -->
+                                        
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Invalid Paymode code
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Receivemode Details</h5>
+                                <div class="form-group mb-3">
+                                    <label for="receiveCode">Receivemode Code</label>
+                                    <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{receiveCode}" id="receiveCode" name="*receiveCode" title="Select Receivemode Code" required>
+                                        <!-- <option value="0">Select Receive Code</option> -->
+                                       
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Invalid Receivemode code
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Global Limit Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="minTxnLimit">Min Txn limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{minTxnLimit}" id="minTxnLimit" placeholder="Enter Min Txn Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Min Txn limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="max_txn_limit">Max Txn Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{maxTxnLimit}" id="max_txn_limit" placeholder="Enter max Txn Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Max Txn Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="dailyLimit">Amount Daily Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{dailyLimit}" id="dailyLimit" placeholder="Enter Amount Daily Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Amount Daily Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="dailyTxnLimit">Txn Daily Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{dailyTxnLimit}" id="dailyTxnLimit" placeholder="Enter Txn Daily Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Txn Daily Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="weeklyLimit">Amount Weekly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{weeklyLimit}" id="weeklyLimit" placeholder="Enter Amount Weekly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Amount Weekly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="weeklyTxnLimit">Txn Weekly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{weeklyTxnLimit}" id="weeklyTxnLimit" placeholder="Enter Txn Weekly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Txn Weekly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="monthlyLimit">Amount Monthly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{monthlyLimit}" id="monthlyLimit" placeholder="Enter Amount Monthly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Amount Monthly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="monthlyTxnLimit">Txn Monthly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{monthlyTxnLimit}" id="monthlyTxnLimit" placeholder="Enter Txn Monthly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Txn Monthly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="quarterlyLimit">Amount Quaterly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{quarterlyLimit}" id="quarterlyLimit" placeholder="Enter Amount Quaterly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Amount Quaterly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="quarterlyTxnLimit">Txn Quaterly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{quarterlyTxnLimit}" id="quarterlyTxnLimit" placeholder="Enter Txn Quaterly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Txn Quaterly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="halfYearlyLimit">Amount Half Yearly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{halfYearlyLimit}" id="halfYearlyLimit" placeholder="Enter Amount Half Yearly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Amount Half Yearly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="halfYearlyTxnLimit">Txn Half Yearly Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{halfYearlyTxnLimit}" id="halfYearlyTxnLimit" placeholder="Enter Txn Half Yearly Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Txn Half Yearly Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="annualLimit">Amount Annual Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{annualLimit}" id="annualLimit" placeholder="Enter Amount Annual Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Amount Annual Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="annualTxnLimit">Txn Annual Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{annualTxnLimit}" id="annualTxnLimit" placeholder="Enter Txn Annual Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Txn Annual Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="annualTxnLimit">Avg Txn Limit</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{avgTransLimit}" id="avgTransLimit" placeholder="Enter Avg Txn Limit" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Avg Txn Limit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2 w-50">Is Risk Limit aplicable</label>
+                                            <label for="isRiskLimitApplicable" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" th:field="*{isRiskLimitApplicable}" id="isRiskLimitApplicable" class="checkbox_input">
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" th:if="${id != null}">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Status</label>
+                                            <label for="publish" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" id="publish" th:field="*{publish}" class="checkbox_input" checked>
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                    <div class="text-center" th:if="${id == null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Global Limit</button>
+                    </div>
+                    <div class="text-center" th:if="${id != null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Update Global Limit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer th:replace="base/footer :: footer"></footer>
+    </div>
+</div>
+
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script th:src="@{/libs/jquery-mask-plugin/jquery.mask.min.js}"></script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script  th:src="@{/js/customGlobalAjax.js}"></script>
+</body>
+</html>

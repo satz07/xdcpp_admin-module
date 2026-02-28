@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="uploadmodal" th:remove="tag">
+
+    <div id="uploadfile" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload File</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center">
+                        <div class="form-group mb-3 mt-1">
+                            <label for="fileupload">Browse File upload</label>
+                            <input type="file" id="fileupload" class="form-control-file" accept=".jpj,.png,.pdf" multiple>
+                        </div>
+                        <button type="button" class="btn btn-primary my-2" data-dismiss="modal" data-toggle="modal" data-target="#generalsuccess" >Upload File</button>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>

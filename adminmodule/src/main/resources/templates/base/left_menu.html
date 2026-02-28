@@ -1,0 +1,789 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<div class="left-side-menu">
+    <div class="h-100" data-simplebar>
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <ul id="side-menu">
+                <!-- sec:authorize="hasRole('SUPERADMIN')"-->
+                <li class="menu-title">Navigation</li>
+                <li th:if="${#authorization.expression('hasAnyRole(''GROUP_VIEW'',''SUPERADMIN'',''GROUP_CREATE'',''GROUP_EDIT'',''GROUP_DELETE'',''ROLES_EDIT'',''ROLES_VIEW'',''ROLES_DELETE'',''ROLES_CREATE'')')}"
+                    class="">
+                    <a href="#Masterparent" data-toggle="collapse"> <i class="mdi mdi-table"></i> <span> User Mapping Master </span>
+                        <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="Masterparent">
+                        <ul class="nav-second-level">
+                            <!--<li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu2" data-toggle="collapse"> Product Master <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu2">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/product/list">View Products</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/product">Add Products</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu3" data-toggle="collapse"> Partner Master <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu3">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/partner/list">View Partner</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/partner">Add Partner</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>-->
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu7" data-toggle="collapse"> Location Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu7">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/location/list">View Location</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/location">Add Location</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''GROUP_VIEW'',''SUPERADMIN'',''GROUP_CREATE'',''GROUP_EDIT'',''GROUP_DELETE'')')}">
+                                <a href="#menu4" data-toggle="collapse"> Group Master <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="menu4">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/group/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''GROUP_VIEW'',''SUPERADMIN'',''GROUP_EDIT'',''GROUP_DELETE'')')}">View
+                                                Group</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''GROUP_CREATE'',''SUPERADMIN'')')}">
+                                            <a href="/group">Add Group</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''ROLES_VIEW'',''SUPERADMIN'',''ROLES_CREATE'',''ROLES_EDIT'',''ROLES_DELETE'')')}">
+                                <a href="#menu5" data-toggle="collapse"> Roles Master <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="menu5">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/role/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''ROLES_VIEW'',''SUPERADMIN'',''ROLES_EDIT'',''ROLES_DELETE'')')}">View
+                                                Roles</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''ROLES_CREATE'',''SUPERADMIN'')')}">
+                                            <a href="/role">Add Roles</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu6" data-toggle="collapse"> Designation Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu6">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/designation/list">View Designation</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/designation">Add Designation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <!--li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu8" data-toggle="collapse"> Country Master <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu8">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/country/list">View Country</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/country">Add Country</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>-->
+                            <!--li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu9" data-toggle="collapse"> Currency Master <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu9">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/currency/list">View Currency</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/currency">Add Currency</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>-->
+                            <!--li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''PAYMODE_VIEW'',''PAYMODE_CREATE'',''PAYMODE_EDIT'',''SUPERADMIN'')')}">
+                                <a href="#menu10" data-toggle="collapse"> Paymentmode Master <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu10">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/payment/list" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''PAYMODE_VIEW'',''PAYMODE_CREATE'',''PAYMODE_EDIT'')')}">View Paymentmode</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''PAYMODE_CREATE'')')}">
+                                            <a href="/payment">Add Paymentmode</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_VIEW'',''RECEIVEMODE_CREATE'',''RECEIVEMODE_EDIT'')')}">
+                                <a href="#menu11" data-toggle="collapse"> Receivemode Master <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu11">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/receive/list" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_VIEW'',''RECEIVEMODE_CREATE'',''RECEIVEMODE_EDIT'')')}">View Receivemode</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_CREATE'')')}">
+                                            <a href="/receive">Add Receivemode</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>-->
+                            <!-- <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_VIEW'',''FEE_CREATE'',''FEE_EDIT'')')}">
+                                 <a href="#menu12" data-toggle="collapse"> Fee Master <span class="menu-arrow"></span> </a>
+                                 <div class="collapse" id="menu12">
+                                     <ul class="nav-second-level">
+                                         <li>
+                                             <a href="/fee/list" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_VIEW'',''FEE_CREATE'',''FEE_EDIT'')')}">View Fee</a>
+                                         </li>
+                                         <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_CREATE'')')}">
+                                             <a href="/fee">Add Fee</a>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                             <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''MARGIN_VIEW'',''MARGIN_CREATE'',''MARGIN_EDIT'',''SUPERADMIN'')')}">
+                                 <a href="#menu13" data-toggle="collapse"> Margin Master <span class="menu-arrow"></span> </a>
+                                 <div class="collapse" id="menu13">
+                                     <ul class="nav-second-level">
+                                         <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''MARGIN_VIEW'',''MARGIN_CREATE'',''MARGIN_EDIT'')')}">
+                                             <a href="/margin/list">View Margin</a>
+                                         </li>
+                                         <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''MARGIN_CREATE'')')}">
+                                             <a href="/margin">Add Margin</a>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                             <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''SERVICE_VIEW'',''SERVICE_CREATE'',''SERVICE_EDIT'',''SUPERADMIN'')')}">
+                                 <a href="#menu14" data-toggle="collapse"> Service Master <span class="menu-arrow"></span> </a>
+                                 <div class="collapse" id="menu14">
+                                     <ul class="nav-second-level">
+                                         <li>
+                                             <a href="/service/charge/list" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''SERVICE_VIEW'',''SERVICE_CREATE'',''SERVICE_EDIT'')')}">View Service</a>
+                                         </li>
+                                         <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''SERVICE_CREATE'')')}">
+                                             <a href="/service/charge">Add Serivce</a>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </li>
+                             <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_VIEW'',''GLOBAL_CREATE'',''GLOBAL_EDIT'',''SUPERADMIN'')')}">
+                                 <a href="#menu15" data-toggle="collapse"> Global Limits Master <span class="menu-arrow"></span> </a>
+                                 <div class="collapse" id="menu15">
+                                     <ul class="nav-second-level">
+                                         <li>
+                                             <a href="/global/list" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_VIEW'',''GLOBAL_CREATE'',''GLOBAL_EDIT'')')}">View Global Limits</a>
+                                         </li>
+                                         <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_CREATE'')')}">
+                                             <a href="/global">Add Global Limits</a>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </li>-->
+                            <!--li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu16" data-toggle="collapse">Status Master<span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu16">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/status/list">View Status</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/status">Add Status</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu17" data-toggle="collapse">Purpose List Master<span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu17">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/purpose/list">View Purpose List</a>
+                                        </li>
+                                        <li class="purpose" th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/purpose">Add Purpose List</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>-->
+                        </ul>
+                    </div>
+                </li>
+
+                <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''PAYMODE_VIEW'',''PAYMODE_DELETE'',''PAYMODE_EDIT'',''PAYMODE_CREATE'',''RECEIVEMODE_VIEW'',''RECEIVEMODE_DELETE'',''RECEIVEMODE_CREATE'',''RECEIVEMODE_EDIT'',''HOLIDAY_EDIT'',''HOLIDAY_VIEW'',''HOLIDAY_DELETE'',''HOLIDAY_CREATE'',''HOLIDAY_APPROVE'')')}">
+                    <a href="#product" data-toggle="collapse"> <i class="mdi mdi-table"></i> <span>Product Master</span>
+                        <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="product">
+                        <ul class="nav-second-level">
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu2" data-toggle="collapse"> Product <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu2">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/product/list">View Products</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/product">Add Products</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!--  <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                  <a href="#menu8" data-toggle="collapse"> Country Master <span class="menu-arrow"></span> </a>
+                                  <div class="collapse" id="menu8">
+                                      <ul class="nav-second-level">
+                                          <li>
+                                              <a href="/product/list">View Products</a>
+                                          </li>
+                                          <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                              <a href="/product">Add Products</a>
+                                          </li>
+                                           </ul>
+                                  </div>
+                              </li> -->
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu8" data-toggle="collapse"> Country Master <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="menu8">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/country/list">View Country</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/country">Add Country</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu9" data-toggle="collapse"> Currency Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu9">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/currency/list">View Currency</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/currency">Add Currency</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''PAYMODE_VIEW'',''PAYMODE_CREATE'',''PAYMODE_EDIT'',''PAYMODE_DELETE'')')}">
+                                <a href="#menu10" data-toggle="collapse"> Paymentmode Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu10">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/payment/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''PAYMODE_VIEW'',''PAYMODE_DELETE'',''PAYMODE_EDIT'')')}">View
+                                                Paymentmode</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''PAYMODE_CREATE'')')}">
+                                            <a href="/payment">Add Paymentmode</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_VIEW'',''RECEIVEMODE_CREATE'',''RECEIVEMODE_EDIT'',''RECEIVEMODE_DELETE'')')}">
+                                <a href="#menu11" data-toggle="collapse"> Receivemode Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu11">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/receive/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_VIEW'',''RECEIVEMODE_DELETE'',''RECEIVEMODE_EDIT'')')}">View
+                                                Receivemode</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECEIVEMODE_CREATE'')')}">
+                                            <a href="/receive">Add Receivemode</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu16" data-toggle="collapse">Status Master<span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="menu16">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/status/list">View Status</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/status">Add Status</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                <a href="#excahnge_rate" data-toggle="collapse"><span>Exchange Rate Master</span> <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="excahnge_rate">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                            <a href="exchangerate/exchangeadd">Add Exchange Rate</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                            <a href="exchangerate/exchangeview">View Exchange Rate</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''HOLIDAY_EDIT'',''HOLIDAY_VIEW'',''HOLIDAY_DELETE'',''HOLIDAY_CREATE'')')}">
+                                <a href="#holidaycalendar" data-toggle="collapse"><span>Holiday Calendar</span> <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="holidaycalendar">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''HOLIDAY_CREATE'')')}">
+                                            <a href="/holiday">Add Holiday</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''HOLIDAY_EDIT'',''HOLIDAY_VIEW'',''HOLIDAY_DELETE'')')}">
+                                            <a href="/holiday/list">View Holiday Calendar</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''HOLIDAY_APPROVE'')')}">
+                                            <a href="/holiday/checkerlist">Holiday Checker</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#menu18" data-toggle="collapse"> Delivery Partner Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="menu18">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/deliverypartner/list">View Delivery Partner</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/deliverypartner">Add Delivery Partner</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_VIEW'',''FEE_CREATE'',''FEE_EDIT'',''FEE_DELETE'',''FEE_APPROVE'',''MARGIN_VIEW'',''MARGIN_CREATE'',''MARGIN_EDIT'',''MARGIN_DELETE'',''MARGIN_APPROVE'',''SERVICE_VIEW'',''SERVICE_CREATE'',''SERVICE_EDIT'',''SERVICE_DELETE'',''SERVICE_APPROVE'',''GLOBAL_VIEW'',''GLOBAL_CREATE'',''GLOBAL_EDIT'',''GLOBAL_DELETE'',''GLOBAL_APPROVE'',''TAT_VIEW'',''TAT_EDIT'',''TAT_CREATE'',''TAT_DELETE'',''TAT_APPROVE'')')}">
+                    <a href="#partner" data-toggle="collapse"> <i class="mdi mdi-table"></i><span> Partner Master</span>
+                        <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="partner">
+                        <ul class="nav-second-level">
+                            <!-- <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_VIEW'',''FEE_CREATE'',''FEE_EDIT'')')}">
+                                <a href="#Transfer" data-toggle="collapse"> Transfer Fee Master <span class="menu-arrow"></span> </a>
+                                <div class="collapse" id="Transfer">
+                                    <ul class="nav-second-level">        
+                                    
+                                        <li>
+                                            <a href="/partner/list">View Partner</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/partner">Add Partner</a>
+                                        </li>
+                                     </ul>
+                                </div>
+                            </li>    -->
+
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                <a href="#partnernew" data-toggle="collapse"> Partner <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="partnernew">
+                                    <ul class="nav-second-level">
+
+                                        <li>
+                                            <a href="/partner/list">View Partner</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/partner">Add Partner</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_VIEW'',''FEE_CREATE'',''FEE_EDIT'',''FEE_DELETE'',''FEE_APPROVE'')')}">
+                                <a href="#Transfer" data-toggle="collapse"> Transfer Fee Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="Transfer">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/fee/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_VIEW'',''FEE_EDIT'',''FEE_DELETE'',''FEE_APPROVE'')')}">View
+                                                Fee</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FEE_CREATE'')')}">
+                                            <a href="/fee">Add Fee</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''MARGIN_VIEW'',''MARGIN_CREATE'',''MARGIN_EDIT'',''MARGIN_DELETE'',''MARGIN_APPROVE'')')}">
+                                <a href="#Fx" data-toggle="collapse">FX Margin Master <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="Fx">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''MARGIN_VIEW'',''MARGIN_EDIT'',''MARGIN_DELETE'',''MARGIN_APPROVE'')')}">
+                                            <a href="/margin/list">View Margin</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''MARGIN_CREATE'')')}">
+                                            <a href="/margin">Add Margin</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''SERVICE_VIEW'',''SERVICE_CREATE'',''SERVICE_EDIT'',''SERVICE_DELETE'',''SERVICE_APPROVE'')')}">
+                                <a href="#Service" data-toggle="collapse"> Service Charge Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="Service">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/service/charge/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''SERVICE_VIEW'',''SERVICE_EDIT'',''SERVICE_DELETE'',''SERVICE_APPROVE'')')}">View
+                                                Service</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''SERVICE_CREATE'')')}">
+                                            <a href="/service/charge">Add Serivce</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_VIEW'',''GLOBAL_CREATE'',''GLOBAL_EDIT'',''GLOBAL_DELETE'',''GLOBAL_APPROVE'')')}">
+                                <a href="#Global" data-toggle="collapse"> Global Limits Master <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="Global">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/global/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_VIEW'',''GLOBAL_EDIT'',''GLOBAL_DELETE'',''GLOBAL_APPROVE'')')}">View
+                                                Global Limits</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_CREATE'')')}">
+                                            <a href="/global">Add Global Limits</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                <a href="#Purpose" data-toggle="collapse">Purpose Master<span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="Purpose">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/purpose/list">View Purpose List</a>
+                                        </li>
+                                        <li class="purpose"
+                                            th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                            <a href="/purpose">Add Purpose List</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TAT_VIEW'',''TAT_EDIT'',''TAT_CREATE'',''TAT_DELETE'',''TAT_APPROVE'')')}">
+                                <a href="#tatdefination" data-toggle="collapse"><span>TAT Master</span> <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="tatdefination">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="/tat"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TAT_CREATE'')')}">Add
+                                                TAT Definition</a>
+                                        </li>
+                                        <li>
+                                            <a href="/tat/list"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TAT_VIEW'',''TAT_EDIT'',''TAT_DELETE'')')}">View
+                                                TAT Definition</a>
+                                        </li>
+                                        <li>
+                                            <a href="/tat/checkerlist"
+                                               th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TAT_APPROVE'')')}">TAT
+                                                Chcker</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li th:if="${#authorization.expression('hasAnyRole(''USER_VIEW'',''USER_CREATE'',''SUPERADMIN'',''USER_EDIT'',''USER_DELETE'')')}">
+                    <a href="#Usermanagement" data-toggle="collapse"> <i class="mdi mdi-account-multiple"></i> <span>Admin User Manage</span>
+                        <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="Usermanagement">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="/user"
+                                   th:if="${#authorization.expression('hasAnyRole(''USER_CREATE'',''SUPERADMIN'')')}">
+                                    User Add</a>
+                            </li>
+                            <li>
+                                <a href="/user/list"
+                                   th:if="${#authorization.expression('hasAnyRole(''USER_VIEW'',''SUPERADMIN'',''USER_EDIT'',''USER_DELETE'')')}">
+                                    User View </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FILE_UPLOAD_VIEW'',''FILE_UPLOAD_ADD'',''FILE_UPLOAD_DELETE'',''FILE_UPLOAD_EDIT'',''FILE_UPLOAD_APPROVE'',''COMPLIANCE_FILE_UPLOAD_EDIT'',''COMPLIANCE_FILE_UPLOAD_VIEW'',''COMPLIANCE_FILE_UPLOAD_DELETE'',''COMPLIANCE_FILE_UPLOAD_CREATE'',''COMPLIANCE_FILE_UPLOAD_APPROVE'')')}">
+                    <a href="#FileUploads" data-toggle="collapse"> <i class="mdi mdi-briefcase-upload-outline"></i>
+                        <span>File Upload</span> <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="FileUploads">
+                        <ul class="nav-second-level">
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''COMPLIANCE_FILE_UPLOAD_EDIT'',''COMPLIANCE_FILE_UPLOAD_VIEW'',''COMPLIANCE_FILE_UPLOAD_DELETE'',''COMPLIANCE_FILE_UPLOAD_CREATE'',''COMPLIANCE_FILE_UPLOAD_APPROVE'')')}">
+                                <a href="/fileupload/compliance/">Compliance Function</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FILE_UPLOAD_VIEW'',''FILE_UPLOAD_ADD'',''FILE_UPLOAD_DELETE'',''FILE_UPLOAD_EDIT'',''FILE_UPLOAD_APPROVE'')')}">
+                                <a href="#opemenu" data-toggle="collapse"> Operation Function <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="opemenu">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FILE_UPLOAD_VIEW'',''FILE_UPLOAD_DELETE'',''FILE_UPLOAD_EDIT'',''FILE_UPLOAD_APPROVE'')')}">
+                                            <a href="/fileupload/operationlist">View Operation</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''FILE_UPLOAD_ADD'')')}">
+                                            <a href="/fileupload/uploadfile">Add Operation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                <a href="/reports/ifsc">IFSC Codes</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                <a href="/reports/ifscglobal">Global Bank Codes</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                <a href="/reports/ifscglobal">Global Cash Pickup</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_UNMATCHED_EDIT'',''RECONCILIATION_UNMATCHED_VIEW'',''RECONCILIATION_UNMATCHED_DELETE'',''RECONCILIATION_UNMATCHED_CREATE'',''RECONCILIATION_UNMATCHED_APPROVE'',''RECONCILIATION_MATCHED_EDIT'',''RECONCILIATION_MATCHED_VIEW'',''RECONCILIATION_MATCHED_DELETE'',''RECONCILIATION_MATCHED_CREATE'',''RECONCILIATION_MATCHED_APPROVE'')')}">
+                    <a href="#Reconciliation" data-toggle="collapse"> <i class="mdi mdi-compare"></i> <span>Reconciliation</span>
+                        <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="Reconciliation">
+                        <ul class="nav-second-level">
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_UNMATCHED_EDIT'',''RECONCILIATION_UNMATCHED_VIEW'',''RECONCILIATION_UNMATCHED_DELETE'',''RECONCILIATION_UNMATCHED_CREATE'',''RECONCILIATION_UNMATCHED_APPROVE'')')}">
+                                <a href="#UnmatchedEntries" data-toggle="collapse"><span>Unmatched Entries</span><span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="UnmatchedEntries">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_UNMATCHED_EDIT'',''RECONCILIATION_UNMATCHED_VIEW'',''RECONCILIATION_UNMATCHED_DELETE'',''RECONCILIATION_UNMATCHED_CREATE'')')}">
+                                            <a href="/reconciliation/unmatchedentrymaker">Unmatched Entries (Maker)</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_UNMATCHED_APPROVE'')')}">
+                                            <a href="/reconciliation/unmatchedentrychecker">Unmatched Entries
+                                                (Checker)</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_MATCHED_EDIT'',''RECONCILIATION_MATCHED_VIEW'',''RECONCILIATION_MATCHED_DELETE'',''RECONCILIATION_MATCHED_CREATE'',''RECONCILIATION_MATCHED_APPROVE'')')}">
+                                <a href="#MatchedException"
+                                   data-toggle="collapse"><span>Matched With Exception</span><span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="MatchedException">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_MATCHED_APPROVE'')')}">
+                                            <a href="/reconciliation/matchedentry/matchedentrychecker">Matched With
+                                                Exception (Checker)</a></li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_MATCHED_EDIT'',''RECONCILIATION_MATCHED_VIEW'',''RECONCILIATION_MATCHED_DELETE'',''RECONCILIATION_MATCHED_CREATE'')')}">
+                                            <a href="/reconciliation/matchedentry/matchedentrymaker">Matched With
+                                                Exception (Maker)</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_STAGING_EDIT'',''BACK_OFFICE_STAGING_VIEW'',''BACK_OFFICE_STAGING_DELETE'',''BACK_OFFICE_STAGING_CREATE'',''BACK_OFFICE_STAGING_APPROVE'',''BACK_OFFICE_DISBURSEMENT_EDIT'',''BACK_OFFICE_DISBURSEMENT_VIEW'',''BACK_OFFICE_DISBURSEMENT_DELETE'',''BACK_OFFICE_DISBURSEMENT_CREATE'',''BACK_OFFICE_DISBURSEMENT_APPROVE'',''BACK_OFFICE_RETURNS_EDIT'',''BACK_OFFICE_RETURNS_VIEW'',''BACK_OFFICE_RETURNS_DELETE'',''BACK_OFFICE_RETURNS_CREATE'',''BACK_OFFICE_RETURNS_APPROVE'',''BACK_OFFICE_REFUND_EDIT'',''BACK_OFFICE_REFUND_VIEW'',''BACK_OFFICE_REFUND_DELETE'',''BACK_OFFICE_REFUND_CREATE'',''BACK_OFFICE_REFUND_APPROVE'')')}">
+                    <a href="#Backoffice" data-toggle="collapse"> <i class="mdi mdi-office-building"></i> <span>Back Office</span>
+                        <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="Backoffice">
+                        <ul class="nav-second-level">
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_STAGING_EDIT'',''BACK_OFFICE_STAGING_VIEW'',''BACK_OFFICE_STAGING_DELETE'',''BACK_OFFICE_STAGING_CREATE'',''BACK_OFFICE_STAGING_APPROVE'')')}">
+                                <a href="#stagingqueue" data-toggle="collapse"> <span>Staging</span> <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="stagingqueue">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_STAGING_APPROVE'',''BACK_OFFICE_STAGING_DELETE'')')}">
+                                            <a href="/backoffice/staging/stagingchecker">Staging Checker</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_STAGING_EDIT'',''BACK_OFFICE_STAGING_VIEW'',''BACK_OFFICE_STAGING_CREATE'')')}">
+                                            <a href="/backoffice/staging/stagingmaker">Staging Maker</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_DISBURSEMENT_EDIT'',''BACK_OFFICE_DISBURSEMENT_VIEW'',''BACK_OFFICE_DISBURSEMENT_DELETE'',''BACK_OFFICE_DISBURSEMENT_CREATE'',''BACK_OFFICE_DISBURSEMENT_APPROVE'')')}">
+                                <a href="#disbursment" data-toggle="collapse"><span>Disbursement</span> <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="disbursment">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_DISBURSEMENT_APPROVE'',''BACK_OFFICE_DISBURSEMENT_DELETE'')')}">
+                                            <a href="/backoffice/disbursment/disbursementchecker">Disbursment
+                                                Checker</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_DISBURSEMENT_EDIT'',''BACK_OFFICE_DISBURSEMENT_VIEW'',''BACK_OFFICE_DISBURSEMENT_CREATE'')')}">
+                                            <a href="/backoffice/disbursment/disbursementmaker">Disbursment Maker</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_RETURNS_EDIT'',''BACK_OFFICE_RETURNS_VIEW'',''BACK_OFFICE_RETURNS_DELETE'',''BACK_OFFICE_RETURNS_CREATE'',''BACK_OFFICE_RETURNS_APPROVE'')')}">
+                                <a href="#return" data-toggle="collapse"><span>Return</span> <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="return">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_RETURNS_APPROVE'',''BACK_OFFICE_RETURNS_DELETE'')')}">
+                                            <a href="/product/Return/return_checker">Return Checker</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_RETURNS_EDIT'',''BACK_OFFICE_RETURNS_VIEW'',''BACK_OFFICE_RETURNS_CREATE'')')}">
+                                            <a href="/product/Return/return_maker">Return Maker</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_REFUND_EDIT'',''BACK_OFFICE_REFUND_VIEW'',''BACK_OFFICE_REFUND_DELETE'',''BACK_OFFICE_REFUND_CREATE'',''BACK_OFFICE_REFUND_APPROVE'')')}">
+                                <a href="#refund" data-toggle="collapse"><span>Refund</span> <span
+                                        class="menu-arrow"></span> </a>
+                                <div class="collapse" id="refund">
+                                    <ul class="nav-second-level">
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_REFUND_APPROVE'',''BACK_OFFICE_REFUND_DELETE'')')}">
+                                            <a href="/product/Refund/refund_checker">Refund Checker</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BACK_OFFICE_REFUND_EDIT'',''BACK_OFFICE_REFUND_VIEW'',''BACK_OFFICE_REFUND_CREATE'')')}">
+                                            <a href="/product/Refund/refund_maker">Refund Maker</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''COMPLIANCE_EDIT'',''COMPLIANCE_VIEW'',''COMPLIANCE_DELETE'',''COMPLIANCE_CREATE'',''COMPLIANCE_APPROVE'')')}">
+                    <a href="#complaince" data-toggle="collapse"> <i class="mdi mdi-view-list"></i>
+                        <span>Compliance</span> <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="complaince">
+                        <ul class="nav-second-level">
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''COMPLIANCE_APPROVE'')')}">
+                                <a href="/product/complaince/complaincechecker">Compliance Checker</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''COMPLIANCE_EDIT'',''COMPLIANCE_VIEW'',''COMPLIANCE_DELETE'',''COMPLIANCE_CREATE'')')}">
+                                <a href="/product/complaince/complaincemaker">Compliance Maker</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!--<li>
+                    <a href="#excahnge_rate" data-toggle="collapse"> <i class="mdi mdi-repeat"></i> <span>Exchange Rate</span> <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="excahnge_rate">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="exchangerate/exchangeadd">Add Exchange Rate</a>
+                            </li>
+                            <li>
+                                <a href="exchangerate/exchangeview">View Exchange Rate</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>-->
+                <!--<li>
+                    <a href="#holiday_calendar" data-toggle="collapse"> <i class="mdi mdi-calendar"></i> <span>Holiday Calendar</span> <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="holiday_calendar">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="/holiday">Add Holiday</a>
+                            </li>
+                            <li>
+                                <a href="/holiday/list">View Holiday Calendar</a>
+                            </li>
+                            <li>
+                                <a href="/holiday/checkerlist">Holiday Checker</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#tat_defination" data-toggle="collapse"> <i class="mdi mdi-sticker-plus-outline"></i> <span>TAT Defination</span> <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="tat_defination">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="/tat">Add TAT Definition</a>
+                            </li>
+                            <li>
+                                <a href="/tat/list">View TAT Definition</a>
+                            </li>
+                            <li>
+                                <a href="/tat/checkerlist">TAT Chcker</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>-->
+                <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''REGISTRATION_REPORT_VIEW'',''RECIPIENT_REPORT_VIEW'',''REMITTER_SUMMARY_VIEW'',''TRANSACTION_REPORT_VIEW'',''TRANSACTION_SUMMARY_VIEW'',''RECONCILIATION_REPORT_VIEW'',''COMPLIANCE_CHECKLIST_VIEW'',''BUSINESS_REGISTRATION_SUMMARY_REPORT_VIEW'')')}">
+                    <a href="#reports" data-toggle="collapse"> <i class="mdi mdi-book-multiple"></i>
+                        <span>Reports</span> <span class="menu-arrow"></span> </a>
+                    <div class="collapse" id="reports">
+                        <ul class="nav-second-level">
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''REGISTRATION_REPORT_VIEW'')')}">
+                                <a href="/reports/registration-report">Registration Report</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECIPIENT_REPORT_VIEW'')')}">
+                                <a href="/reports/recipient-report/">Recipient Report</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''REMITTER_SUMMARY_VIEW'')')}">
+                                <a href="/reports/remitter-summary">Remitter Summary</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TRANSACTION_REPORT_VIEW'')')}">
+                                <a href="/reports/transaction-report">Transaction Report</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TRANSACTION_SUMMARY_VIEW'')')}">
+                                <a href="/reports/transaction-summary">Transaction Summary</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TRANSACTION_SUMMARY_VIEW'')')}">
+                                <a href="/reports/web3-transaction-tracker">Web3 Transaction Tracker</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''RECONCILIATION_REPORT_VIEW'')')}">
+                                <a href="/reports/reconciliation-report">Reconciliation Report</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''COMPLIANCE_CHECKLIST_VIEW'')')}">
+                                <a href="/reports/complaince-checklist">Compliance Checklist</a>
+                            </li>
+                            <li th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''BUSINESS_REGISTRATION_SUMMARY_REPORT_VIEW'')')}">
+                                <a href="/reports/business-registration-summary">Business Registration Summary
+                                    Report</a>
+                            </li>
+                            <li>
+                                <a href="/reports/signup-report">Signup User Report</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- End Sidebar -->
+        <div class="clearfix"></div>
+    </div>
+    <!-- Sidebar -left -->
+</div>

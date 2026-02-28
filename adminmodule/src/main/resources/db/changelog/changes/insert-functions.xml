@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="superadmin" id="1">
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="1"/>
+            <column name="function_master_name" value="User Management"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="USER_MANAGEMENT"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="2"/>
+            <column name="function_master_name" value="Group Master"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="GROUP_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="3"/>
+            <column name="function_master_name" value="Role Master"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="ROLE_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="4"/>
+            <column name="function_master_name" value="Paymentmode Modify"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="PAYMENT_MODE_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="5"/>
+            <column name="function_master_name" value="Receivemode Modify"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="RECEIVE_MODE_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="6"/>
+            <column name="function_master_name" value="Modify Transfer Fee"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="FEE_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="7"/>
+            <column name="function_master_name" value="Authorise Transfer Fee"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="FEE_APPROVE"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="8"/>
+            <column name="function_master_name" value="Global Limits"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="GLOBAL_LIMITS"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="9"/>
+            <column name="function_master_name" value="Authorise Global Limits"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="GLOBAL_LIMITS_APPROVE"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="10"/>
+            <column name="function_master_name" value="Modify Service Charge"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="SERVICE_CHARGE_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="11"/>
+            <column name="function_master_name" value="Authorise Service Charge"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="SERVICE_CHARGE_APPROVE"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="12"/>
+            <column name="function_master_name" value="Modify Margin"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="MARGIN_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="13"/>
+            <column name="function_master_name" value="Authorise Margin"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="MARGIN_APPROVE"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,153 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Currency</a></li>
+                                    <li class="breadcrumb-item active" th:if="${currency.id == null}"><a href="/currency/list">Add Currency</a></li>
+                                    <li class="breadcrumb-item active" th:if="${currency.id != null}">Edit Currency</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title" th:if="${currency.id == null}">Add Currency</h4>
+                            <h4 class="page-title" th:if="${currency.id != null}">Edit Currency</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <form th:action="@{/currency/create}" th:object="${currency}" method="post" class="needs-validation" novalidate autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div th:if="${confirmationMessage}" class="alert alert-success" role="alert" th:text=${confirmationMessage}></div>
+                            <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Currency Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="currency_code">Currency Code</label>
+                                            <input class="form-control" type="text" id="currency_code" th:field="*{currencyCode}" required placeholder="Enter Currency Code">
+                                            <div class="invalid-feedback">
+                                                Invlaid Currency code
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="currency_name">Currency Name</label>
+                                            <input class="form-control" type="text" id="currency_name" th:field="*{currencyName}" required placeholder="Enter Currency Name">
+                                            <div class="invalid-feedback">
+                                                Invlaid Currency Name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--  <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="currency_symbol">Currency Symbol</label>
+                                            <input class="form-control" type="text" id="currency_symbol" th:field="*{currencySymbol}" placeholder="Enter Currency Symbol">
+                                            <div class="invalid-feedback">
+                                                Invlaid Currency Symbol
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                   <!-- <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="currency_desc">Currency Description</label>
+                                            <input class="form-control" type="text" id="currency_desc" th:field="*{currencyDescription}"  >
+                                            <div class="invalid-feedback">
+                                                Invlaid Currency description
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <div class="col-md-6" th:if="${id != null}">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Status</label>
+                                            <label for="publish" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" id="publish" th:field="*{publish}" class="checkbox_input" checked>
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Country Details</h5>
+                                <div class="row">
+                                <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="country">Country</label>
+                                            <select class="selectpicker border rounded show-tick" th:field="*{countryName}" data-style="btn" data-dropup-auto="false" id="country"  title="Select Country" required>
+                                                <option th:each="country : ${countries}"
+                                                        th:value="${country.countryName}"
+                                                        th:text="${country.countryName}"
+                                                        selected="${currency.countryName == country.id}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invlaid Country code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="country_code">Country Code</label>
+                                            <select class="selectpicker border rounded show-tick" th:field="*{countryCode}" data-style="btn" data-dropup-auto="false" id="country_code" title="Select Country Code" required>
+                                               <option th:each="country : ${countries}"
+                                                        th:value="${country.countryCode}"
+                                                        th:text="${country.countryCode}"
+                                                        selected="${currency.countryCode == country.countryCode}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invlaid Country code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                    <div class="text-center" th:if="${id == null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Currency</button>
+                    </div>
+                    <div class="text-center" th:if="${id != null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Update Currency</button>
+                    </div>
+                </form>
+            </div> <!-- container -->
+        </div> <!-- content -->
+        <!-- Footer Start -->
+        <footer th:replace="base/footer :: footer"></footer>
+        <!-- end Footer -->
+    </div>
+</div>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script  th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script  th:src="@{/js/app.min.js}"></script>
+<script  th:src="@{/js/custom.js}"></script>
+<script  th:src="@{/js/customAjax.js}"></script>
+<!--<script language="javascript">
+     function getCountryCode(selectedCountry)
+     {
+    	window.location.href='/currency/getcountryCode?countryName='+selectedCountry; 
+     }
+     </script>-->
+</body>
+</html>

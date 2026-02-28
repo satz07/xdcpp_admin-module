@@ -1,0 +1,217 @@
+import com.adminremit.masters.models.FeeMaster;
+import com.adminremit.masters.models.MarginMaster;
+
+import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+rule "Currency Conversion with feemaster Percentage marginmaster Percentage"
+
+when
+    $hm: Map(this["feeMaster"] != "",this["feeMaster"].flatPercFlag.equals("P"),
+    this["marginMaster"]!=null,this["marginMaster"].flatPercFlag.equals("P"))
+    $amt: Map(this["currencyAmt"] != "")
+then
+   FeeMaster fm = (FeeMaster)$hm.get("feeMaster");
+   MarginMaster mm = (MarginMaster)$hm.get("marginMaster");
+
+   BigDecimal totalAmt = (BigDecimal)$hm.get("currencyAmt");
+   BigDecimal baseRate = (BigDecimal)$hm.get("fxBaseRate");
+   BigDecimal discountTransactionAmt = totalAmt.multiply(fm.getTransactionFee().divide(new java.math.BigDecimal(100)));
+   BigDecimal netAmt = totalAmt.subtract(discountTransactionAmt);
+
+   BigDecimal totalMarginAmt = baseRate.subtract(baseRate.multiply(mm.getTxnSpread().divide(new java.math.BigDecimal(100))));
+   totalMarginAmt = totalMarginAmt.setScale(4, RoundingMode.CEILING);
+   BigDecimal finalAmt = netAmt.multiply(totalMarginAmt);
+
+   System.out.println("Currency Conversion with feemaster Percentage marginmaster Percentage");
+   System.out.println("totalAmt "+totalAmt);
+   System.out.println("baseRate "+baseRate);
+   System.out.println("TransactionFee Percentage "+fm.getTransactionFee());
+   System.out.println("Spread  percentage "+mm.getTxnSpread());
+   System.out.println("TransactionAmt "+discountTransactionAmt);
+   System.out.println("Margin Amount "+totalMarginAmt);
+   System.out.println("After Transaction Deducted  "+netAmt);
+   System.out.println("Total Margin  "+totalMarginAmt);
+   System.out.println("Total Received Amt  "+finalAmt);
+   $hm.put("totalMargin",totalMarginAmt);
+   $hm.put("totalAmt",finalAmt);
+   $hm.put("transactionFee",discountTransactionAmt);
+   $hm.put("baseRate",baseRate);
+   $hm.put("margin",mm.getTxnSpread());
+
+end
+
+rule "Currency Conversion with feemaster Flat margin master Percentage"
+
+when
+    $hm: Map(this["feeMaster"] != null,this["feeMaster"].flatPercFlag.equals("F"),
+    this["marginMaster"]!=null,this["marginMaster"].flatPercFlag.equals("P"))
+    $amt: Map(this["currencyAmt"] != "")
+then
+   FeeMaster fm = (FeeMaster)$hm.get("feeMaster");
+   MarginMaster mm = (MarginMaster)$hm.get("marginMaster");
+
+   BigDecimal totalAmt = (BigDecimal)$hm.get("currencyAmt");
+   BigDecimal baseRate = (BigDecimal)$hm.get("fxBaseRate");
+   BigDecimal discountTransactionAmt = fm.getTransactionFee();
+   BigDecimal netAmt = totalAmt.subtract(discountTransactionAmt);
+
+
+   BigDecimal totalMarginAmt = baseRate.subtract(baseRate.multiply(mm.getTxnSpread().divide(new java.math.BigDecimal(100))));
+   totalMarginAmt = totalMarginAmt.setScale(4, RoundingMode.CEILING);
+
+   BigDecimal finalAmt = netAmt.multiply(totalMarginAmt);
+
+   System.out.println("Currency Conversion with feemaster Flat margin master Percentage");
+     System.out.println("totalAmt "+totalAmt);
+      System.out.println("baseRate "+baseRate);
+      System.out.println("TransactionFee flat "+discountTransactionAmt);
+      System.out.println("Spread  percentage "+mm.getTxnSpread());
+      System.out.println("Margin Amount "+totalMarginAmt);
+      System.out.println("After Transaction Deducted  "+netAmt);
+      System.out.println("Total Received Amt  "+finalAmt);
+
+
+   $hm.put("totalMargin",totalMarginAmt);
+   $hm.put("totalAmt",finalAmt);
+   $hm.put("transactionFee",discountTransactionAmt);
+   $hm.put("baseRate",baseRate);
+   $hm.put("margin",mm.getTxnSpread());
+
+end
+
+rule "Currency Conversion with feemaster Percentage marginmaster Flat"
+
+when
+    $hm: Map(this["feeMaster"] != "",this["feeMaster"].flatPercFlag.equals("P"),
+    this["marginMaster"]!=null,this["marginMaster"].flatPercFlag.equals("F"))
+    $amt: Map(this["currencyAmt"] != "")
+then
+   FeeMaster fm = (FeeMaster)$hm.get("feeMaster");
+   MarginMaster mm = (MarginMaster)$hm.get("marginMaster");
+
+   BigDecimal totalAmt = (BigDecimal)$hm.get("currencyAmt");
+   BigDecimal baseRate = (BigDecimal)$hm.get("fxBaseRate");
+   BigDecimal discountTransactionAmt = totalAmt.multiply(fm.getTransactionFee().divide(new java.math.BigDecimal(100)));
+   BigDecimal netAmt = totalAmt.subtract(discountTransactionAmt);
+
+
+   BigDecimal totalMarginAmt = mm.getTxnSpread();
+   totalMarginAmt = totalMarginAmt.setScale(4, RoundingMode.CEILING);
+
+   BigDecimal finalAmt = netAmt.multiply(totalMarginAmt);
+
+   System.out.println("Currency Conversion with feemaster Percentage marginmaster Flat");
+   System.out.println("totalAmt "+totalAmt);
+   System.out.println("baseRate "+baseRate);
+   System.out.println("TransactionFee Percentage "+fm.getTransactionFee());
+   System.out.println("Spread  percentage "+mm.getTxnSpread());
+   System.out.println("TransactionAmt "+discountTransactionAmt);
+   System.out.println("Margin Amount "+totalMarginAmt);
+   System.out.println("After Transaction Deducted  "+netAmt);
+   System.out.println("Total Margin  "+totalMarginAmt);
+   System.out.println("Total Received Amt  "+finalAmt);
+   $hm.put("totalMargin",totalMarginAmt);
+   $hm.put("totalAmt",finalAmt);
+   $hm.put("transactionFee",discountTransactionAmt);
+   $hm.put("baseRate",baseRate);
+   $hm.put("margin",mm.getTxnSpread());
+
+end
+
+rule "Currency Conversion with feemaster Flat marginmaster Flat"
+
+when
+    $hm: Map(this["feeMaster"] != "",this["feeMaster"].flatPercFlag.equals("F"),
+    this["marginMaster"]!=null,this["marginMaster"].flatPercFlag.equals("F"))
+    $amt: Map(this["currencyAmt"] != "")
+then
+   FeeMaster fm = (FeeMaster)$hm.get("feeMaster");
+   MarginMaster mm = (MarginMaster)$hm.get("marginMaster");
+
+   BigDecimal totalAmt = (BigDecimal)$hm.get("currencyAmt");
+   BigDecimal baseRate = (BigDecimal)$hm.get("fxBaseRate");
+   BigDecimal discountTransactionAmt = fm.getTransactionFee();
+   BigDecimal netAmt = totalAmt.subtract(discountTransactionAmt);
+
+
+   BigDecimal totalMarginAmt = mm.getTxnSpread();
+   totalMarginAmt = totalMarginAmt.setScale(4, RoundingMode.CEILING);
+
+   BigDecimal finalAmt = netAmt.multiply(totalMarginAmt);
+   System.out.println("Currency Conversion with feemaster Flat marginmaster Flat");
+   System.out.println("totalAmt "+totalAmt);
+   System.out.println("baseRate "+baseRate);
+   System.out.println("TransactionFee Percentage "+fm.getTransactionFee());
+   System.out.println("Spread  percentage "+mm.getTxnSpread());
+   System.out.println("TransactionAmt "+discountTransactionAmt);
+   System.out.println("Margin Amount "+totalMarginAmt);
+   System.out.println("After Transaction Deducted  "+netAmt);
+   System.out.println("Total Margin  "+totalMarginAmt);
+   System.out.println("Total Received Amt  "+finalAmt);
+   $hm.put("totalMargin",totalMarginAmt);
+   $hm.put("totalAmt",finalAmt);
+   $hm.put("transactionFee",discountTransactionAmt);
+   $hm.put("baseRate",baseRate);
+   $hm.put("margin",mm.getTxnSpread());
+
+end
+
+
+rule "Currency Conversion with Percentage with Null marginMaster"
+when
+    $hm: Map(this["feeMaster"] != "",this["feeMaster"].flatPercFlag.equals("P"), this["marginMaster"]==null)
+    $amt: Map(this["currencyAmt"] != "")
+then
+   FeeMaster fm = (FeeMaster)$hm.get("feeMaster");
+
+   BigDecimal totalAmt = (BigDecimal)$hm.get("currencyAmt");
+   BigDecimal baseRate = (BigDecimal)$hm.get("fxBaseRate");
+   BigDecimal discountTransactionAmt = totalAmt.multiply(fm.getTransactionFee().divide(new java.math.BigDecimal(100)));
+   BigDecimal netAmt = totalAmt.subtract(discountTransactionAmt);
+   baseRate = baseRate.setScale(4, RoundingMode.CEILING);
+
+   BigDecimal finalAmt = baseRate.multiply(baseRate);
+
+   System.out.println("Currency Conversion with Percentage with Null marginMaster");
+
+   System.out.println("discountTransactionAmt "+discountTransactionAmt);
+   System.out.println("After Transaction Deducted  "+netAmt);
+   System.out.println("Total Received Amt  "+finalAmt);
+   $hm.put("totalMargin",baseRate);
+   $hm.put("totalAmt",finalAmt);
+   $hm.put("transactionFee",discountTransactionAmt);
+
+end
+
+
+rule "Currency Conversion with Flat with Null marginMaster"
+
+when
+    $hm: Map(this["feeMaster"] != null,this["feeMaster"].flatPercFlag.equals("F"),this["marginMaster"]==null)
+    $amt: Map(this["currencyAmt"] != "")
+then
+   FeeMaster fm = (FeeMaster)$hm.get("feeMaster");
+
+   BigDecimal totalAmt = (BigDecimal)$hm.get("currencyAmt");
+   BigDecimal baseRate = (BigDecimal)$hm.get("fxBaseRate");
+   BigDecimal discountTransactionAmt = fm.getTransactionFee();
+   BigDecimal netAmt = totalAmt.subtract(discountTransactionAmt);
+   baseRate = baseRate.setScale(4, RoundingMode.CEILING);
+
+   BigDecimal finalAmt = netAmt.multiply(baseRate);
+
+   System.out.println("Currency Conversion with Flat with Null marginMaster");
+
+   System.out.println("Flat discountTransactionAmt "+discountTransactionAmt);
+   System.out.println("Flat  After Transaction Deducted  "+netAmt);
+   System.out.println("Flat Total Received Amt  "+finalAmt);
+   $hm.put("totalMargin",baseRate);
+   $hm.put("totalAmt",finalAmt);
+   $hm.put("transactionFee",discountTransactionAmt);
+
+end

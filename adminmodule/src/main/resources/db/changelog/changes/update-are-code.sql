@@ -1,0 +1,1 @@
+UPDATE admin_currencies SET country_code='AE' where id=133;

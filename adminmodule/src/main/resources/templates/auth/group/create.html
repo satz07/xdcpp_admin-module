@@ -1,0 +1,113 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Groups</a></li>
+                                    <li th:if="${groups.id == null}" class="breadcrumb-item active"><a href="/group/list">Add Groups</a></li>
+                                    <li th:if="${groups.id != null}" class="breadcrumb-item active">Edit Group</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title" th:if="${groups.id == null}">Add Group</h4>
+                            <h4 class="page-title" th:if="${groups.id != null}">Edit Group</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <form th:action="@{/group/create}" th:object="${groups}" method="post" class="needs-validation"
+                      novalidate autocomplete="off">
+                    <div th:if="${confirmationMessage}" class="alert alert-success"
+                         role="alert" th:text=${confirmationMessage}></div>
+
+                    <div th:if="${errorMessage}"
+                         class="alert alert-danger" role="alert"
+                         th:text="${errorMessage}"></div>
+                    <div th:if="${#fields.hasErrors('groupName')}"
+                         th:errors="*{groupName}"
+                         class="validation-message alert alert-danger" role="alert"></div>
+                    <div class="card-box">
+                        <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">General Details</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="groupName">Group Name</label>
+                                    <input class="form-control" type="text" th:field="*{groupName}" id="groupName"
+                                           minlength="2" maxlength="70" required>
+                                    <div class="invalid-feedback">
+                                        Enter Group Name
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="locationMaster">Location</label>
+                                    <select class="selectpicker show-tick border" title="Select Location"
+                                            data-style="btn" data-dropup-auto="false" th:field="*{locationMaster}"
+                                            id="locationMaster" name="*locationMaster" required>
+                                        <option th:each="location : ${locationMasters}"
+                                                th:value="${location.id}" th:text="${location.locationName}"
+                                                selected="${location.id == locationMaster}"></option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Enter Location
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="groupDescription">Description</label>
+                                    <textarea class="form-control" type="text" th:field="*{groupDescription}"
+                                              id="groupDescription" cols="30" rows="5"
+                                              placeholder="Add description"></textarea>
+                                    <div class="invalid-feedback">
+                                        Enter Description
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" th:if="${id != null}">
+                                <div class="form-group mt-3">
+                                    <label class="mr-2">Status</label>
+                                    <label for="publish" class="checkboxtoggle pt-2">
+                                        <input type="checkbox" id="publish" th:field="*{publish}" class="checkbox_input" checked>
+                                        <div class="checkboxtoggle_fill"></div>
+                                    </label>
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center" th:if="${id == null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Group</button>
+                    </div>
+                    <div class="text-center" th:if="${id != null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Update Group</button>
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                </form>
+            </div> <!-- container -->
+        </div> <!-- content -->
+    </div>
+    <footer th:replace="base/footer :: footer"></footer>
+</div>
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</html>

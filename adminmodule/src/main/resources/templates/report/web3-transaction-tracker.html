@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base/list_header :: head"></head>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+                                    <li class="breadcrumb-item active">Web3 Transaction Tracker</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Web3 Transaction Tracker</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <!-- main content -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <p class="text-muted mb-2">
+                                    Latest Web3 on-ramp and off-ramp transaction events fetched from the Web3 webhook service.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box" style="overflow: auto">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <h4 class="header-title mb-4">Events</h4>
+                                        </div>
+                                    </div>
+
+                                    <table class="table table-hover table-striped m-0 table-centered nowrap w-100">
+                                        <thead>
+                                        <tr>
+                                            <th>Event ID</th>
+                                            <th>Event Type</th>
+                                            <th>Reference ID</th>
+                                            <th>Status</th>
+                                            <th>Event Created At</th>
+                                            <th>Created At</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:if="${events == null or #lists.isEmpty(events)}">
+                                            <td colspan="6" class="text-center text-muted">
+                                                No Web3 events found.
+                                            </td>
+                                        </tr>
+                                        <tr th:each="event : ${events}">
+                                            <td th:text="${event.eventId}">849246</td>
+                                            <td th:text="${event.eventType}">OFFRAMP</td>
+                                            <td th:text="${event.referenceId}">447565.0</td>
+                                            <td th:text="${event.status}">FIAT_TRANSFER_COMPLETED</td>
+                                            <td th:text="${event.eventCreatedAt}">2026-02-18T11:06:24.000+0000</td>
+                                            <td th:text="${event.createAt}">2026-02-18T11:06:28.387+0000</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div> <!-- container-fluid -->
+        </div> <!-- content -->
+    </div> <!-- content-page -->
+</div> <!-- wrapper -->
+
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base/list_header :: head"></head>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+                                    <li class="breadcrumb-item active">Web3 Transaction Tracker</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Web3 Transaction Tracker</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <!-- main content -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <p class="text-muted mb-2">
+                                    Latest Web3 on-ramp and off-ramp transaction events fetched from the Web3 webhook service.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box" style="overflow: auto">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <h4 class="header-title mb-4">Events</h4>
+                                        </div>
+                                    </div>
+
+                                    <table class="table table-hover table-striped m-0 table-centered nowrap w-100">
+                                        <thead>
+                                        <tr>
+                                            <th>Event ID</th>
+                                            <th>Event Type</th>
+                                            <th>Reference ID</th>
+                                            <th>Status</th>
+                                            <th>Event Created At</th>
+                                            <th>Created At</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:if="${events == null or #lists.isEmpty(events)}">
+                                            <td colspan="6" class="text-center text-muted">
+                                                No Web3 events found.
+                                            </td>
+                                        </tr>
+                                        <tr th:each="event : ${events}">
+                                            <td th:text="${event.eventId}">849246</td>
+                                            <td th:text="${event.eventType}">OFFRAMP</td>
+                                            <td th:text="${event.referenceId}">447565.0</td>
+                                            <td th:text="${event.status}">FIAT_TRANSFER_COMPLETED</td>
+                                            <td th:text="${event.eventCreatedAt}">2026-02-18T11:06:24.000+0000</td>
+                                            <td th:text="${event.createAt}">2026-02-18T11:06:28.387+0000</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div> <!-- container-fluid -->
+        </div> <!-- content -->
+    </div> <!-- content-page -->
+</div> <!-- wrapper -->
+
+</html>
+

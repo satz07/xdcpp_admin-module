@@ -1,0 +1,681 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base/list_header :: head"></head>
+
+<body class="loading">
+
+	<!-- Begin page -->
+	<div id="wrapper">
+		<div th:replace="base/top_header" :: div></div>
+		<div th:replace="base/left_menu" :: div></div>
+
+		<div class="content-page">
+			<div class="content">
+
+				<!-- Start Content-->
+				<div class="container-fluid">
+
+					<!-- start page title -->
+					<div class="row">
+						<div class="col-12">
+							<div class="page-title-box">
+								<div class="page-title-right">
+									<ol class="breadcrumb m-0">
+										<li class="breadcrumb-item"><a
+											href="javascript: void(0);">Reports</a></li>
+										<li class="breadcrumb-item active">Remitter Summary</li>
+									</ol>
+								</div>
+								<h4 class="page-title">Remitter Summary</h4>
+							</div>
+						</div>
+					</div>
+					<!-- end page title -->
+					<!-- main content -->
+
+					<div class="card">
+						<div class="card-body">
+							<form th:action="@{/remitterSummary/list}" method="post"
+								class="needs-validation" novalidate autocomplete="off">
+								<div class="mb-2">
+									<div class="form-group mb-3 form-inline mr-3 d-inline-flex">
+										<label for="emailid" class="mr-3">Email ID</label> <input
+											class="form-control" type="email" id="email" th:name="email">
+									</div>
+									<button class="btn btn-outline-primary" type="submit">Search</button>
+								</div>
+							</form>
+							<div class="row mb-6">
+								<div class="col-lg-1">
+									<div
+										class="nav nav-pills flex-column nav-pills-tab text-center"
+										id="v-pills-tab" role="tablist" aria-orientation="vertical">
+										<a class="nav-link active shadow show py-2"
+											id="custom-v-pills-remitterdetails-tab" data-toggle="pill"
+											href="#custom-v-pills-remitterdetails" role="tab"
+											aria-controls="custom-v-pills-remitterdetails"
+											aria-selected="true"> <i
+											class="mdi mdi-account-circle d-block font-24"></i> Remitter
+											Details
+										</a> <a class="nav-link mt-2 shadow py-2"
+											id="custom-v-pills-kyc-tab" data-toggle="pill"
+											href="#custom-v-pills-kyc" role="tab"
+											aria-controls="custom-v-pills-kyc" aria-selected="false">
+											<i class="mdi mdi-file-find d-block font-24"></i> KYC
+										</a> <a class="nav-link mt-2 shadow py-2"
+											id="custom-v-pills-edd-tab" data-toggle="pill"
+											href="#custom-v-pills-edd" role="tab"
+											aria-controls="custom-v-pills-edd" aria-selected="false">
+											<i class="mdi mdi-cash-multiple d-block font-24"></i> EDD
+										</a> <a class="nav-link mt-2 shadow py-2"
+											id="custom-v-pills-recipients-tab" data-toggle="pill"
+											href="#custom-v-pills-recipients" role="tab"
+											aria-controls="custom-v-pills-recipients"
+											aria-selected="false"> <i
+											class="mdi mdi-account-group d-block font-24"></i> Recipients
+										</a> <a class="nav-link mt-2 shadow py-2"
+											id="custom-v-pills-documents-tab" data-toggle="pill"
+											href="#custom-v-pills-documents" role="tab"
+											aria-controls="custom-v-pills-documents"
+											aria-selected="false"> <i
+											class="mdi mdi-file-document d-block font-24"></i> Documents
+										</a>
+									</div>
+								</div>
+								<!-- end col-->
+
+
+
+								<div class="tab-content px-3 pt-10">
+									<div class="tab-pane fade active show"
+										id="custom-v-pills-remitterdetails" role="tabpanel"
+										aria-labelledby="custom-v-pills-remitterdetails-tab">
+										<div>
+											<div th:if="${not #lists.isEmpty(userLists)}">
+												<div th:each="userList : ${userLists}">
+													<h4 class="header-title">Remitter Details</h4>
+													<div class="table-responsive">
+
+														<table
+															class="m-0 nowrap table table-bordered table-centered table-hover w-100 table-striped">
+															<tbody>
+																<tr>
+																	<th>Name</th>
+																	<td th:text="${userList.fullName}"></td>
+																</tr>
+																<tr>
+																	<th>Gender</th>
+																	<td th:text="${userList.gender}"></td>
+																</tr>
+																<tr>
+																	<th>Date of Birth</th>
+																	<td th:text="${userList.dateofBirth}"></td>
+																</tr>
+																<tr>
+																	<th>Age</th>
+																	<td th:text="${userList.age}"></td>
+																</tr>
+																<tr>
+																	<th>Address</th>
+																	<td th:text="${userList.address}"></td>
+																</tr>
+																<tr>
+																	<th>Email Address</th>
+																	<td th:text="${userList.email}"></td>
+																</tr>
+																<tr>
+																	<th>Mobile Number</th>
+																	<td th:text="${userList.mobileNumber}"></td>
+																</tr>
+																<tr>
+																	<th>Nationality</th>
+																	<td th:text="${userList.nationality}"></td>
+																</tr>
+																<tr>
+																	<th>Risk Profile</th>
+																	<td></td>
+																</tr>
+																<tr>
+																	<th>User Category</th>
+																	<td th:text="General"></td>
+																</tr>
+																<tr>
+																	<th>Registration Date and Time</th>
+																	<td th:text="${userList.registrationDateAndTime}"></td>
+																</tr>
+																<tr>
+																	<th>Partner Name</th>
+																	<td th:text="'XDC Payments'"></td>
+																</tr>
+																<tr>
+																	<th>Registration IP Address</th>
+																	<td th:text="${userList.registrationIPAddress}"></td>
+																</tr>
+																<tr>
+																	<th>Registration IP Location</th>
+																	<td></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="tab-pane fade" id="custom-v-pills-kyc"
+										role="tabpanel" aria-labelledby="custom-v-pills-kyc-tab">
+										<div>
+											<h4 class="header-title">KYC</h4>
+											<div class="card-box">
+
+												<table
+													class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable"
+													id="scroll-horizontal-datatable3">
+													<thead>
+														<tr>
+															<th>KYC Country</th>
+															<th>Level 1 KYC ID</th>
+															<th>Level 1 KYC Partner</th>
+															<th>KYC Result</th>
+															<th>KYC Document</th>
+															<th>KYC Date and Time</th>
+															<th>Level 2 KYC ID</th>
+															<th>Level 2 KYC Partner</th>
+															<th>KYC Result</th>
+															<th>KYC Document</th>
+															<th>KYC Date and Time</th>
+															<th>AML Check Status</th>
+															<th>AML Date and Time</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="kyc : ${kyc1}">
+															<td th:text="${kyc.kycCountry}"></td>
+															<td th:text="${kyc.level1KYCID}"></td>
+															<td th:text="${kyc.level1KYCPartner}"></td>
+															<td th:text="${kyc.kycResult}"></td>
+															<td th:text="${kyc.kycDocument}"></td>
+															<td th:text="${kyc.kycDateandTime}"></td>
+															<td th:text="${kyc.level2KYCID}"></td>
+															<td th:text="${kyc.level2KYCPartner}"></td>
+															<td th:text="${kyc.kyc2Result}"></td>
+															<td th:text="${kyc.kyc2Document}"></td>
+															<td th:text="${kyc.kyc2DateandTime}"></td>
+															<td></td>
+															<td th:text="${kyc.amlDateandTime}"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="custom-v-pills-edd"
+										role="tabpanel" aria-labelledby="custom-v-pills-edd-tab">
+										<div>
+											<div th:if="${not #lists.isEmpty(eddDatas)}">
+
+												<h4 class="header-title">EDD</h4>
+
+												<div class="card-box">
+
+													<table
+														class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable"
+														id="scroll-horizontal-datatable">
+
+
+														<thead>
+															<tr>
+																<th>EDD</th>
+																<th>EDD Country</th>
+																<th>Profession</th>
+																<th>Profession Type</th>
+																<th>Other Profession</th>
+																<th>Source of Income</th>
+																<th>Annual Income Slab</th>
+
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:each="eddData : ${eddDatas}">
+																<td th:text="${eddData.eDD}"></td>
+																<td th:text="${eddData.eDDCountry}"></td>
+																<td th:text="${eddData.profession}"></td>
+																<td th:text="${eddData.professionType}"></td>
+																<td th:text="${eddData.otherProfession}"></td>
+																<td th:text="${eddData.sourceOfIncome}"></td>
+																<td th:text="${eddData.annualIncomeSlab}"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="custom-v-pills-recipients"
+										role="tabpanel"
+										aria-labelledby="custom-v-pills-recipients-tab">
+										<div>
+											<div th:if="${not #lists.isEmpty(recipients)}">
+
+												<h4 class="header-title">Recipients</h4>
+												<div class="card-box">
+
+													<table
+														class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable"
+														id="scroll-horizontal-datatable2">
+
+														<thead>
+
+															<tr>
+																<th>Country</th>
+																<th>Relationship Number</th>
+																<th>Name</th>
+																<th>Nickname</th>
+																<th>Relationship</th>
+																<th>Purpose</th>
+																<th>Date of Birth</th>
+																<th>Address</th>
+																<th>Bank Code</th>
+																<th>Bank Name</th>
+																<th>Account Number</th>
+																<th>VPA Handle</th>
+																<th>Date Added</th>
+																<th>Date Modified</th>
+																<th>Status</th>
+																<th>AML Check status</th>
+																<th>AML Date and Time</th>
+																<th>Name Validation Value</th>
+																<th>Name Validation Status</th>
+
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:each="recipient : ${recipients}">
+																<td th:text="${recipient.country}"></td>
+																<td></td>
+																<td th:text="${recipient.name}"></td>
+																<td th:text="${recipient.nickname}"></td>
+																<td th:text="${recipient.relationship}"></td>
+																<td th:text="${recipient.purpose}"></td>
+																<td th:text="${recipient.dateofBirth}"></td>
+																<td th:text="${recipient.address}"></td>
+																<td></td>
+																<td th:text="${recipient.bankName}"></td>
+																<td th:text="${recipient.accountNumber}"></td>
+																<td th:text="${recipient.vPAHandle}"></td>
+																<td th:text="${recipient.dateAdded}"></td>
+																<td th:text="${recipient.dateModified}"></td>
+																<td th:text="${recipient.status}"></td>
+																<td th:text="${recipient.amlCheckStatus}"></td>
+																<td th:text="${recipient.amlDateandTime}"></td>
+																<td></td>
+																<td th:text="${recipient.nameValidationStatus}"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="custom-v-pills-documents"
+										role="tabpanel" aria-labelledby="custom-v-pills-documents-tab">
+										<div>
+											<h4 class="header-title">Documents</h4>
+											<!-- File1 -->
+											<div class="row">
+												<div class="col-md">
+													<div class="card mb-1 shadow-none border">
+														<div class="p-2">
+															<div class="row align-items-center">
+																<div class="col-auto">
+																	<div class="avatar-sm">
+																		<span
+																			class="avatar-title badge-soft-primary text-primary rounded">
+																			JPG </span>
+																	</div>
+																</div>
+																<div class="col pl-0">
+																	<a href="javascript:void(0);"
+																		class="text-muted font-weight-bold">Transaction
+																		Number - Date of document upload - Name of Document</a>
+																</div>
+																<div class="col-auto">
+																	<!-- Button -->
+																	<a href="javascript:void(0);"
+																		class="btn btn-link float-right font-16 text-muted"
+																		data-target="#filepreview" data-toggle="modal"> <i
+																		class="mdi mdi-eye"></i>
+																	</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md">
+													<div class="card mb-1 shadow-none border">
+														<div class="p-2">
+															<div class="row align-items-center">
+																<div class="col-auto">
+																	<div class="avatar-sm">
+																		<span
+																			class="avatar-title badge-soft-primary text-primary rounded">
+																			PDF </span>
+																	</div>
+																</div>
+																<div class="col pl-0">
+																	<a href="javascript:void(0);"
+																		class="text-muted font-weight-bold">Transaction
+																		Number - Date of document upload - Name of Document</a>
+																</div>
+																<div class="col-auto">
+																	<!-- Button -->
+																	<a href="javascript:void(0);"
+																		class="btn btn-link float-right font-16 text-muted"
+																		data-target="#filepreview" data-toggle="modal"> <i
+																		class="mdi mdi-eye"></i>
+																	</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- File2 -->
+											<!-- File2 -->
+											<!-- File3 -->
+											<!-- File4 -->
+										</div>
+									</div>
+								</div>
+
+								<!-- end col-->
+
+
+							</div>
+							<!-- end row-->
+							<h4 class="header-title">Transaction Summary</h4>
+							<div class="row">
+								<div class="col-12">
+									<div class="card-box">
+
+										<table
+											class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable"
+											id="scroll-horizontal-datatable1">
+											<thead>
+												<tr>
+													<th data-priority="1">Booking Date and Time</th>
+													<th data-priority="3">Transaction Number</th>
+													<th data-priority="1">Originating Currency</th>
+													<th data-priority="3">Originating Amount</th>
+													<th data-priority="3">Exchange Rate</th>
+													<th data-priority="6">Disbursement Amount</th>
+													<th data-priority="6">Payment mode</th>
+													<th data-priority="6">Recipient Name</th>
+													<th data-priority="6">Receive mode</th>
+													<th data-priority="6">Status</th>
+													<th data-priority="6">IP Location</th>
+													<th data-priority="6">Disbursement Date and Time</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="transactionList : ${transactionLists}">
+													<td th:text="${transactionList.BookingDate}"></td>
+													<td th:text="${transactionList.transactionNo}"></td>
+													<td th:text="${transactionList.originatingCurrency}"></td>
+													<td th:text="${transactionList.originatingAmount}"></td>
+													<td th:text="${transactionList.disbursementAmount}"></td>
+													<td th:text="${transactionList.disbursementAmount}"></td>
+													<td th:text="${transactionList.paymentmode}"></td>
+													<td th:text="${transactionList.recipientName}"></td>
+													<td th:text="${transactionList.receivemode}"></td>
+													<td th:text="${transactionList.status}"></td>
+													<td th:text="${transactionList.iPLocation}"></td>
+													<td th:text="${transactionList.disbursementDateTime}"></td>
+												</tr>
+
+
+											</tbody>
+										</table>
+									</div>
+									<!-- end .table-responsive -->
+
+								</div>
+								<!-- end .table-rep-plugin-->
+							</div>
+							<button class="btn btn-primary mt-3 float-right" type="button">Add
+								More</button>
+						</div>
+					</div>
+					<!-- /main content -->
+				</div>
+				<!-- container -->
+				<!-- Modal -->
+				<div id="filepreview" class="modal fade" tabindex="-1" role="dialog"
+					aria-hidden="true">
+					<div class="modal-dialog modal-md">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="standard-modalLabel">Filename</h4>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+							</div>
+							<div class="modal-body p-4">
+								<!-- File to be shown here -->
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+				<div id="confirm-delete" class="modal fade" tabindex="-1"
+					role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-body p-4">
+								<div class="text-center">
+									<i class="dripicons-information h1 text-info"></i>
+									<h4 class="mt-2">Heads up!</h4>
+									<p class="mt-3">Are you sure you want to delete?</p>
+									<button type="button"
+										class="btn btn-primary my-2 confirm-deletemap"
+										data-dismiss="modal">Yes</button>
+									<button type="button" class="btn btn-outline-primary my-2"
+										data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+				<!-- Success Alert Modal -->
+				<div id="success-alert-modal" class="modal fade" tabindex="-1"
+					role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content">
+							<div class="modal-body p-4">
+								<div class="text-center">
+									<i class="dripicons-checkmark h1 text-secondarycolor"></i>
+									<h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+									<p class="mt-3 text-secondarycolor">Mapping Deleted</p>
+									<button type="button" class="btn btn-outline-primary my-2"
+										data-dismiss="modal">Continue</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
+			<!-- content -->
+		</div>
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<script>
+							document.write(new Date().getFullYear())
+						</script>
+						© AndRemit
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-sm-block">
+							<a href="javascript:void(0);">Help</a> <a
+								href="javascript:void(0);">Contact Admin</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- end Footer -->
+		<div id="notification-modal" class="modal fade" tabindex="-1"
+			role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body p-4">
+						<div class="text-center">
+							<h4 class="mt-2">Authorize</h4>
+							<p class="mt-3">Fee</p>
+							<button type="button" class="btn btn-primary my-2"
+								data-dismiss="modal">Yes</button>
+							<button type="button" class="btn btn-outline-primary my-2"
+								data-dismiss="modal">No</button>
+						</div>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- ============================================================== -->
+		<!-- End Page content -->
+		<!-- ============================================================== -->
+	</div>
+
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script
+	th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/libs/admin-resources/rwd-table/rwd-table.min.js}"></script>
+<script th:src="@{/js/pages/responsive-table.init.js}"></script>
+<script th:src="@{/libs/footable/footable.all.min.js}"></script>
+<script th:src="@{/js/pages/foo-tables.init.js}"></script>
+<script src="@{/libs/admin-resources/rwd-table/rwd-table.min.js}"></script>
+<script src="@{/js/pages/responsive-table.init.js}"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+								$("#scroll-horizontal-datatable")
+										.DataTable(
+												{
+													scrollX : !0,
+													language : {
+														paginate : {
+															previous : "<i class='mdi mdi-chevron-left'>",
+															next : "<i class='mdi mdi-chevron-right'>",
+														},
+													},
+													drawCallback : function() {
+														$(
+																".dataTables_paginate > .pagination")
+																.addClass(
+																		"pagination-rounded");
+													},
+												}),
+								$("#scroll-horizontal-datatable1")
+										.DataTable(
+												{
+													scrollX : !0,
+													order: [ [0, "desc"] ],
+													       
+													  
+													language : {
+														paginate : {
+															previous : "<i class='mdi mdi-chevron-left'>",
+															next : "<i class='mdi mdi-chevron-right'>",
+														},
+													},
+													drawCallback : function() {
+														$(
+																".dataTables_paginate > .pagination")
+																.addClass(
+																		"pagination-rounded");
+													},
+												}),
+												$("#scroll-horizontal-datatable2")
+												.DataTable(
+														{
+															scrollX : !0,
+														//	order:  0, desc,
+															language : {
+																paginate : {
+																	previous : "<i class='mdi mdi-chevron-left'>",
+																	next : "<i class='mdi mdi-chevron-right'>",
+																},
+															},
+															drawCallback : function() {
+																$(
+																		".dataTables_paginate > .pagination")
+																		.addClass(
+																				"pagination-rounded");
+															},
+														}),
+														$("#scroll-horizontal-datatable3")
+														.DataTable(
+																{
+																	scrollX : !0,
+																//	order:  0, desc,
+																	language : {
+																		paginate : {
+																			previous : "<i class='mdi mdi-chevron-left'>",
+																			next : "<i class='mdi mdi-chevron-right'>",
+																		},
+																	},
+																	drawCallback : function() {
+																		$(
+																				".dataTables_paginate > .pagination")
+																				.addClass(
+																						"pagination-rounded");
+																	},
+																}),
+								$("#state-saving-datatable")
+										.DataTable(
+												{
+													stateSave : !0,
+													language : {
+														paginate : {
+															previous : "<i class='mdi mdi-chevron-left'>",
+															next : "<i class='mdi mdi-chevron-right'>",
+														},
+													},
+													drawCallback : function() {
+														$(
+																".dataTables_paginate > .pagination")
+																.addClass(
+																		"pagination-rounded");
+													},
+												});
+
+					});
+</script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</html>

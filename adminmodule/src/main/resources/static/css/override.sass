@@ -1,0 +1,99 @@
+$primary-color: #357cff
+$seconday-color: #001833
+$seondary-coloropacity7: rgba(0,24,51,.7)
+$white: #ffffff
+
+.text-secondarycolor
+    color: $seconday-color
+.btn
+    transition: all .5s ease-in-out
+    &:focus
+        box-shadow: 0 2px 6px 0 rgba(53,124,225,.5)
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle, .btn-primary, .swal2-confirm.swal2-styled
+    background-color: $primary-color !important
+    border-color: $primary-color !important
+    box-shadow: 0 2px 6px 0 rgba(53,124,225,.5)
+    &:hover
+        background-color: $white !important
+        background-image: none !important
+        color: $primary-color !important
+        border-color: $primary-color !important
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle, .btn-outline-primary
+    background-color: $white
+    color: $primary-color
+    border-color: $primary-color
+    &:hover
+        background-color: $white
+        color: $primary-color
+    &:focus
+        background-color: $primary-color
+        color: $white
+        box-shadow: none
+.left-side-menu #sidebar-menu>ul>li>a, .nav-second-level li a
+    color: #9097a7
+    &:hover
+        color: $white
+.left-side-menu #sidebar-menu .menuitem-active>a
+    color: #00acc1
+.primary-text
+    color: $primary-color
+.checkboxtoggle
+    width: 40px
+    height: 20px
+    border-radius: 10px
+    display: inline-block
+    cursor: pointer
+.checkbox_input
+    display: none
+.checkboxtoggle_fill
+    position: relative
+    width: 40px
+    height: 20px
+    border-radius: 10px
+    background: #ddd
+    transition: background .3s
+    &:after
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        height: 20px
+        width: 20px
+        background: #ffffff
+        box-shadow: 0 0 10px rgba(0, 0, 0, .25)
+        border-radius: 10px;transition: transform .3s;
+.checkbox_input:checked ~ .checkboxtoggle_fill
+        background: $primary-color
+        &::after
+            transform: translateX(20px)
+// .navbar-custom .button-menu-mobile, .navbar-custom .topnav-menu .nav-link, 
+//     color: $seconday-color
+// .navbar-custom
+//     background-color: #38414a
+//     box-shadow: 0 0 35px 0 rgba(154,161,171,.15)
+// .navbar-custom .app-search .btn, .navbar-custom .app-search .form-control
+//     background-color: $seondary-coloropacity7
+// .searchcstm
+//     .navbar-custom
+//         z-index: 1
+//         box-shadow: none
+body[data-sidebar-size=condensed] #wrapper .left-side-menu #sidebar-menu>ul>li:hover>a, .left-side-menu
+    background-color: #38414a;
+    box-shadow: none;
+.searchfilter:focus-within .search-dropdown
+    display: block
+// .bootstrap-select .dropdown-menu.inner.show, .bootstrap-select .inner.show
+//     overflow-y: hidden !important
+// .bootstrap-select .inner.show
+//     overflow-y: scroll !important
+// .bootstrap-select 
+//     .dropdown-menu
+//         height: 100%
+//         overflow-y: scroll !important
+.bootstrap-select .bs-searchbox .form-control
+        color: #6c757d
+        background: $white  !important
+        border-color: #b1bbc4 !important
+.form-control.disabled
+    background: #dcdcdc
+    pointer-events: none

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="admin" id="9">
+
+            <createTable tableName="function_master">
+                <column name="id" type="bigint" autoIncrement="true">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="function_master_name" type="varchar(255)">
+                    <constraints nullable="true" />
+                </column>
+                <column name="function_master_type" type="varchar(255)">
+                    <constraints nullable="true" />
+                </column>
+                <column name="function_master_key" type="varchar(255)">
+                    <constraints nullable="true" />
+                </column>
+                <column name="publish" type="boolean">
+                    <constraints nullable="true" />
+                </column>
+            </createTable>
+
+            <createTable tableName="features_master">
+                <column name="id" type="bigint" autoIncrement="true">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="feature_name" type="varchar(255)">
+                    <constraints nullable="true" />
+                </column>
+                <column name="feature_end_point" type="varchar(255)">
+                    <constraints nullable="true" />
+                </column>
+                <column name="publish" type="boolean">
+                    <constraints nullable="true" />
+                </column>
+                <column name="read_access" type="boolean">
+                    <constraints nullable="true" />
+                </column>
+                <column name="write_access" type="boolean">
+                    <constraints nullable="true" />
+                </column>
+                <column name="delete_access" type="boolean">
+                    <constraints nullable="true" />
+                </column>
+                <column name="approve_access" type="boolean">
+                    <constraints nullable="true" />
+                </column>
+                <column name="function_id" type="bigint">
+                    <constraints nullable="true" />
+                </column>
+                <column name="feature_type" type="varchar(100)">
+                    <constraints nullable="true" />
+                </column>
+            </createTable>
+
+            <addForeignKeyConstraint baseColumnNames="function_id"
+                                     baseTableName="features_master"
+                                     constraintName="fk_feature_function_id"
+                                     referencedColumnNames="id"
+                                     referencedTableName="function_master"/>
+    </changeSet>
+</databaseChangeLog>

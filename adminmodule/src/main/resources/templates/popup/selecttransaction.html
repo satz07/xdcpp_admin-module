@@ -1,0 +1,166 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="selecttransmodal" th:remove="tag">
+
+    <div id="selecttransaction" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-full-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Transaction</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body p-4">
+                    <h4 class="mb-2">Statement Details</h4>
+                    <div class="table-responsive">
+                        <!-- Interim values -->
+                        <div class="interim">
+                            <table class="table table-striped mb-3">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Value Date</th>
+                                    <th>Dr / Cr</th>
+                                    <th>Currency	Amount</th>
+                                    <th>Transaction Reference</th>
+                                    <th>Bank Reference</th>
+                                    <th>Account Name</th>
+                                    <th>Classification</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>8/4/2020</td>
+                                    <td>CR</td>
+                                    <td>AUD 1,000.00</td>
+                                    <td>AU123456789I</td>
+                                    <td>CMS1234</td>
+                                    <td>Anil Kumar</td>
+                                    <td>Fund Confimration</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Final Values -->
+                        <div class="final">
+                            <table class="table table-striped mb-3">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Value Date</th>
+                                    <th>Entry Date</th>
+                                    <th>Dr / Cr</th>
+                                    <th>Currency</th>
+                                    <th>Amount</th>
+                                    <th>Customer Reference</th>
+                                    <th>Bank Reference</th>
+                                    <th>Supplementary Details</th>
+                                    <th>Classification</th>
+                                    <th>Type</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>8/4/2020</td>
+                                    <td>8/4/2020</td>
+                                    <td>CR</td>
+                                    <td>INR</td>
+                                    <td>80,000.00</td>
+                                    <td>NEFT INW KKBH34789095890</td>
+                                    <td>NEFT-022310577401</td>
+                                    <td>&nbsp;    </td>
+                                    <td>Return</td>
+                                    <td>Single Entry</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h4 class="mb-2">Filters</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <select class="selectpicker show-tick border" id="user_type"   title="Select User Type" data-style="btn" data-dropup-auto="false">
+                                <option value="Personal">Personal</option>
+                                <option value="Business">Business</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control" type="email" placeholder="Enter Email address">
+                        </div>
+                        <div class="col-md-2">
+                            <select class="selectpicker show-tick border" title="Select Payment Mode" data-style="btn" data-dropup-auto="false">
+                                <option value="DCT">DCT</option>
+                                <option value="PGT">PGT</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="selectpicker show-tick border" title="Select Disbursement Mode" data-style="btn" data-dropup-auto="false">
+                                <option value="INR">INR</option>
+                                <option value="AUD">AUD</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control numbdecimal" type="tel" placeholder="Amount From" maxlength="10">
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control numbdecimal" type="tel" placeholder="Amount To" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="table-responsive popuptables">
+                        <table class="table table-striped mb-2">
+                            <thead>
+                            <tr>
+                                <th>User Type</th>
+                                <th>Email address</th>
+                                <th>Remitter Name</th>
+                                <th>Transaction Number</th>
+                                <th>Booking Date</th>
+                                <th>Booking Time</th>
+                                <th>Originating Currency</th>
+                                <th>Originating Amount</th>
+                                <th>Disbursement Currency</th>
+                                <th>Disbursement Amount</th>
+                                <th>Payment mode code</th>
+                                <th>Receivemode Code</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Personal</td>
+                                <td>xyz@gmail.com</td>
+                                <td>Anil Kumar</td>
+                                <td>12345672567</td>
+                                <td>8-Jul-20</td>
+                                <td>13:05</td>
+                                <td>AUD</td>
+                                <td>600</td>
+                                <td>INR</td>
+                                <td>30,000 </td>
+                                <td>DCT</td>
+                                <td>BAC</td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Business</td>
+                                <td>abc@gmail.com</td>
+                                <td>Prasun Joshi</td>
+                                <td>98765439872</td>
+                                <td>9-Jul-20</td>
+                                <td>9:33</td>
+                                <td>AUD</td>
+                                <td>900</td>
+                                <td>INR</td>
+                                <td>45,000</td>
+                                <td>PGT</td>
+                                <td>WAL</td>
+                                <td><input type="checkbox"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center"><button type="button" class="btn btn-primary my-2" data-dismiss="modal">Approve</button></div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>

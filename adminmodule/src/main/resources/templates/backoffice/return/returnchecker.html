@@ -1,0 +1,240 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Return</a></li>
+                                    <li class="breadcrumb-item active">Checker</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Return (Checker)</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end title -->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-primary">-->
+<!--                                        <i class="fe-tag font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">3,947</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Total Returns</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-warning">-->
+<!--                                        <i class="fe-clock font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">624</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Pending Approval</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-success">-->
+<!--                                        <i class="fe-check-circle font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">3195</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Approved Returns</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-danger">-->
+<!--                                        <i class="fe-trash-2 font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">128</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Rejected Returns</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+<!--                </div>-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-lg-8"> <h4 class="header-title mb-4">Return Checker</h4> </div>
+                                <div class="col-lg-4 text-right">
+                                    <a  data-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="filters">Filter <i class="mdi mdi-filter-variant font-20"></i></a>
+                                </div>
+                            </div>
+                            <div class="row mb-3 collapse" id="filters">
+                                <div class="col-md-3 mt-2">
+                                    <select class="selectpicker show-tick border" id="user_type" title="Select User Type" data-style="btn" data-dropup-auto="false">
+                                        <option value="Personal">Personal</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <input class="form-control" type="email" placeholder="Enter Email Address">
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <input class="form-control" type="text" placeholder="Transaction Reference">
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <select class="selectpicker show-tick border" id="paymentode"   title="Select Paymentmode" data-style="btn" data-dropup-auto="false">
+                                        <option value="DCT">DCT</option>
+                                        <option value="OMT">OMT</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <select class="selectpicker show-tick border"   title="Select Receivemode" data-style="btn" data-dropup-auto="false">
+                                        <option value="BAC">BAC</option>
+                                        <option value="CAS">CAS</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <select class="selectpicker show-tick border" id="currency"   title="Select Currency" data-style="btn" data-dropup-auto="false">
+                                        <option value="AUD">AUD</option>
+                                        <option value="USD">USD</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <input class="form-control numbdecimal" type="tel" placeholder="Amount From" maxlength="10">
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <input class="form-control numbdecimal" type="tel" placeholder="Amount To" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="tablewrap table-responsive mb-4">
+                                <table class="table text-center table-hover m-0 table-centered nowrap w-100 viewtable">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>User Type</th>
+                                        <th>Txn Ref</th>
+                                        <th>Email Add</th>
+                                        <th>Rem Name</th>
+                                        <th>Rec Name</th>
+                                        <th>Bkg Dt Time</th>
+                                        <th>Orig Cy</th>
+                                        <th>Orig Amt</th>
+                                        <th>Disbmnt Cy</th>
+                                        <th>Disbmnt Amt</th>
+                                        <th>Pay Mode</th>
+                                        <th>Rec Mode</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Personal</td>
+                                        <td><a href="javascript:void(0);" data-target="#transactionreferencedetails" data-toggle="modal">Details</a></td>
+                                        <td><a href="mailto:xyz@gmail.com">xyz@gmail.com</a></td>
+                                        <td>Anil Kumar</td>
+                                        <td>Sunil Kumar</td>
+                                        <td>08-12-2020 18:18</td>
+                                        <td>AUD</td>
+                                        <td>600</td>
+                                        <td>INR</td>
+                                        <td>30,000 </td>
+                                        <td>DCT</td>
+                                        <td>BAC</td>
+                                        <td class="font-weight-bold text-primary">Reprocess</td>
+                                        <td>
+                                            <a href="javascript:void(0);" class="action-icon" title="Approve"> <i class="mdi mdi-check-bold font-24 text-success"></i></a>
+                                            <a href="javascript:void(0);" class="action-icon" title="Reject"><i class="mdi mdi-cancel font-24 text-danger"></i></a>
+                                        </td>
+                                    </tr><tr>
+                                        <td>Personal</td>
+                                        <td><a href="javascript:void(0);" data-target="#transactionreferencedetails" data-toggle="modal">Details</a></td>
+                                        <td><a href="mailto:xyz@gmail.com">xyz@gmail.com</a></td>
+                                        <td>Anil Kumar</td>
+                                        <td>Sunil Kumar</td>
+                                        <td>08-12-2020 18:18</td>
+                                        <td>AUD</td>
+                                        <td>600</td>
+                                        <td>INR</td>
+                                        <td>30,000 </td>
+                                        <td>DCT</td>
+                                        <td>BAC</td>
+                                        <td class="font-weight-bold text-primary">Reprocess</td>
+                                        <td>
+                                            <a href="javascript:void(0);" class="action-icon" title="Approve"> <i class="mdi mdi-check-bold font-24 text-success"></i></a>
+                                            <a href="javascript:void(0);" class="action-icon" title="Reject"><i class="mdi mdi-cancel font-24 text-danger"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+                <!-- end row -->
+            </div> <!-- container -->
+        </div> <!-- content -->
+
+        <footer th:replace="base/footer :: footer"></footer>
+        <div id="transactionreferencedetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog  modal-full-width">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Transaction Details</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body p-4">
+                        Remitter Details <br>
+                        Sending Bank Details
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- notification Modal -->
+        <div th:replace="popup/notification :: notifymodal"></div>
+        <!-- General Success Modal -->
+        <div th:replace="popup/generalsuccess :: generalmodal"></div>
+    </div>
+
+</div>
+<div th:replace="base/script_table :: script"></div>
+</body>
+</html>

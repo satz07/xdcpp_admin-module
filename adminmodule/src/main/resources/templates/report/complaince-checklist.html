@@ -1,0 +1,280 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base/list_header :: head"></head>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+            <div th:replace="base/top_header" :: div></div>
+            <div th:replace="base/left_menu" :: div></div>
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+                                            <li class="breadcrumb-item active">Complaince Checklist</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Complaince Checklist</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+                        <!-- main content -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form th:action="@{/complaince/list}" method="post"
+                                              class="needs-validation" novalidate autocomplete="off">
+                                            <div class="mb-3"></div>
+                                            <div class="form-group mb-3 form-inline mr-3 d-inline-flex">
+                                                <label for="trns-number" class="mr-3">Transaction Number</label>
+                                                <input class="form-control" type="text" th:name="transactionId"
+                                                       id="transactionId">
+                                            </div>
+                                            <button class="btn btn-outline-primary" type="submit">Search</button>
+
+                                        </form>
+                                        <button class="btn btn-outline-primary" onclick="downloadReport()" style="margin-left: 47.5%; margin-top: -75px">report</button>
+                                        <div class="responsive-table-plugin">
+                                            <div class="table-rep-plugin">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-bordered wnwrp">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Particulars	Basis</th>
+                                                            <th>User Entry </th>
+                                                            <th>Basis Logic and API</th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        <tbody th:if="${complaince!= null}">
+                                                            <tr><td class="font-weight-bold">Registration Country</td><td th:text="${complaince.registrationCountry.userSelectedCountry}"><td th:text="${complaince.registrationCountry.registrationIpBasedCountry}"></tr>
+                                                            <tr><td class="font-weight-bold">Last login IP of User</td><td>-</td><td th:text="${complaince.lastLoginIPDetails.lastLoginIP}"></tr>
+                                                            <tr><td class="font-weight-bold">Transaction Country</td><td th:text="${complaince.transactionCountry.userTxnCountry}"><td th:text="${complaince.transactionCountry.txnIpBasedCountry}"></tr>
+                                                            <tr><td class="font-weight-bold">Registration Vs Transaction IP check</td><td th:text="${complaince.registrationVsTxnIPDetails.registrationIpLocation}"><td th:text="${complaince.registrationVsTxnIPDetails.txnIpLocation}"></tr>
+                                                            <!-- <tr><td class="font-weight-bold">Nationality</td><td th:text="${complaince.nationality1}"><td th:text="${complaince.nationality2}"></tr> -->
+                                                            <tr><td class="font-weight-bold">Remitter KYC - Onfido Document Check</td><td th:text="${complaince.remitterOnfidoDocumentCheckDetails.documentTypeSelectedByUser}"></td><td><span th:if="${complaince.remitterOnfidoDocumentCheckDetails.responseFromOnfido !=null}"><span th:text="${complaince.remitterOnfidoDocumentCheckDetails.responseFromOnfido} + '(Check Id - ' + ${complaince.remitterOnfidoDocumentCheckDetails.checkId} + ')'"></span></span></td>></tr>
+                                                            <tr><td class="font-weight-bold">Remitter KYC - Onfido Document Expiry</td><td>-</td><td th:text="${complaince.remitterOnfidoDocumentExpiry.dateOfExpiryFromOnfido}"></tr>
+                                                            <tr><td class="font-weight-bold">Remitter KYC - Onfido Selfie Check</td><td>-</td><td th:text="${complaince.remitterOnfidoSelfieCheck.onfidoSelfieCheckResponse}"></tr>
+                                                            <tr><td class="font-weight-bold">Profile - First Name</td><td th:text="${complaince.profileFirstName.firstNameByUser}"><td th:text="${complaince.profileFirstName.firstNameByOcr}"></tr>
+                                                            <tr><td class="font-weight-bold">Profile - Middle Name</td><td th:text="${complaince.profileMiddleName.middleNameByUser}"><td th:text="${complaince.profileMiddleName.middleNameByOcr}"></tr>
+                                                            <tr><td class="font-weight-bold">Profile - Last Name</td><td th:text="${complaince.profileLastName.profileLastNameByUser}"><td th:text="${complaince.profileLastName.profileLastNameByOcr}"></tr>
+                                                            <tr><td class="font-weight-bold">Profile - DOB</td><td th:text="${complaince.profileDobDetails.dobByUser}"><td th:text="${complaince.profileDobDetails.dobByOcr}"></tr>
+                                                            <tr><td class="font-weight-bold">Profile - Gender</td><td th:text="${complaince.profileGender.genderByUser}"><td th:text="${complaince.profileGender.genderByOcr}"></tr>
+                                                            <tr><td class="font-weight-bold">Profile - Nationality</td><td th:text="${complaince.profileNationality.nationalityByUser}"><td th:text="${complaince.profileNationality.nationalityByOCr}"></tr>
+                                                            <!-- <tr><td class="font-weight-bold">Profile - Address</td><td th:text="${complaince.profileAddress.addressByUser}">-<td th:text="${complaince.profileAddress.suburbByUser}">-<td th:text="${complaince.profileAddress.stateByUser}">-<td th:text="${complaince.profileAddress.postalCodeByUser}">-<td th:text="${complaince.profileAddress.countryByUser}"></tr> -->
+                                                            <tr><td class="font-weight-bold">Profile - Address</td><td><span th:text="'Address: ' +${complaince.profileAddress.addressByUser}"></span><br/><span th:text="'Suburb: ' +${complaince.profileAddress.suburbByUser}"></span><br/><span th:text="'State: ' +${complaince.profileAddress.stateByUser}"></span><br/><span th:text="'PostalCode: ' +${complaince.profileAddress.postalCodeByUser}"></span><br/><span th:text="'Country Of Residence: ' +${complaince.profileAddress.countryByUser}"></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Remitter KYC - GBG</td><td th:text="${complaince.remitterGbgNonDvs.ruleType}"><td th:text="${complaince.remitterGbgNonDvs.gbgNonDvsResponse}"></tr>
+                                                            <tr><td class="font-weight-bold">Remitter KYC - GBG DVS</td><td th:text="${complaince.remitterGbgDvs.gbgDvsDocumentTypeSelectedByUser}"><td th:text="${complaince.remitterGbgDvs.gbgDvsResponse}"></tr>
+                                                            <tr><td class="font-weight-bold">Remitter Manual KYC</td><td th:text="${complaince.remitterManualKyc.manualKycApplicable}"><td><span th:if="${complaince.remitterManualKyc.manualKycApplicable == 'Yes'}"><span th:if="${complaince.remitterManualKyc.documentName1 != null}"><a th:href="@{/document/download/{fileName}(fileName=${complaince.remitterManualKyc.documentName1})}" th:text="Document-1"></a></span><span th:if="${complaince.remitterManualKyc.documentName2 != null}"><a th:href="@{/document/download/{fileName}(fileName=${complaince.remitterManualKyc.documentName2})}" th:text="Document-2"></a></span></span></tr>
+                                                            <tr><td class="font-weight-bold">Remitter Bank Account Name</td><td th:text="${complaince.remitterBankAccountName.remitterBankAccountName}"><td th:text="${complaince.remitterBankAccountName.senderAcctHolderNameFromFile}"></tr>
+                                                            <tr><td class="font-weight-bold">Duplicate Registration</td>
+                                                                <td th:text="${complaince.duplicateRegistration.remitterNameAndDob}">
+                                                                <td th:text="${complaince.duplicateRegistration.emailIdOfDuplicateNameAndDob}"></td></tr>
+                                                            <!-- <tr><td class="font-weight-bold">Remitter's Bank Account</td><td th:text="${complaince.remitterBankAccountNumber.remitterBankAccountNumber}"></td><td>-</td></tr> -->
+                                                            <tr><td class="font-weight-bold">Recipient Name Validation</td><td th:text="${complaince.receipientNameValidation.receipeientNameByUser}"><td th:text="${complaince.receipientNameValidation.receipientNameByYesBank}"></tr>
+                                                            <tr><td class="font-weight-bold">Recipient Name Validation API Status</td><td>-</td><td th:text="${complaince.receipientNameValidationApiStatus.statusResponseFromYesBank}"></tr>
+                                                            <tr><td class="font-weight-bold">Recipient Modification Date</td><td th:text="${complaince.receipientModificationDate.dateOfReceipientAdded}"><td th:text="${complaince.receipientModificationDate.dateOfReceipientModified}"></tr>
+                                                            <tr><td class="font-weight-bold">Recipient Modification location</td><td th:text="${complaince.receipientModificationLocation.ipBasedLocationOfReceipientAdded}"><td th:text="${complaince.receipientModificationLocation.ipBasedLocationOfReceipientModified}"></tr>
+                                                            <tr><td class="font-weight-bold">Recipient's other Remitter</td><td th:text="${complaince.receipientOtherRemitter.isReceipientHavingOtherRemitter}"><td th:text="${complaince.receipientOtherRemitter.emailIdOfRemitters}"></tr>
+                                                            <tr><td class="font-weight-bold">Remitter Watchlist Screening</td><td>-</td><td><span th:if="${complaince.remitterWatchListScreening.remitterWatchListResponse !=null}"><span th:text="${complaince.remitterWatchListScreening.remitterWatchListResponse} + '(Check Id - ' + ${complaince.remitterWatchListScreening.checkId} + ')'"></span></span><td></tr>
+                                                            <tr><td class="font-weight-bold">Recipient Watchlist Screening</td><td>-</td><td> <span th:if="${complaince.receipientWatchListScreening.receipientWatchListResponse !=null}"><span th:text="${complaince.receipientWatchListScreening.receipientWatchListResponse} + '(Check Id - ' + ${complaince.receipientWatchListScreening.checkId} + ')'"></span></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Relationship </td><td th:text="${complaince.relationShip.relationShip}"><td th:text="${complaince.relationShip.remitterName} + ' ' + ${complaince.relationShip.receipientName}"></tr>
+                                                            <tr><td class="font-weight-bold">Purpose of Remittance</td><td th:text="${complaince.purposeOfRemittance.purpose}"><td>-</td></tr>
+                                                            <!-- <tr><td class="font-weight-bold">Source Of Funds</td><td th:text="${complaince.sourceOfFund}"><td>-</td></tr> -->
+                                                            <tr><td class="font-weight-bold">Profession</td><td th:text="${complaince.profession.profession}"><td>-</td></tr>
+                                                            <tr><td class="font-weight-bold">Profession Type</td><td th:text="${complaince.professionType.professionType}"><td th:text="${complaince.professionType.otherProfession}"></td></tr>
+                                                            <tr><td class="font-weight-bold">Annual Income from Profession</td><td th:text="${complaince.annualIncomeFromProfession.annualIncome}"><td>-</td></tr>
+                                                            <tr><td class="font-weight-bold">Source of Income</td><td th:text="${complaince.sourceOfIncome.sourceOfIncome}"><td th:text="${complaince.sourceOfIncome.otherIncome}"></td></tr>
+                                                            <tr><td class="font-weight-bold">Limit enhancement documents</td><td><span th:if="${complaince.limitEnhancementDocuments.doc1FileName != null}"><a th:href="@{/document/download/{fileName}(fileName=${complaince.limitEnhancementDocuments.doc1FileName})}" th:text="Document-1" th:target="_blank"/></a></span></td><td><span th:if="${complaince.limitEnhancementDocuments.doc2FileName != null}"></span><a th:href="@{/document/download/{fileName}(fileName=${complaince.limitEnhancementDocuments.doc2FileName})}" th:text="Document-2" th:target="_blank"/></a></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Limit Consumed till date</td><td>-</td><td><span th:if="${complaince.limitConsumedTillDate.limitConsumed != null}"><span th:text="${complaince.limitConsumedTillDate.transactionCurrency} + ' ' +${complaince.limitConsumedTillDate.limitConsumed}"></span></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Average Ticket Size</td><td>-</td><td th:text="${complaince.averageTicketSize.avgRemittersProcessedTxns}"></tr>
+                                                            <tr><td class="font-weight-bold">Last Transaction Date and Time</td><td>-</td><td th:text="${complaince.lastTransactionDateAndTime.lastTransactionDateTime}"></tr>
+                                                            <tr><td class="font-weight-bold">Last Transaction Status</td><td></td><td th:text="${complaince.lastTransactionStatus.lastTransactionStatus}"></tr>
+                                                            <tr><td class="font-weight-bold">Last Transaction Recipient name</td><td>-</td><td th:text="${complaince.lastTransactionReceipientName.lastTxnReceipientName}"></tr>
+                                                            <tr><td class="font-weight-bold">Total Recipients</td><td>-</td><td th:text="${complaince.totalReceipients.totalNumberOfReceipients}"></tr>
+                                                            <tr><td class="font-weight-bold">Transaction amount</td><td>-</td><td><span th:if="${complaince.transactionAmount.transactionAmount !=null}"><span th:text="${complaince.transactionAmount.transactionCurrency} +' '+${complaince.transactionAmount.transactionAmount}"></span></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Daily Limit</td><td><span th:if="${complaince.dailyLimit.dailyLimitAsPerCurrentTxnAmt !=null}"><span th:text="${complaince.dailyLimit.transactionCurrency} +' '+${complaince.dailyLimit.dailyLimitAsPerCurrentTxnAmt}"></span></span></td><td><span th:if="${complaince.dailyLimit.definedDailyLimit !=null}"><span th:text="${complaince.dailyLimit.transactionCurrency} +' '+${complaince.dailyLimit.definedDailyLimit}"></span></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Weekly Limit</td><td><span th:if="${complaince.weeklyLimit.weeklyLimitAsPerCurrentTxnAmt !=null}"><span th:text="${complaince.weeklyLimit.transactionCurrency} +' '+${complaince.weeklyLimit.weeklyLimitAsPerCurrentTxnAmt}"></span></span></td><td><span th:if="${complaince.weeklyLimit.definedWeeklyLimit !=null}"><span th:text="${complaince.weeklyLimit.transactionCurrency} +' '+${complaince.weeklyLimit.definedWeeklyLimit}"></span></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Monthly Limit</td><td><span th:if="${complaince.monthlyLimit.monthlyLimitAsPerCurrentTxnAmt !=null}"><span th:text="${complaince.monthlyLimit.transactionCurrency} +' '+${complaince.monthlyLimit.monthlyLimitAsPerCurrentTxnAmt}"></span></span></td><td><span th:if="${complaince.monthlyLimit.definedMonthlyLimit !=null}"><span th:text="${complaince.monthlyLimit.transactionCurrency} +' '+${complaince.monthlyLimit.definedMonthlyLimit}"></span></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Half Yearly Limit</td><td><span th:if="${complaince.halfYearlyLimit.halfYearlyLimitAsPerCurrentTxnAmt !=null}"><span th:text="${complaince.halfYearlyLimit.transactionCurrency} +' '+${complaince.halfYearlyLimit.halfYearlyLimitAsPerCurrentTxnAmt}"></span></span></td><td><span th:if="${complaince.halfYearlyLimit.definedhalfYearlyLimit !=null}"><span th:text="${complaince.halfYearlyLimit.transactionCurrency} +' '+${complaince.halfYearlyLimit.definedhalfYearlyLimit}"></span></span></td></tr>
+                                                            <tr><td class="font-weight-bold">Yearly Limit</td><td><span th:if="${complaince.yearlyLimit.yearlyLimitAsPerCurrentTxnAmt !=null}"><span th:text="${complaince.yearlyLimit.transactionCurrency} +' '+${complaince.yearlyLimit.yearlyLimitAsPerCurrentTxnAmt}"></span></span></td><td><span th:if="${complaince.yearlyLimit.definedYearlyLimit !=null}"><span th:text="${complaince.yearlyLimit.transactionCurrency} +' '+${complaince.yearlyLimit.definedYearlyLimit}"></span></span></td></tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- end .table-responsive -->
+        
+                                            </div> <!-- end .table-rep-plugin-->
+                                        </div>
+                                        <button class="btn btn-primary mt-3 float-right" type="button">Load More</button>
+                                    </div>
+                                </div>
+                        <!-- /main content -->
+                    </div> <!-- container -->
+                    <!-- Modal -->
+                    <div id="filepreview" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="standard-modalLabel">Filename</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                </div>
+                                <div class="modal-body p-4">
+                                        <!-- File to be shown here -->
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-body p-4">
+                                    <div class="text-center">
+                                        <i class="dripicons-information h1 text-info"></i>
+                                        <h4 class="mt-2">Heads up!</h4>
+                                        <p class="mt-3">Are you sure you want to delete?</p>
+                                        <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal">Yes</button>
+                                        <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                     <!-- Success Alert Modal -->
+                     <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-body p-4">
+                                    <div class="text-center">
+                                        <i class="dripicons-checkmark h1 text-secondarycolor"></i>
+                                        <h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+                                        <p class="mt-3 text-secondarycolor">Mapping Deleted</p>
+                                        <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                </div> <!-- content -->
+            </div>
+            <!-- Footer -->
+            <footer th:replace="base/footer :: footer"></footer>
+            <!-- end Footer -->
+                <div id="notification-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-body p-4">
+                                <div class="text-center">
+                                    <h4 class="mt-2">Authorize</h4>
+                                    <p class="mt-3">Fee</p>
+                                    <button type="button" class="btn btn-primary my-2" data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+        </div>
+
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script
+        th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script
+        th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/libs/admin-resources/rwd-table/rwd-table.min.js}"></script>
+<script th:src="@{/js/pages/responsive-table.init.js}"></script>
+<script th:src="@{/libs/footable/footable.all.min.js}"></script>
+<script>
+
+    function downloadReport(){
+        var refId = $('#transactionId').val();
+
+        if(refId == ""){
+            alert("Enter Reference Number");
+        }else{
+            $.ajax({
+                url: "/reports/complaince-checklist/download-xml/"+refId,
+                cache: false,
+                xhr: function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 2) {
+                            if (xhr.status == 200) {
+                                xhr.responseType = "blob";
+                            } else {
+                                alert("The transaction isn't complete yet")
+                                xhr.responseType = "text";
+                            }
+                        }
+                    };
+                    return xhr;
+                },
+                success: function (data,status,xhr) {
+                    var fileName = (((xhr.getResponseHeader("Content-Disposition").split(";")[1]).trim()).split("=")[1]).replace(/^"|"$/g, '');
+                    //Convert the Byte Data to BLOB object.
+                    var blob = new Blob([data], { type: "application/octetstream" });
+
+                    //Check the Browser type and download the File.
+                    var isIE = false || !!document.documentMode;
+
+                    if (isIE) {
+                        window.navigator.msSaveBlob(blob, fileName);
+                    } else {
+                        var url = window.URL || window.webkitURL;
+                        link = url.createObjectURL(blob);
+                        var a = $("<a />");
+                        a.attr("download",fileName);
+                        a.attr("href", link);
+                        $("body").append(a);
+                        a[0].click();
+                        $("body").remove(a);
+                    }
+
+                    if(status = "success"){
+                        saveLatestSeqIntoDb(fileName);
+                    }
+                }
+            });
+        }
+
+    }
+
+    function saveLatestSeqIntoDb(fileName) {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/reports/complaince-checklist/updateSeq/"+fileName,
+            cache: false,
+            timeout: 3000,
+            success: function (data) {
+
+            },
+            error: function (e) {
+                alert("Failure");
+            }
+        });
+    }
+
+</script>
+</html>

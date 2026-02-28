@@ -1,0 +1,195 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+                                    <li class="breadcrumb-item active">Recipient Report</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Recipient Report</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <form method="post" action="/" th:action="@{/reports/recipient-report/load-data}">
+                        <div class="card-body">
+                            <!-- <input type="hidden" name="current_data_count" th:value="${criteria.currentDataCount}">  -->
+                            <input id="pageNum" type="hidden" name="pageNum" th:value="${pageNum}">
+                            <input id="totalPage" type="hidden" name="totalPage" th:value="${totalPage}">
+
+                            <div class="row mb-3">
+                                <div class="col-md-3 mt-2">
+                                    <label for="partner_id">Select Partner ID</label>
+                                    <select class="selectpicker show-tick border" name="partner_id" id="partner_id" title="Select Partner ID" data-style="btn" data-dropup-auto="false">
+                                        <option value="Partner 1">Partner 1</option>
+                                        <option value="Partner 2">Partner 2</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <label for="regdatefrom">Registration Date From </label>
+                                    <input class="form-control" name="regdatefrom" type="date" id="regdatefrom" th:value="${criteria.fromDate}">
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <label for="regdateto">Registration Date To</label>
+                                    <input class="form-control" name="regdateto" type="date" id="regdateto" th:value="${criteria.toDate}">
+                                </div>
+                                <div class="col-md-3 mt-2">
+                                    <label for="emailad">Email address</label>
+                                    <input class="form-control" name="emailad" id="emailad" type="email" placeholder="Email address"  th:value="${criteria.email}">                                      
+                                </div>                                
+                                <div class="col-md-3 mt-2">
+                                    <label class="d-block">&nbsp;</label>
+                                    <button id="search" class="btn btn-outline-primary" th:onclick="OnSearchButtonClick()">Search</button>
+                                </div>
+                            </div>
+                            <div class="text-right mb-3">
+                                <button class="btn btn-outline-primary" type="button"><i class="font-20 mdi mdi-microsoft-excel"></i> Download</button>
+                            </div>
+                            <div class="responsive-table-plugin">
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered wnwrp">
+                                            <thead>
+                                            <tr>
+                                                <th data-priority="1">Email Address </th>
+                                                <th data-priority="1">Recipient Name</th>
+                                                <th data-priority="4">Nickname</th>
+                                                <th data-priority="2">Relationship with Remitter</th>
+                                                <th data-priority="2">Date of Birth </th>
+                                                <th data-priority="1">Bank Code</th>
+                                                <th data-priority="3">Bank Name</th>
+                                                <th data-priority="2">Account Number </th>
+                                                <th data-priority="4">VPA Handle </th>
+                                                <th data-priority="4">Date Added</th>
+                                                <th data-priority="5">Date Modified</th>
+                                                <th data-priority="5">Status</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="data : ${result}">
+                                                <td th:text="${data.email}"></td>
+                                                <td th:text="${data.receipientName}"></td>
+                                                <td th:text="${data.nickName}"></td>
+                                                <td th:text="${data.relationship}"></td>
+                                                <td th:text="${data.dob}"></td>
+                                                <td th:text="${data.ifscCode}"></td>
+                                                <td th:text="${data.bankName}"></td>
+                                                <td th:text="${data.accountNumber}"></td>
+                                                <td th:text="${data.vpaHandle}"></td>
+                                                <td th:text="${data.dateAdded}"></td>
+                                                <td th:text="${data.dateUpdated}"></td>
+                                                <td th:text="${data.accountStatus}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="loadmore" class="btn btn-primary mt-3 float-right" type="submit">Load More</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="filepreview" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="standard-modalLabel">Filename</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <!-- File to be shown here -->
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body p-4">
+                            <div class="text-center">
+                                <i class="dripicons-information h1 text-info"></i>
+                                <h4 class="mt-2">Heads up!</h4>
+                                <p class="mt-3">Are you sure you want to delete?</p>
+                                <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal">Yes</button>
+                                <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-body p-4">
+                            <div class="text-center">
+                                <i class="dripicons-checkmark h1 text-secondarycolor"></i>
+                                <h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+                                <p class="mt-3 text-secondarycolor">Mapping Deleted</p>
+                                <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <script>document.write(new Date().getFullYear())</script> © AndRemit
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-right footer-links d-none d-sm-block">
+                        <a href="javascript:void(0);">Help</a>
+                        <a href="javascript:void(0);">Contact Admin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="notification-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body p-4">
+                    <div class="text-center">
+                        <h4 class="mt-2">Authorize</h4>
+                        <p class="mt-3">Fee</p>
+                        <button type="button" class="btn btn-primary my-2" data-dismiss="modal">Yes</button>
+                        <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/libs/admin-resources/rwd-table/rwd-table.min.js}"></script>
+<script th:src="@{/js/pages/responsive-table.init.js}"></script>
+<script th:src="@{/libs/footable/footable.all.min.js}"></script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/reports/recipientreport.js}"></script>
+</html>

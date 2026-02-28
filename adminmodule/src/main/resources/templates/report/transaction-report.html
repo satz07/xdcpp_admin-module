@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base/list_header :: head"></head>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+	<!-- Topbar Start -->
+	<div th:replace="base/top_header" :: div></div>
+	<div th:replace="base/left_menu" :: div></div>
+	<div class="content-page">
+		<div class="content">
+
+			<!-- Start Content-->
+			<div class="container-fluid">
+
+				<!-- start page title -->
+				<div class="row">
+					<div class="col-12">
+						<div class="page-title-box">
+							<div class="page-title-right">
+								<ol class="breadcrumb m-0">
+									<li class="breadcrumb-item"><a href="javascript: void(0);">Reports</a></li>
+									<li class="breadcrumb-item active">Transaction</li>
+								</ol>
+							</div>
+							<h4 class="page-title">Transaction Report</h4>
+						</div>
+					</div>
+				</div>
+				<!-- end page title -->
+				<!-- main content -->
+				<div class="card">
+					<div class="card-body">
+							<div class="row">
+								<div class="col-md-3 mt-2">
+									<label for="partner_id">Select Partner ID</label> <select
+										class="selectpicker show-tick border" id="partnerid"
+										title="Select Partner ID" data-style="btn" name="partnerId"
+										data-dropup-auto="false">
+										<option value="">Select All</option>
+										<option th:value="'XDC Payments'">XDC Payments</option>
+									</select>
+								</div>
+								<div class="col-md-3 mt-2">
+									<label for="bookdatefrom">Booking Date From</label> <input
+										class="form-control" type="date" id="from" name="from" th:value="${{fromToBookingDate}}">
+								</div>
+								<div class="col-md-3 mt-2">
+									<label for="bookdateto">Booking Date To</label> <input
+										class="form-control" type="date" id="to" name="to" th:value="${{toBookingDate}}">
+								</div>
+								<div class="col-md-3 mt-2">
+									<label for="trns_no">Reference Number</label> <input
+										class="form-control" id="trnsno" type="text"
+										placeholder="Reference Number" name="trnsno">
+								</div>
+								<div class="col-md-3 mt-2">
+									<label for="email_add">Email Address</label> <input
+										class="form-control" id="email" type="email" name="email"
+										placeholder="Email Address">
+								</div>
+								<div class="col-md-3 mt-2">
+									<label for="status">Status</label> <select
+										class="selectpicker show-tick border" id="status"
+										title="Select Status" data-style="btn" name="status"
+										data-dropup-auto="false">
+										<option value="">Select All</option>
+										<option value="CONFIRMED">CONFIRMED</option>
+										<option value="CANCEL">CANCEL</option>
+										<option value="BACKOFFICE_CANCEL">BACKOFFICE_CANCEL</option>
+										<option value="BACKOFFICE_CANCEL_CONFIRMED">BACKOFFICE_CANCEL_CONFIRMED</option>
+										<option value="STAGING_START">STAGING_START</option>
+										<option value="STAGING_COMPLETED">STAGING_COMPLETED</option>
+										<option value="STAGING_CANCELLED">STAGING_CANCELLED</option>
+										<option value="MATCHED_EXCEPTION">MATCHED_EXCEPTION</option>
+										<option value="MATCHED_EXCEPTION_CHECKER">MATCHED_EXCEPTION_CHECKER</option>
+										<option value="UNMATCHED_ENTRIES">UNMATCHED_ENTRIES</option>
+										<option value="COMPLIANCE_START">COMPLIANCE_START</option>
+										<option value="DISBURSEMENT_START">DISBURSEMENT_START</option>
+										<option value="DISBURSEMENT_CHECK">DISBURSEMENT_CHECK</option>
+										<option value="SENT_TO_BANK">SENT_TO_BANK</option>
+										<option value="CANCELLED_BY_USER">CANCELLED_BY_USER</option>
+										<option value="REFUND_START">REFUND_START</option>
+										<option value="CANCELLED">CANCELLED</option>
+										<option value="COMPLETED">COMPLETED</option>
+										<option value="SENT_TO_BENEFICIARY">SENT_TO_BENEFICIARY</option>
+									</select>
+								</div>
+								<div class="col-md-3 mt-2">
+                                    <label class="d-block">&nbsp;</label>
+                                    <button id="search" class="btn btn-outline-primary">Search</button>
+                        		</div>	
+                        		<div class="col-md-3 mt-2">
+                                    <label class="d-block">&nbsp;</label>
+                                    <button id="download" class="btn btn-outline-primary">Download</button>
+                        		</div>		
+                        		<!-- <div>
+                        			<a th:href="@{/reports/download-transaction-report}">
+                                            tttttt</a>
+                        		</div> -->				
+							</div>
+
+						<div class="row">
+							<div class="col-12">
+								<div class="card-box" style="overflow: auto">
+									<div class="row">
+										<div class="col-lg-8">
+											<h4 class="header-title mb-4">Transaction Report</h4>
+										</div>										
+									</div>
+
+									<table
+										class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable"
+										id="transaction-report-datatable">
+										<thead>
+											<tr>
+												<th data-priority="1">Partner ID</th>
+												<th data-priority="">Booking Date and Time</th>
+												<!-- <th data-priority="1">Booking Time</th> -->
+												<th data-priority="1">Email Address</th>
+												<th data-priority="1">Reference Number</th>
+												<th data-priority="1">Transaction Order</th>
+												<th data-priority="2">Originating Currency</th>
+												<th data-priority="2">Originating Amount</th>												
+												<th data-priority="2">Total Fees</th>
+												<th data-priority="">FX Base Rate</th>
+												<th data-priority="2">Margin</th>
+												<th data-priority="3">Exchange Rate</th>
+												<th data-priority="2">Disburment Currency</th>
+												<th data-priority="3">Disbursement Amount</th>
+												<th data-priority="3">Payment mode</th>
+												<th data-priority="4">Receive mode</th>
+												<th data-priority="5">Remitter Name</th>
+												<th data-priority="5">Recipient Name</th>
+												<th data-priority="4">Relationship with Remitter</th>
+												<th data-priority="5">Purpose</th>
+												<th data-priority="5">Recipient Bank Name</th>
+												<th data-priority="5">Recipient Bank Details</th>
+												<!-- <th data-priority="5">VPA Handle</th> -->
+												<th data-priority="5">Disbursement Date and Time</th>
+												<th data-priority="5">Disbursement Partner Bank</th>
+												<th data-priority="5">Disbursement Bank Status</th>
+												<th data-priority="5">UTR Number</th>
+												<th data-priority="5">UTR time stamp</th>
+												<th data-priority="5">Status</th>
+											</tr>
+										</thead>										
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- /main content -->
+			</div>
+			<!-- container -->
+			<!-- Modal -->
+			<div id="filepreview" class="modal fade" tabindex="-1" role="dialog"
+				aria-hidden="true">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Filename</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">�</button>
+						</div>
+						<div class="modal-body p-4">
+							<!-- File to be shown here -->
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			<div id="confirm-delete" class="modal fade" tabindex="-1"
+				role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body p-4">
+							<div class="text-center">
+								<i class="dripicons-information h1 text-info"></i>
+								<h4 class="mt-2">Heads up!</h4>
+								<p class="mt-3">Are you sure you want to delete?</p>
+								<button type="button"
+									class="btn btn-primary my-2 confirm-deletemap"
+									data-dismiss="modal">Yes</button>
+								<button type="button" class="btn btn-outline-primary my-2"
+									data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			<!-- Success Alert Modal -->
+			<div id="success-alert-modal" class="modal fade" tabindex="-1"
+				role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-body p-4">
+							<div class="text-center">
+								<i class="dripicons-checkmark h1 text-secondarycolor"></i>
+								<h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+								<p class="mt-3 text-secondarycolor">Mapping Deleted</p>
+								<button type="button" class="btn btn-outline-primary my-2"
+									data-dismiss="modal">Continue</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- content -->
+	</div>
+	<!-- Footer -->
+	<footer th:replace="base/footer :: footer"></footer>
+	<!-- end Footer -->
+	<div id="notification-modal" class="modal fade" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body p-4">
+					<div class="text-center">
+						<h4 class="mt-2">Authorize</h4>
+						<p class="mt-3">Fee</p>
+						<button type="button" class="btn btn-primary my-2"
+							data-dismiss="modal">Yes</button>
+						<button type="button" class="btn btn-outline-primary my-2"
+							data-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Page content -->
+	<!-- ============================================================== -->
+</div>
+
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script
+	th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script
+	th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/libs/admin-resources/rwd-table/rwd-table.min.js}"></script>
+<script th:src="@{/js/pages/responsive-table.init.js}"></script>
+<script th:src="@{/libs/footable/footable.all.min.js}"></script>
+<script>
+var txnReportDataTable;
+$(document).ready(function() {
+	txnReportDataTable = $('#transaction-report-datatable').dataTable( {
+    	"serverSide": true,
+        "bFilter": false,
+        "pageLength": 10,
+		"order": [
+			[1, "desc" ]
+		],
+        "ajax": {
+            "url": "/reports/get-transaction-report",
+            "data": function ( data ) {            	
+            		data.partnerId = $("#partnerid").val();
+            		data.fromBookingDate = $("#from").val();
+            		data.toBookingDate = $("#to").val();
+            		data.transactionNumber = $("#trnsno").val();
+            		data.email = $("#email").val();
+            		data.status = $("#status").val();            	
+            	    data.pageNumber = $('#transaction-report-datatable').DataTable().page.info().page;
+         }},
+        "columns": [
+	    { "data": "partnerId"},
+        { "data": null,
+	       "render" : function ( data, type, full ) { 
+	           return full['bookingDate']+' '+full['bookingTime']}
+        },	
+       
+		
+		{ "data": "email" },
+		{ "data": "transactionNumber" },
+		{ "data": "orderSeq" },
+		{ "data": "originatingCurrency" },
+		{ "data": "originatingAmount" },		
+		{ "data": "totalFees" },
+		{ "data": "fxBaseRateToDisplay" },
+		{ "data": "marginSpread" },
+		{ "data": "exchangeRate" },
+		
+		{ "data": "receivingCurrency" },
+		{ "data": "disbursementAmount", 
+		  "render" : $.fn.dataTable.render.number(",", ".", 2),
+		},
+		{ "data": "paymentMode" },
+		{ "data": "receiveMode" },
+		{ "data": "remitterName" },
+		{ "data": "receipientName" },
+		{ "data": "relationshipWithRemitterToDisplay" },
+		{ "data": "purpose" },
+		{ "data": "bankName" },
+		//{ "data": "accountNumber" },
+		{ "data": null ,
+			   "render" : function ( data, type, full ) { 
+			            if(full['accountNumber']!="" || full['accountNumber']!=null){
+			        	return  full['accountNumber']
+			        	   }else if (full['vpaHandle']!="" || full['vpaHandle']!=null){
+			        	return	full['vpaHandle']
+			        	   }
+			           }
+			},
+		//{ "data": "vpaHandle" },
+		{ "data": "disbursementBookingDateAndTimeToDisplay" },
+		{ "data": "disbursementBank" },
+		{ "data": "disbursementBankStatus" },
+		{ "data": "utrNumber" },
+		{ "data": "utrTimeToDisplay" },
+		{ "data": "statusToDisplay" }
+	]
+        
+    } ); 
+    
+    $('#search').on('click', function () {
+    	var table = $('#transaction-report-datatable').DataTable();
+    	table.ajax.reload();
+    });
+    
+    $('#download').on('click', function () {
+    	
+    	var partnerId = ($("#partnerid").val()!=null && $("#partnerid").val()!='') ? $("#partnerid").val() : null;
+		var fromBookingDate = ($("#from").val()!=null && $("#from").val()!='') ? $("#from").val() : null;
+		var toBookingDate = ($("#to").val()!=null && $("#to").val()!='') ? $("#to").val() : null;
+		var trnsno = ($("#trnsno").val()!=null && $("#trnsno").val()!='') ? $("#trnsno").val() : null;
+		var email = ($("#email").val()!=null && $("#email").val()!='') ? $("#email").val() : null;
+		var status = ($("#status").val()!=null && $("#status").val()!='') ? $("#status").val() : null;
+		
+		var reportUrl = "/reports/download-transaction-report/"+partnerId+"/"+fromBookingDate+"/"+toBookingDate+"/"+trnsno+"/"+email+"/"+status;
+		window.location.href=reportUrl;    	
+    });
+    
+} );
+</script>
+</html>
+
+
+

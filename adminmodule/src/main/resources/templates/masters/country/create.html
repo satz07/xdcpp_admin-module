@@ -1,0 +1,120 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Country</a></li>
+                                    <li th:if="${country.id == null}" class="breadcrumb-item active"><a href="/country/list">Add Country</a></li>
+                                    <li th:if="${country.id != null}" class="breadcrumb-item active">Edit Country</li>
+                                </ol>
+                            </div>
+
+                            <h4 class="page-title" th:if="${country.id == null}">Add Country</h4>
+                            <h4 class="page-title" th:if="${country.id != null}">Edit Country</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <form action="#" th:action="@{/country/create}" th:object="${country}" method="post" class="needs-validation" novalidate autocomplete="off" role="form" data-toggle="validator">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div th:if="${confirmationMessage}" class="alert alert-success" role="alert" th:text=${confirmationMessage}></div>
+                            <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+                            <div th:if="${#fields.hasErrors('countryName')}" th:errors="*{countryName}" class="validation-message alert alert-danger" role="alert"></div>
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">General Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="countryCode">Country Code</label>
+                                            <input class="form-control" type="text" th:field="*{countryCode}" th:maxlength="2" id="countryCode" placeholder="Enter Country Code" required>
+                                            <div class="invalid-feedback">
+                                                Invlaid Country code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="countryName">Country Name</label>
+                                            <input class="form-control" type="text" th:field="*{countryName}" id="countryName" placeholder="Enter Country Name" required>
+                                            <div class="invalid-feedback">
+                                                Invlaid Country name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="dialingCode">Dialling Code</label>
+                                            <input class="form-control" type="tel" th:field="*{dialingCode}" id="dialingCode" placeholder="Enter Dailling Code"  maxlength="3" minlength="2" required>
+                                            <div class="invalid-feedback">
+                                                Invlaid Dialling Code
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="isoCode">ISO Code</label>
+                                            <input class="form-control" type="text" th:field="*{isoCode}" id="isoCode" placeholder="Enter isoCode" required>
+                                            <div class="invalid-feedback">
+                                                Invlaid iso_code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" th:if="${id != null}">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Restricted</label>
+                                            <label for="isRestricted" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" id="isRestricted" th:field="*{isRestricted}" class="checkbox_input">
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" th:if="${id != null}">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Status</label>
+                                            <label for="publish" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" id="publish" th:field="*{publish}" class="checkbox_input" checked>
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                    <div class="text-center" th:if="${id == null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Country</button>
+                    </div>
+                    <div class="text-center" th:if="${id != null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Update Country</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer th:replace="base/footer :: footer"></footer>
+    </div>
+</div>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script  th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script  th:src="@{/js/app.min.js}"></script>
+<script  th:src="@{/js/custom.js}"></script>
+</body>
+</html>

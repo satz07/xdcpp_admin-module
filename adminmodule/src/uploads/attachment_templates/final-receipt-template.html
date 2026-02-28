@@ -1,0 +1,270 @@
+<html lang="en">
+
+<head>
+    <title>Receipt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;" rel="stylesheet">
+    </link>
+    <style>
+        .page {
+            width: 900px !important;
+            height: 900px !important;
+        }
+
+        .transaction {
+            border: 2px dashed;
+            border-radius: 10px;
+            border-color: #b2b2b2 !important;
+            padding: 10px;
+            margin-right: 220px;
+        }
+
+        .date-header {
+            margin-right: 200px;
+        }
+
+        .transaction-amount {
+            border: 2px dashed;
+            border-radius: 10px;
+            border-color: #b2b2b2 !important;
+            margin-right: 220px;
+            margin-top: 20px;
+        }
+
+        .transaction-amount tr {
+            height: 30px;
+        }
+
+        .note {
+            margin-right: 200px;
+        }
+
+        .transaction-amount table td:nth-child(2) {
+            text-align: right;
+            padding-right: 15px;
+        }
+
+        .transaction-amount table td:nth-child(1) {
+            padding-left: 15px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table th {
+            text-align: left;
+        }
+
+        .transaction-amount table tr:last-child {
+            background-color: #D1D1D1;
+        }
+
+
+        .date-header table td:nth-child(2) {
+            text-align: right;
+            padding-right: 15px;
+        }
+
+        .font-medium {
+            font-size: 1.5rem;
+            line-height: 1.5rem;
+            font-weight: 500;
+        }
+
+        .text-uppercase {
+            text-transform: uppercase !important;
+        }
+
+        .border-dark {
+            border-color: #343a40 !important;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #343a40 !important;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .lable-color {
+            color: #777;
+        }
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        .sqrlist {
+            list-style: square;
+        }
+
+        .bg-offwhite {
+            background: #f7f7f7;
+        }
+
+        .note table {
+            border: none;
+            border-collapse: collapse;
+        }
+
+        .note table td,
+        th {
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            padding-left: 20px;
+        }
+
+        .note table td:first-child,
+        th:first-child {
+            border-left: none;
+        }
+
+        .note table td:last-child,
+        th:last-child {
+            border-right: none;
+        }
+
+        .txt-prime {
+            color: #175fff !important;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            text-align: left;
+            background-color: #fff;
+        }
+
+        .right {
+            float: right;
+        }
+
+        li {
+            font-size: small;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="receipt-title">
+            <h1 class="font-medium">RECEIPT</h1>
+        </div>
+
+        <div class="date-header">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><img src="data:image/png;base64,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" alt="Logo" srcset=""></img></td>
+                        <td> DATE: ${timestamp} AEST</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="receipt-body">
+            <!--.logo and date-->
+            <div class="transaction">
+                <div class="border-bottom border-dark">
+                    <h3 class="font-semibold">
+                        Reference Number
+                        <span class="txt-prime">${transaction_number}</span>
+                    </h3>
+                </div>
+                <p class="font-semibold text-uppercase">Sender details</p>
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td class="lable-color" style="width: 70%">Name</td>
+                            <td class="lable-color">Payment method</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 70%">${sender_name}</td>
+                            <td>${payment_method}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="font-semibold text-uppercase">Recipient details</p>
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td class="lable-color" style="width: 70%">Name</td>
+                            <td class="lable-color">Account Number / VPA</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 70%">${receiver_name}</td>
+                            <td>${receiver_bank_account}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--.transaction div-->
+
+            <div class="transaction-amount">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Transfer Amount
+                            </td>
+                            <td>
+                                ${transfer_amount}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Transfer Fees Applicable
+                            </td>
+                            <td>
+                                (-) ${transfer_fee}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Converted Amount
+                            </td>
+                            <td>
+                                ${transferable_amount}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Exchange Rate
+                            </td>
+                            <td>
+                                ${exchange_rate}
+                            </td>
+                        </tr>
+                        <!--<tr>
+                            <td>
+                                Converted Amount
+                            </td>
+                            <td>
+                                ${converted_amount}
+                            </td>
+                        </tr>-->
+                        <tr>
+                            <td>
+                                Total Amount to Recipient
+                            </td>
+                            <td>
+                                ${converted_amount}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+		<div class="note mt-10"  style="font-size: 11px;">
+			XDC Payments is the registered business name of XDC Payments Pty Ltd (ACN 645 354 605), which is regulated by the Australian Securities and Investments Commission (ASIC) and registered with the Australian Transaction Reports and Analysis Centre (AUSTRAC)
+		</div>
+    </div>
+
+</body>
+
+</html>

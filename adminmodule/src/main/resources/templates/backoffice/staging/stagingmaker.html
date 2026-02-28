@@ -1,0 +1,259 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Back Office</a></li>
+                                    <li class="breadcrumb-item active">Staging Queue</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Staging Queue (Maker)</h4>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="row">-->
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-primary">-->
+<!--                                        <i class="fe-tag font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">3,947</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Total Transactions</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-warning">-->
+<!--                                        <i class="fe-clock font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">624</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Pending Transactions</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-success">-->
+<!--                                        <i class="fe-check-circle font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">3195</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Submitted Transactions</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+
+<!--                    <div class="col-md-6 col-xl-3">-->
+<!--                        <div class="widget-rounded-circle card-box">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="avatar-lg rounded-circle bg-danger">-->
+<!--                                        <i class="fe-trash-2 font-22 avatar-title text-white"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <div class="text-right">-->
+<!--                                        <h3 class="text-dark mt-1"><span data-plugin="counterup">128</span></h3>-->
+<!--                                        <p class="text-muted mb-1 text-truncate">Rejected Transactions</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div> &lt;!&ndash; end row&ndash;&gt;-->
+<!--                        </div> &lt;!&ndash; end widget-rounded-circle&ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; end col&ndash;&gt;-->
+<!--                </div>-->
+                <!-- end title -->
+                <form th:action="@{/backoffice/staging/stagingmakersearch/}" method="post" th:object="${stagingsearch}" class="needs-validation"  novalidate autocomplete="off">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-lg-8"> <h4 class="header-title mb-4">Maker Staging Queue</h4> </div>
+                                <div class="col-lg-4 text-right">
+                                    <a  data-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="filters">Filter <i class="mdi mdi-filter-variant font-20"></i></a>
+                                </div>
+                            </div>
+                            <div class="row mb-3 collapse" id="filters">
+                                <div class="col-md-3 mt-1">
+                                    <select class="selectpicker show-tick border" id="user_type" th:field="*{userType}" title="Select User Type" data-style="btn" data-dropup-auto="false">
+                                        <option value="PERSONAL">Personal</option>
+                                        <option value="BUSINESS">Business</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-1">
+                                    <input class="form-control" type="email" th:field="*{email}" placeholder="Enter Email Address">
+                                </div>
+                                <div class="col-md-3 mt-1">
+
+
+                                    <select class="selectpicker show-tick border" id="paymentode"  th:field="*{paymentMode}"  title="Select Paymentmode" data-style="btn" data-dropup-auto="false">
+                                        <option th:each="paymentMode : ${paymentCodeList}" th:value="${paymentMode.paymentCode}">[[${paymentMode.paymentCode}]]</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-1">
+                                    <select class="selectpicker show-tick border"   th:field="*{receiveMode}" title="Select Receivemode" data-style="btn" data-dropup-auto="false">
+                                        <option th:each="receiveMode : ${receiveCodeList}" th:value="${receiveMode.paymentCode}">[[${receiveMode.paymentCode}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-1">
+                                    <select class="selectpicker show-tick border" id="currency"  th:field="*{currency}" title="Select Currency" data-style="btn" data-dropup-auto="false">
+
+                                        <option th:each="currency : ${currencies}" th:value="${currency.currencyCode}">[[${currency.currencyCode}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mt-1">
+                                    <input class="form-control numbdecimal" type="tel" th:field="*{amountFrom}" placeholder="Amount From" maxlength="10">
+                                </div>
+                                <div class="col-md-3 mt-1">
+                                    <input class="form-control numbdecimal" type="tel" th:field="*{amountTo}" placeholder="Amount To" maxlength="10">
+                                </div>
+                                <div class="col-md-3 mt-1">
+                                    <button class="btn btn-primary w-sm waves-effect waves-light mb-4" type="submit"> Search </button>
+                                    <!--<a href="/fileupload/uploadfile" class="btn btn-primary waves-effect waves-light mb-4"><i class="mdi mr-1"></i>search</a>-->
+                                </div>
+
+                            </div>
+                            <div class="tablewrap table-responsive">
+                                <table class="table table-hover m-0 table-centered nowrap w-100 viewtable" id="scroll-horizontal-datatable">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>User Type</th>
+                                        <th>Txn Ref</th>
+                                        <th>Email Add</th>
+                                        <th>Rem Name</th>
+                                        <th>Rec Name</th>
+                                        <th>Bkg Dt Time</th>
+                                        <th>Orig Cy</th>
+                                        <th>Orig Amt</th>
+                                        <th>Disbmt Cy</th>
+                                        <th>Disbmt Amt</th>
+                                        <th>Pay Mode</th>
+                                        <th>Rec Mode</th>
+                                        <th class="text-center">Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="usertransaction : ${usertransactions}">
+
+                                    <tr>
+
+                                        <td>[[${usertransaction.userAccountType}]]</td>
+                                        <td><a href="javascript:void(0);" data-target="#transactionreferencedetails" data-toggle="modal">[[${usertransaction.refId}]]</a></td>
+                                        <td>[[${usertransaction.getEmail()}]]</td>
+                                        <td>[[${usertransaction.userName}]]</td>
+                                        <td>[[${usertransaction.beneficiaryName}]]</td>
+                                        <td>[[${usertransaction.updatedAt}]]</td>
+                                        <td>[[${usertransaction.fromCurrencyCode}]]</td>
+                                        <td>[[${usertransaction.transferAmount}]]</td>
+                                        <td>[[${usertransaction.toCurrencyCode}]]</td>
+                                        <td>[[${usertransaction.totalConvertedValue}]]</td>
+                                        <td>[[${usertransaction.paymentMode}]]</td>
+                                        <td>[[${usertransaction.receiveMode}]]</td>
+                                        <td>
+                                        	<select id="tranStatus" class="form-control">
+                                                <option value="0" selected>Select Status</option>
+                                                <option value="cancel">Cancel</option>
+                                            </select>
+                                            <!--<div class="btn-group dropdown">
+                                                <a href="javascript: void(0);" class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" th:href="@{/backoffice/staging/stagingMakerCancelled/}+${usertransaction.refId}">Cancel</a>
+                                                </div>
+                                            </div>-->
+                                        </td>
+                                        <td>
+                                        	<input class="refid" type="hidden" th:value="${usertransaction.refId}" />
+                                            <a href="javascript:void(0);" onclick="changeStatus(this)" class="action-icon" title="Submit"> <i class="mdi mdi-check-bold font-24 text-success"></i></a>
+                                            <a href="javascript:void(0);" onclick="resetDropdown(this)" class="action-icon" title="Reset"><i class="mdi mdi-refresh font-24 text-dark"></i></a>
+                                        </td>
+                                    </tr>
+                                    </th:block>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+                </form>
+                <!-- end row -->
+            </div> <!-- container -->
+        </div> <!-- content -->
+        <footer th:replace="base/footer :: footer"></footer>
+        <div id="transactionreferencedetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog  modal-full-width">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Transaction Details</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body p-4">
+                        Remitter Details <br>
+                        Sending Bank Details
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- notification Modal -->
+        <div th:replace="popup/notification :: notifymodal"></div>
+    </div>
+
+</div>
+<div th:replace="base/script_table :: script"></div>
+</body>
+</html>
+<script>
+function changeStatus(element){
+	var refId = $(element).parents("tr").find(".refid").val();
+	var selectedMode = $(element).parents("tr").find("#tranStatus option:selected").text();
+	var apiUrl = "";
+	 
+	if(selectedMode == "Cancel"){
+		window.location.href = "/backoffice/staging/stagingMakerCancelled/" + refId;
+	}
+	else{
+		alert('Please select valid transaction status - Cancel');
+		return;
+	}
+}
+
+function resetDropdown(element){
+	$(element).parents("tr").find("#tranStatus option:selected").val("0");
+}
+</script>

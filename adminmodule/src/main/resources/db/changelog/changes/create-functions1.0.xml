@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="superadmin" id="1">
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="1"/>
+            <column name="function_master_name" value="User Modify"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="USER_MODIFY"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="2"/>
+            <column name="function_master_name" value="User Delete"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="USER_DELETE"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="3"/>
+            <column name="function_master_name" value="User Read"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="USER_READ"/>
+        </insert>
+        <insert tableName="function_master">
+            <column name="id" valueNumeric="4"/>
+            <column name="function_master_name" value="User Create"/>
+            <column name="function_master_type" value="MASTERS"/>
+            <column name="publish" value="1"/>
+            <column name="function_master_key" value="USER_CREATE"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

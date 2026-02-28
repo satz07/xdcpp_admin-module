@@ -1,0 +1,237 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="/purpose">Purpose List</a></li>
+                                    <li class="breadcrumb-item active">Purpose Lists View</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Purpose List View</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-lg-8"> <h4 class="header-title mb-4">Manage Purpose List</h4> </div>
+                                <div class="col-lg-4 text-right" th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}"><a href="/purpose" class="btn btn-primary waves-effect waves-light mb-4"><i class="mdi mdi-plus mr-1"></i> Add Purpose List</a></div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="userType" name="userType" title="Select User Type" required>
+                                        <option value="">Select All</option>
+                                        <option th:value="BUSINESS">Business</option>
+                                        <option th:value="PERSONAL">Personal</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="currencyCode" name="currencyCode" title="Select Currency Code" required>
+                                        <option value="">Select All</option>
+                                        <option th:each="currency : ${currencies}" th:value="${currency.currencyCode}"
+                                                th:text="${currency.currencyCode}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="status" name="status" title="Select Status">
+                                        <option value="">Select All</option>
+                                        <option th:value="ACTlVE" th:text="ACTlVE"></option>
+                                        <option th:value="INACTIVE" th:text="INACTIVE"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <table class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable" id="scroll-horizontal-datatable">
+                                <thead>
+                                <tr>
+                                    <th>User Type</th>
+                                    <th>Country Code</th>
+                                    <th>Currency Code</th>
+                                    <th>Receivemode Code</th>
+                                    <th>Purpose Code</th>
+                                    <th>Purpose</th>
+                                    <th>Status</th>
+                                    <th th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="purpose : ${purposeListMasters}">
+                                    <td th:text="${purpose.userType}"></td>
+                                    <td th:text="${purpose.countryCode.countryCode}"></td>
+                                    <td th:text="${purpose.currencyCode.currencyCode}"></td>
+                                    <td th:text="${purpose.receiveCode.paymentCodeMaster.paymentCode}"></td>
+                                    <td th:text="${purpose.purposeCode}"></td>
+                                    <td th:text="${purpose.purpose}"></td>
+                                    <td th:if="${purpose.publish}"><span class="badge badge-soft-success" th:text="ACTlVE"></span></td>
+                                    <td th:unless="${purpose.publish}"><span class="badge badge-soft-danger" th:text="INACTIVE"></span></td>
+                                    <td th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                        <a th:href="@{/purpose/edit/{userType}/{id}(userType=${purpose.userType},id=${purpose.id})}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                        <a th:href="@{/purpose/delete/{id}(id=${purpose.id})}" class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                            <i class="mdi mdi-delete dellist"></i>
+                                        </a>
+                                        <a th:unless="${purpose.publish}" th:href="@{/purpose/{id}/approve(id=${purpose.id})}" class="action-icon">
+                                            <i class="fa fa-check-circle" style="font-size:24px;color:green"></i>
+                                        </a>
+                                        <a th:unless="${purpose.publish}" th:href="@{/purpose/{id}/reject(id=${purpose.id})}" class="action-icon" >
+                                            <i class='fas fa-ban' style='font-size:24px;color:red'></i>
+                                        </a>
+                                        <!--<a href="javascript:void(0);" class="action-icon">
+                                            <i class="mdi mdi-delete dellist"></i>
+                                        </a>
+                                        <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-body p-4">
+                                                        <div class="text-center">
+                                                            <i class="dripicons-information h1 text-warning"></i>
+                                                            <h4 class="mt-2">Heads up!</h4>
+                                                            <p class="mt-3">Are you sure you want to delete?</p>
+                                                            <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal" th:id="${purpose.id}" onclick="deleteConfirm(this.id)">
+                                                                Yes
+                                                            </button>
+                                                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                         <div class="row">
+                                
+                                <div class="col-lg-12 text-right" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''TAT_CREATE'')')}"><a href="/tat" class="btn btn-primary waves-effect waves-light mb-4"><i
+                                        class="mdi mdi-plus mr-1"></i> Add TAT Definition</a>
+                                </div>
+                    </div>
+                    </div><!-- end col -->
+                   
+                </div>
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+        <footer th:replace="base/footer :: footer"></footer>
+        <!-- end Footer -->
+        <div id="notification-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <h4 class="mt-2">Authorize</h4>
+                            <p class="mt-3">Fee</p>
+                            <button type="button" class="btn btn-primary my-2" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <i class="dripicons-checkmark h1 text-secondarycolor"></i>
+                            <h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+                            <p class="mt-3 text-secondarycolor">Deleted</p>
+                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+<script th:src="@{/js/vendor.min.js}"></script>
+<!-- third party js -->
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<script>
+                function deleteConfirm(id) {
+                    window.location.href="/purpose/delete/"+id;
+                }
+    $(document).ready(function () {
+        table = $("#scroll-horizontal-datatable").DataTable({
+        scrollX: !0,
+        language: {
+            paginate: {
+            previous: "<i class='mdi mdi-chevron-left'>",
+            next: "<i class='mdi mdi-chevron-right'>",
+            },
+        },
+        drawCallback: function () {
+            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+        },
+        }),
+        $("#state-saving-datatable").DataTable({
+        stateSave: !0,
+        language: {
+            paginate: {
+            previous: "<i class='mdi mdi-chevron-left'>",
+            next: "<i class='mdi mdi-chevron-right'>",
+            },
+        },
+        drawCallback: function () {
+            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+        },
+        });
+
+        $('#userType, #currencyCode, #status').change( function() {
+
+            var utypeVal = $("#userType").val();
+            var currencyVal = $("#currencyCode").val();
+            var statusVal = $("#status").val();
+
+            if ((table.column(0).search() != utypeVal) || (table.column(2).search() != currencyVal) || (table.column(6).search() != statusVal)) {
+                table.column(0).search(utypeVal).column(2).search(currencyVal).column(6).search(statusVal).draw();
+            }
+            if ((currencyVal == "" && statusVal == "") && utypeVal != "") {
+                table.column(0).search(utypeVal).draw();
+            }
+            if ((utypeVal == "" && statusVal == "") && currencyVal != "") {
+                table.column(2).search(currencyVal).draw();
+            }
+            if ((utypeVal == "" && currencyVal == "") && statusVal != "") {
+                table.column(6).search(statusVal).draw();
+            }
+
+            if(utypeVal == "" && currencyVal == "" && statusVal == "") {
+                table.search('').columns().search('').draw();
+            }
+        });
+
+    });
+</script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</body>
+</html>

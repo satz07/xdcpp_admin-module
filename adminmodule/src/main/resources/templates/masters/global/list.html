@@ -1,0 +1,319 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="/global">Global Limit</a></li>
+                                    <li class="breadcrumb-item active">Global Limits List</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Global Limit List</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-lg-8"> <h4 class="header-title mb-4">Manage Global Limit</h4> </div>
+                                <div class="col-lg-4 text-right" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_CREATE'')')}">
+                                    <button type="button" class="btn btn-primary waves-effect waves-light mb-4" onclick="redirect('/global')"><i class="mdi mdi-plus mr-1"></i> Add Global Limit</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-2">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="userType" name="userType" title="Select User Type"
+                                            required>
+                                        <option value="">Select All</option>
+                                        <option th:value="BUSINESS">Business</option>
+                                        <option th:value="PERSONAL">Personal</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="sendCurrencyCode" name="sendCurrencyCode" title="Send Currency Code"
+                                            required>
+                                        <option value="">Select All</option>
+                                        <option th:each="currency : ${currencies}" th:value="${currency.currencyCode}"
+                                                th:text="${currency.currencyCode}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false"
+                                            id="receiveCurrencyCode" name="receiveCurrencyCode"
+                                            title="Receive Currency Code" required>
+                                        <option value="">Select All</option>
+                                        <option th:each="currency : ${currencies}" th:value="${currency.currencyCode}"
+                                                th:text="${currency.currencyCode}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="paymentCode" name="paymentCode" title="Select Paymentmode"
+                                            required>
+                                        <option value="">Select All</option>
+                                        <option th:each="payment : ${paymentCode}" th:value="${payment.paymentCodeMaster.paymentCode}"
+                                                th:text="${payment.paymentCodeMaster.paymentCode}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="receiveCode" name="receiveCode" title="Select Receivemode"
+                                            required>
+                                        <option value="">Select All</option>
+                                        <option th:each="receive : ${receiveCode}" th:value="${receive.paymentCodeMaster.paymentCode}"
+                                                th:text="${receive.paymentCodeMaster.paymentCode}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <select class="selectpicker border rounded show-tick" data-style="btn"
+                                            data-dropup-auto="false" id="status" name="status" title="Select Status">
+                                        <option value="">Select All</option>
+                                        <option th:value="ACTlVE" th:text="ACTlVE"></option>
+                                        <option th:value="INACTIVE" th:text="INACTIVE"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable" id="scroll-horizontal-datatable">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <td>User Type</td>
+                                        <td>User Category</td>
+                                        <td>Send Country Code</td>
+                                        <td>Send Currency Code</td>
+                                        <td>Receive Country Code</td>
+                                        <td>Receive Currency Code</td>
+                                        <td>Paymode Code</td>
+                                        <td>Receivemode Code</td>
+                                        <th>Min Txn limit</th>
+                                        <th>Max Txn Limit</th>
+                                        <th>Amount Daily Limit</th>
+                                        <th>Txn Daily Limit</th>
+                                        <th>Amount Weekly Limit</th>
+                                        <th>Txn Weekly Limit</th>
+                                        <th>Amount Monthly Limit</th>
+                                        <th>Txn Monthly Limit</th>
+                                        <th>Amount Quaterly Limit</th>
+                                        <th>Txn Quaterly Limit</th>
+                                        <th>Amount Half Yearly Limit</th>
+                                        <th>Txn Half Yearly Limit</th>
+                                        <th>Amount Annual Limit</th>
+                                        <th>Txn Annual Limit</th>
+                                        <th>Avg Txn Limit</th>
+                                        <th>Is Risk Limit aplicable</th>
+                                        <th>Status</th>
+                                        <th th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_APPROVE'',''GLOBAL_EDIT'',''GLOBAL_DELETE'')')}">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  th:each="global : ${globals}">
+                                        <td th:text="${global.userType}"></td>
+                                        <td th:text="${global.userCategory}"></td>
+                                        <td th:text="${global.sendCountryCode.countryCode}"></td>
+                                        <td th:text="${global.sendCurrencyCode.currencyCode}"></td>
+                                        <td th:text="${global.receiveCountryCode.countryCode}"></td>
+                                        <td th:text="${global.receiveCurrencyCode.currencyCode}"></td>
+                                        <td th:text="${global.paymentCode.paymentCodeMaster.paymentCode}"></td>
+                                        <td th:text="${global.receiveCode.paymentCodeMaster.paymentCode}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.minTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.maxTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.dailyLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.dailyTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.weeklyLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.weeklyTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.monthlyLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.monthlyTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.quarterlyLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.quarterlyTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.halfYearlyLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.halfYearlyTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.annualLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.annualTxnLimit,1,2)}"></td>
+                                        <td th:text="${#numbers.formatDecimal(global.avgTransLimit,1,2)}"></td>
+                                        <td th:text="${global.isRiskLimitApplicable}"></td>
+                                        <td th:if="${global.publish}"><span class="badge badge-soft-success" th:text="ACTlVE"></span></td>
+                                        <td th:unless="${global.publish}"><span class="badge badge-soft-danger" th:text="INACTIVE"></span></td>
+                                        <td th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_EDIT'',''GLOBAL_DELETE'',''GLOBAL_APPROVE'')')}">
+                                            <a th:href="@{/global/edit/{userType}/{id}(userType=${global.userType},id=${global.id})}" class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_EDIT'')')}"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                            <a th:href="@{/global/delete/{id}(id=${global.id})}" class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_DELETE'')')}">
+                                                <i class="mdi mdi-delete dellist"></i>
+                                            </a>
+                                            <a th:unless="${global.publish}" th:href="@{/global/{id}/approve(id=${global.id})}" class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_APPROVE'')')}">
+                                                <i class="fa fa-check-circle" style="font-size:24px;color:green"></i>
+                                            </a>
+                                            <a th:unless="${global.publish}" th:href="@{/global/{id}/reject(id=${global.id})}" class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'',''GLOBAL_APPROVE'')')}">
+                                                <i class='fas fa-ban' style='font-size:24px;color:red'></i>
+                                            </a>
+                                            <!--<a href="javascript:void(0);" class="action-icon">
+                                                <i class="mdi mdi-delete dellist"></i>
+                                            </a>
+                                            <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body p-4">
+                                                            <div class="text-center">
+                                                                <i class="dripicons-information h1 text-warning"></i>
+                                                                <h4 class="mt-2">Heads up!</h4>
+                                                                <p class="mt-3">Are you sure you want to delete?</p>
+                                                                <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal" th:id="${global.id}" onclick="deleteConfirm(this.id)">
+                                                                    Yes
+                                                                </button>
+                                                                <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- end card-->
+                         <div class="row">
+                              
+                                <div class="col-lg-12 text-right" th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}"><a href="/purpose" class="btn btn-primary waves-effect waves-light mb-4"><i class="mdi mdi-plus mr-1"></i> Add Purpose List</a></div>
+                          </div>
+
+                          </div>
+                    </div> <!-- end col -->
+                    
+            </div>
+        </div> <!-- content -->
+        <footer th:replace="base/footer :: footer"></footer>
+        <div id="notification-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <h4 class="mt-2">Authorize</h4>
+                            <p class="mt-3">Fee</p>
+                            <button type="button" class="btn btn-primary my-2" data-dismiss="modal">Yes</button>
+                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content modal-filled bg-success">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <i class="dripicons-checkmark h1 text-white"></i>
+                            <h4 class="mt-2 text-white">Well Done!</h4>
+                            <p class="mt-3 text-white">Product Deleted</p>
+                            <button type="button" class="btn btn-light my-2" data-dismiss="modal">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+    </div>
+
+</div>
+<script th:src="@{/js/vendor.min.js}"></script>
+<!-- third party js -->
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- Tickets js -->
+<script>
+                function deleteConfirm(id) {
+                    window.location.href="/global/delete/"+id;
+                }
+    $(document).ready(function () {
+        table = $("#scroll-horizontal-datatable").DataTable({
+        scrollX: !0,
+        language: {
+            paginate: {
+            previous: "<i class='mdi mdi-chevron-left'>",
+            next: "<i class='mdi mdi-chevron-right'>",
+            },
+        },
+        drawCallback: function () {
+            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+        },
+        }),
+        $("#state-saving-datatable").DataTable({
+        stateSave: !0,
+        language: {
+            paginate: {
+            previous: "<i class='mdi mdi-chevron-left'>",
+            next: "<i class='mdi mdi-chevron-right'>",
+            },
+        },
+        drawCallback: function () {
+            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+        },
+        });
+
+        $('#userType, #sendCurrencyCode, #receiveCurrencyCode, #paymentCode, #receiveCode, #status').change( function()
+         {
+            var utypeVal = $("#userType").val();
+            var selVal = $("#sendCurrencyCode").val();
+            var receiveVal = $("#receiveCurrencyCode").val();
+            var paycodeVal = $("#paymentCode").val();
+            var recodeVal = $("#receiveCode").val();
+            var statusVal = $("#status").val();
+
+            if ((table.column(0).search() != utypeVal) || (table.column(3).search() != selVal) || (table.column(5).search() != receiveVal) || (table.column(6).search() != paycodeVal) || (table.column(7).search() != recodeVal) || (table.column(23).search() != statusVal)) {
+                table.column(0).search(utypeVal).column(3).search(selVal).column(5).search(receiveVal).column(6).search(paycodeVal).column(7).search(recodeVal).column(23).search(statusVal).draw();
+            }
+
+            if ((selVal == "" && receiveVal == "" && paycodeVal == "" && recodeVal == "" && statusVal == "") && utypeVal != "") {
+                table.column(0).search(utypeVal).draw();
+            }
+            if ((utypeVal == "" && receiveVal == "" && paycodeVal == "" && recodeVal == "" && statusVal == "") && selVal != "") {
+                table.column(3).search(selVal).draw();
+            }
+            if ((utypeVal == "" && selVal == "" && paycodeVal == "" && recodeVal == "" && statusVal == "") && receiveVal != "") {
+                table.column(5).search(receiveVal).draw();
+            }
+            if ((utypeVal == "" && selVal == "" && receiveVal == "" && recodeVal == "" && statusVal == "") && paycodeVal != "") {
+                table.column(6).search(paycodeVal).draw();
+            }
+            if ((utypeVal == "" && selVal == "" && paycodeVal == "" && receiveVal == "" && statusVal == "") && recodeVal != "") {
+                table.column(7).search(recodeVal).draw();
+            }
+            if ((utypeVal == "" && selVal == "" && receiveVal == "" && paycodeVal == "" && recodeVal == "") && statusVal != "") {
+                table.column(23).search(statusVal).draw();
+            }
+
+            if(utypeVal == "" && receiveVal == "" && selVal == "" && paycodeVal == "" && recodeVal == "" && statusVal == "") {
+                table.search('').columns().search('').draw();
+            }
+        });
+    });
+</script>
+<!-- App js -->
+<script  th:src="@{/js/app.min.js}"></script>
+<script  th:src="@{/js/custom.js}"></script>
+</body>
+</html>

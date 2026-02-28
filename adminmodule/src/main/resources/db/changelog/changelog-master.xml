@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <include file="/db/changelog/changes/create_function_feature_table.xml" />
+    <include file="/db/changelog/changes/insert-functions.xml"/>
+    <include file="/db/changelog/changes/insert-features.xml" />
+    <include file="changes/countries-code.sql" relativeToChangelogFile="true"/>
+    <include file="changes/currencies-code.sql" relativeToChangelogFile="true"/>
+    <include file="changes/payment-code-master.sql" relativeToChangelogFile="true" />
+    <include file="changes/street_type.sql" relativeToChangelogFile="true" />
+    <include file="changes/update-are-code.sql" relativeToChangelogFile="true" />
+    <include file="changes/restricted-beneficiary-names.sql" relativeToChangelogFile="true"/>
+	<include file="/db/changelog/changes/create_business_activity_sub_activity_table.xml" />
+    <include file="changes/business-activity.sql" relativeToChangelogFile="true" />
+    <include file="changes/business-sub-activity.sql" relativeToChangelogFile="true" />
+</databaseChangeLog>

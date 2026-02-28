@@ -1,0 +1,197 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/list_header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="/deliverypartner">Delivery Partner</a></li>
+                                    <li class="breadcrumb-item active">Delivery Partner List</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Delivery Partner List</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-lg-8"> <h4 class="header-title mb-4">Manage Delivery Partner</h4> </div>
+                                <div class="col-lg-4 text-right" th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}"><a href="/deliverypartner" class="btn btn-primary waves-effect waves-light mb-4"><i class="mdi mdi-plus mr-1"></i> Add Delivery Partner</a></div>
+                            </div>
+
+                            <div th:if="${confirmationMessage}" class="alert alert-success" id="alert-success"
+                                 role="alert" th:text=${confirmationMessage}></div>
+
+                           <div th:if="${errorMessage}"
+                                 class="alert alert-danger" role="alert" id="alert-danger"
+                                 th:text="${errorMessage}"></div>
+                            <table class="table table-hover table-striped m-0 table-centered nowrap w-100 viewtable" id="scroll-horizontal-datatable">
+                                <thead>
+                                <tr>
+                                    <th>Partner Name</th>
+                                    <th>Partner Country</th>
+                                    <th>Partner Location</th>
+                                    <th>payment Mode</th>
+                                    <th>Partner Code</th>
+                                    <th>Min. Limit</th>
+                                    <th>Max. Limit</th>
+                                    <th  th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="deliveryPartner : ${deliveryPartnerList}">
+                                    <td th:text="${deliveryPartner.partnerName}"></td>
+                                    <td th:text="${deliveryPartner.operatingCountry.countryName}"></td>
+                                    <td th:text="${deliveryPartner.partnerLocation}"></td>
+                                    <td th:text="${deliveryPartner.paymentMode}"></td>
+									<td th:text="${deliveryPartner.partnerCode}"></td>
+									<td th:text="${deliveryPartner.partnerLimitsMin}"></td>
+									<td th:text="${deliveryPartner.partnerLimitsMax}"></td>
+                                    <!-- <td th:if="${country.publish}"><span class="badge badge-soft-success">Active</span></td>
+                                    <td th:unless="${country.publish}"><span class="badge badge-soft-danger">In Active</span></td> -->
+                                    <td  th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}">
+                                        <a th:href="@{/deliverypartner/edit/{id}(id=${deliveryPartner.id})}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                        <!--<a href="javascript:void(0);" class="action-icon">
+                                            <i class="mdi mdi-delete dellist"></i>
+                                        </a>-->
+                                        <a  class="action-icon" th:if="${#authorization.expression('hasAnyRole(''SUPERADMIN'')')}">
+                                            <i th:id="${deliveryPartner.id}" class="mdi mdi-delete dellist" ></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+                 <div class="row">
+                     <div class="col-lg-12 text-right" th:if="${#authorization.expression('hasRole(''SUPERADMIN'')')}"><a href="/product"
+                        class="btn btn-primary waves-effect waves-light mb-4"><iclass="mdi mdi-plus mr-1"></i> Add Products</a></div>
+                 </div>
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+        <footer th:replace="base/footer :: footer"></footer>
+        <div id="confirm-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <i class="dripicons-information h1 text-warning"></i>
+                            <h4 class="mt-2">Heads up!</h4>
+                            <p class="mt-3">Are you sure you want to delete?</p>
+                            <button type="button" class="btn btn-primary my-2 confirm-deletemap" data-dismiss="modal" onclick="deleteConfirm(this.id)" id="confirmDeleteAction" cid="" >
+                                Yes
+                            </button>
+                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <i class="dripicons-checkmark h1 text-secondarycolor"></i>
+                            <h4 class="mt-2 text-secondarycolor">Well Done!</h4>
+                            <p class="mt-3 text-secondarycolor">Deleted</p>
+                            <button type="button" class="btn btn-outline-primary my-2" data-dismiss="modal">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+</div>
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/libs/datatables.net-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{/libs/datatables.net-select/js/dataTables.select.min.js}"></script>
+<script th:src="@{/js/deleteDeliveryAjax.js}"></script>
+<script>
+
+     setTimeout(function () {
+                $("#alert-danger").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#alert-danger").remove();
+                });
+              }, 3000);
+   setTimeout(function () {
+                $("#alert-success").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#alert-success").remove();
+                });
+              }, 3000);
+            function deleteConfirm() {
+  
+            
+             
+
+	var cid=$("#confirmDeleteAction").attr("cid")
+	deletecountrysAjaxRequest(cid)
+                  //  window.location.href="/country/delete/"+id;
+                    //window.location.reload();
+                    
+        }
+            $(document).ready(function () {
+	$(".dellist").click(function(){
+		
+	
+		del_id=this.id	
+		 $('#confirm-delete').modal('show')
+		 $("#confirmDeleteAction").attr("cid",this.id)
+	})
+               var del_id=0
+                $("#scroll-horizontal-datatable").DataTable({
+                scrollX: !0,
+                language: {
+                    paginate: {
+                    previous: "<i class='mdi mdi-chevron-left'>",
+                    next: "<i class='mdi mdi-chevron-right'>",
+                    },
+                },
+                drawCallback: function () {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                },
+                }),
+                $("#state-saving-datatable").DataTable({
+                stateSave: !0,
+                language: {
+                    paginate: {
+                    previous: "<i class='mdi mdi-chevron-left'>",
+                    next: "<i class='mdi mdi-chevron-right'>",
+                    },
+                },
+                drawCallback: function () {
+                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                },
+                });
+                });
+
+</script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</html>

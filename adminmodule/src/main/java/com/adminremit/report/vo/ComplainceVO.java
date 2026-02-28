@@ -1,0 +1,71 @@
+package com.adminremit.report.vo;
+
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class ComplainceVO {
+    private String nationality1;
+    private String registrationCountry1;
+    private String registrationCountry2;
+    private String nationality2;
+    private String fullName;
+    private String firstName;
+    private String lastName1;
+    private String lastName2;
+    private String middleName1;
+    private String middleName2;
+    private String dateOfBirth1;
+    private String dateOfBirth2;
+    private String gender1;
+    private String gender2;
+    private String kycRow1DocType1;
+    private String kycRow1DocType2;
+    private String kycRow2;
+    private String senderName;
+    private String acNumber;
+    private String apiName;
+    private String verificationStatus;
+    private String flatNumber;
+    private String streetNumber;
+    private String streetName;
+    private String streetType;
+    private String province;
+    private String regIp1;
+    private String regIp2;
+    private String amlKey;
+    private String relationship;
+    private String purpose;
+    private String professionType;
+    private String annualIncome;
+    private String sourceOfIncome;
+    private String sourceOfFund;
+    private String sumTransferAmount;
+    private String avgTransferAmount;
+    private String workflowState;
+    private String createAt;
+    private String referenceId;
+    private String beneficiaryName;
+    private String buIdCount;
+    private String transferAmount;
+    private String dailyLimit;
+    private String weeklyLimit;
+    private String monthLimit;
+    private String halfYearlyLimit;
+    private String yearlyLimit;
+    private String masterDailyLimit;
+    private String masterWeeklyLimit;
+    private String masterMonthLimit;
+    private String masterHalfYearlyLimit;
+    private String masterYearlyLimit;
+    private String loginIp;
+    private String validationResponse;
+    private String checkFullName;
+    private String checkResponse;
+    private String recipientModifiedOn1;
+    private String recipientModifiedOn2;
+    private String txnCountry1;
+    private String txnCountry2;
+    private String checkStatus;
+}

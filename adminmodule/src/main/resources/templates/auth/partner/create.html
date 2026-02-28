@@ -1,0 +1,203 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Partner</a></li>
+                                    <li th:if="${partner.id == null}" class="breadcrumb-item active"><a href="/partner/list">Add Partners</a></li>
+                                    <li th:if="${partner.id != null}" class="breadcrumb-item active">Edit Partner</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title" th:if="${partner.id == null}">Add Partner</h4>
+                            <h4 class="page-title" th:if="${partner.id != null}">Edit Partner</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <form th:action="@{/partner/create}" th:object="${partner}" method="post" class="needs-validation"
+                      novalidate autocomplete="off">
+                    <div th:if="${confirmationMessage}" class="alert alert-success"
+                         role="alert" th:text=${confirmationMessage}></div>
+
+                    <div th:if="${errorMessage}"
+                         class="alert alert-danger" role="alert"
+                         th:text="${errorMessage}"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">General Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="partnerId">Partner ID</label>
+                                            <input th:if="${partner.id == null}" class="form-control" type="text" th:field="*{partnerId}"
+                                                   id="partnerId" required>
+                                            <input th:if="${partner.id != null}" class="form-control" type="text" th:field="*{partnerId}"
+                                                   required readonly>
+                                            <div class="invalid-feedback">
+                                                Invlaid Partner ID
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="partnerName">Partner Name</label>
+                                            <input type="text" th:field="*{partnerName}" class="form-control"
+                                                   id="partnerName" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Partner Name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="description">Partner Description</label>
+                                            <textarea type="text" th:field="*{description}" class="form-control"
+                                                      id="description" cols="30" rows="5" placeholder="Add description"></textarea>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="product">Product Name</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false"
+                                                    th:field="*{product}" id="product" name="*product" title="Select Product Name" required>
+                                                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.productName}"
+                                                        selected="${partner.id == partner}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" th:if="${id != null}">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Status</label>
+                                            <label for="publish" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" id="publish" th:field="*{publish}" class="checkbox_input" checked>
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Owner Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="ownerName">Owner Name</label>
+                                            <input type="text" th:field="*{ownerName}" class="form-control"
+                                                   id="ownerName" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Owner Name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="ownerDesignation">Owner Designation</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{ownerDesignation}" id="ownerDesignation"
+                                                    name="*ownerDesignation" title="Select Owner Designation" required>
+                                                <option th:each="designations : ${ownerDesignation}"
+                                                        th:value="${designations.id}"
+                                                        th:text="${designations.designation}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Owner Designation
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="officialEmail">Official Email Address</label>
+                                            <input type="email" th:field="*{officialEmail}" class="form-control"
+                                                   id="officialEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                            <div class="invalid-feedback">
+                                                Invlaid Email Address
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="phoneNumber">Mobile Number</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <select class="selectpicker show-tick border border-right-0"
+                                                            required title="code" data-style="btn"
+                                                            data-dropup-auto="false" th:field="*{countryCode}" id="countryCode"
+                                                            name="*countryCode" >
+                                                        <option th:each="country : ${countries}"
+                                                                th:value="${country.dialingCode}"
+                                                                th:text="${country.dialingCode}"
+                                                                selected="${partner.countryCode == country.dialingCode}"></option>
+                                                    </select>
+                                                </div>
+                                                <input th:field="*{phoneNumber}" class="form-control"
+                                                       id="phoneNumber" type="tel" maxlength="10" minlength="10" required>
+                                                <div class="invalid-feedback">
+                                                    Invlaid Mobile Number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="locationMaster">Location</label>
+                                            <select class="selectpicker show-tick border"  th:field="*{locationMaster}" id="locationMaster"
+                                                    name="*locationMaster" required  title="Select Location" data-style="btn" data-dropup-auto="false">
+                                                <option th:each="location : ${locationMasters}" th:value="${location.id}"
+                                                        th:text="${location.locationName}"
+                                                        selected="${location.id == locationMaster}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Location
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                    <div class="text-center" th:if="${id == null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Partner</button>
+                    </div>
+                    <div class="text-center" th:if="${id != null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Update Partner</button>
+                    </div>
+                </form>
+            </div> <!-- container -->
+            <!-- Footer Start -->
+            <footer th:replace="base/footer :: footer"></footer>
+            <!-- end Footer -->
+        </div> <!-- content -->
+    </div>
+</div>
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</html>

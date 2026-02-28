@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="superadmin" id="1">
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="1"/>
+            <column name="feature_name" value="User Modify"/>
+            <column name="feature_end_point" value="/user/edit"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="1"/>
+            <column name="feature_type" value="Update" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="2"/>
+            <column name="feature_name" value="User Modify"/>
+            <column name="feature_end_point" value="/user/create"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="1"/>
+            <column name="feature_type" value="Create" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="3"/>
+            <column name="feature_name" value="User Delete"/>
+            <column name="feature_end_point" value="/user/delete"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="1"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="2"/>
+            <column name="feature_type" value="Delete" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="4"/>
+            <column name="feature_name" value="User Create"/>
+            <column name="feature_end_point" value="/user/create"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="4"/>
+            <column name="feature_type" value="Create" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="5"/>
+            <column name="feature_name" value="User Create"/>
+            <column name="feature_end_point" value="/user"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="4"/>
+            <column name="feature_type" value="Create" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="6"/>
+            <column name="feature_name" value="User Read"/>
+            <column name="feature_end_point" value="/user/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="1"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="4"/>
+            <column name="feature_type" value="View" />
+        </insert>
+        <insert tableName="features_master">
+            <column name="id" valueNumeric="7"/>
+            <column name="feature_name" value="User Read"/>
+            <column name="feature_end_point" value="/user/list"/>
+            <column name="publish" value="1"/>
+            <column name="read_access" value="1"/>
+            <column name="write_access" value="0"/>
+            <column name="delete_access" value="0"/>
+            <column name="approve_access" value="0"/>
+            <column name="function_id" valueNumeric="3"/>
+            <column name="feature_type" value="View" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

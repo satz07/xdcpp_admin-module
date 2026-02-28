@@ -1,0 +1,289 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="/service/charge/list">Service</a></li>
+                                    <li th:if="${service.id == null}" class="breadcrumb-item active"><a href="/service/charge/list">Add Service</a></li>
+                                    <li th:if="${service.id != null}" class="breadcrumb-item active">Edit Service</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title" th:if="${service.id == null}">Add Service</h4>
+                            <h4 class="page-title" th:if="${service.id != null}">Edit Service</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/service/charge/create}" th:object="${service}" method="post" class="needs-validation" novalidate autocomplete="off">
+                    <div th:if="${confirmationMessage}" class="alert alert-success" role="alert" th:text=${confirmationMessage}></div>
+                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">User Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label>User Type</label>
+                                            <div class="radio radio-primary mb-2">
+                                                <input type="radio" id="personal" name="userType" th:value="PERSONAL" th:field="*{userType}" required>
+                                                <label for="personal" class="mr-3">
+                                                    Personal
+                                                </label>
+                                                <input type="radio" id="business" name="userType" th:value="BUSINESS" th:field="*{userType}" required>
+                                                <label for="business" >
+                                                    Business
+                                                </label>
+                                                <div class="invalid-feedback">
+                                                    Invalid User Type
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="userCategory">User Category</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false" th:field="*{userCategory}" id="userCategory" name="*userCategory" title="Select User Category" required>
+                                                <!-- <option value="0">Select Category</option> -->
+                                                <option th:each="category : ${userCategory}" th:value="${category}" th:text="${category}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid User Category
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Country Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="sendCountryCode">Send Country Code</label>
+                                            <select class="selectpicker border rounded show-tick" required data-style="btn" data-dropup-auto="false" th:field="*{sendCountryCode}" id="sendCountryCode" name="*sendCountryCode" title="Select Send Country Code">
+                                                <!-- <option value="0">Select Country</option> -->
+                                                <option th:each="country : ${countries}" th:value="${country.id}">[[${country.countryCode}]] - [[${country.countryName}]]</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Country code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="receiveCountryCode">Receive Country Code</label>
+                                            <select class="selectpicker border rounded show-tick" required data-style="btn" data-dropup-auto="false" th:field="*{receiveCountryCode}" id="receiveCountryCode" name="*receiveCountryCode" title="Select Receive Country Code">
+                                                <!-- <option value="0">Select Country</option> -->
+                                                <option th:each="country : ${countries}" th:value="${country.id}">[[${country.countryCode}]] - [[${country.countryName}]]</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Country code
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Currency Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="sendCurrencyCode">Send Currency Code</label>
+                                            <select class="selectpicker border rounded show-tick" required data-style="btn" data-dropup-auto="false" th:field="*{sendCurrencyCode}" id="sendCurrencyCode" name="*sendCurrencyCode" title="Select Send Currency Code">
+                                                <!--  <option value="0">Select Currency</option> -->
+                                                
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Currency code
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="receiveCurrencyCode">Receive Currency Code</label>
+                                            <select class="selectpicker border rounded show-tick" required data-style="btn" data-dropup-auto="false" th:field="*{receiveCurrencyCode}" id="receiveCurrencyCode" name="*receiveCurrencyCode" title="Select Receive Currency Code">
+                                                <!-- <option value="0">Select Currency</option> -->
+                                               
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Invalid Currency code
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Paymentmode Details</h5>
+                                <div class="form-group mb-3">
+                                    <label for="paymentCode">Paymode Code</label>
+                                    <select class="selectpicker border rounded show-tick" multiple data-style="btn" data-dropup-auto="false" th:field="*{paymentCode}" id="paymentCode" name="*paymentCode" title="Select Paymode Code" required>
+                                        <!-- <option value="0">Select Payment Code</option> -->
+                                     
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Invalid Paymode code
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Receivemode Details</h5>
+                                <div class="form-group mb-3">
+                                    <label for="receiveCode">Receivemode Code</label>
+                                    <select class="selectpicker border rounded show-tick" multiple data-style="btn" data-dropup-auto="false" th:field="*{receiveCode}" id="receiveCode" name="*receiveCode" title="Select Receivemode Code" required>
+                                        <!-- <option value="0">Select Receive Code</option> -->
+                                       
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Invalid Receivemode code
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-md-14">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Partner Details</h5>
+                                     <div class="row">
+                                        <div class="form-group mb-3">
+                                            <label for="partnerName">Partner Name</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn"
+                                                    data-dropup-auto="false"
+                                                    th:field="*{partnerName}" id="partnerName"
+                                                    name="*partnerName" title="Select partner Name" required>
+
+                                                <option th:each="partnerNames : ${partnerName}"
+                                                        th:value="${partnerNames.id}"
+                                                        th:text="${partnerNames.partnerName}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                     </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Service Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="rangeFrom">Range From</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{rangeFrom}" id="rangeFrom" placeholder="Range From" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Range From
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="rangeTo">Range To</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{rangeTo}" id="rangeTo" placeholder="Range To" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Range To
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="serviceCharge">Service Charge (%)</label>
+                                            <input class="form-control numbdecimal" type="tel" th:field="*{serviceCharge}" id="serviceCharge" placeholder="Enter Service Charge  (%)" required>
+                                            <div class="invalid-feedback">
+                                                Invalid Service Charge
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2 w-50">Is Service Charge Applicable</label>
+                                            <label for="isServiceChargeApplicable" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" th:field="*{isServiceChargeApplicable}" id="isServiceChargeApplicable" class="checkbox_input">
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Flat/Perc Flag</label>
+                                            <label for="flatPercFlag" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" th:field="*{flatPercFlag}" id="flatPercFlag" class="checkbox_input" >
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" th:if="${id != null}">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Status</label>
+                                            <label for="publish" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" id="publish" th:field="*{publish}" class="checkbox_input" checked>
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                    <div class="text-center" th:if="${id == null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Service Charge</button>
+                    </div>
+                    <div class="text-center" th:if="${id != null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Update Service Charge</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer th:replace="base/footer :: footer"></footer>
+        <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content modal-filled bg-success">
+                    <div class="modal-body p-4">
+                        <div class="text-center">
+                            <i class="dripicons-checkmark h1 text-white"></i>
+                            <p class="mt-3 text-white">Service Charge Added</p>
+                            <button type="button" class="btn btn-light my-2" data-dismiss="modal">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script  th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script th:src="@{/libs/jquery-mask-plugin/jquery.mask.min.js}"></script>
+<script  th:src="@{/js/app.min.js}"></script>
+<script  th:src="@{/js/custom.js}"></script>
+<script  th:src="@{/js/customServiceChargeAjax.js}"></script>
+</body>
+</html>

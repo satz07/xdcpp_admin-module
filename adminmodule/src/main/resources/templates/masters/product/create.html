@@ -1,0 +1,196 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="base/header :: head"></head>
+<div id="wrapper">
+    <div th:replace="base/top_header" :: div></div>
+    <div th:replace="base/left_menu" :: div></div>
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Masters</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Products</a></li>
+                                    <li class="breadcrumb-item active" th:if="${productDTO.id == null}"><a href="/product/list">Add Products</a></li>
+                                    <li class="breadcrumb-item active" th:if="${productDTO.id != null}">Edit Products</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title" th:if="${productDTO.id == null}">Add Products</h4>
+                            <h4 class="page-title" th:if="${productDTO.id != null}">Edit Products</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <form th:action="@{/product/create}" th:object="${productDTO}" method="post" class="needs-validation"
+                      novalidate autocomplete=`"off">
+                    <div th:if="${confirmationMessage}" class="alert alert-success"
+                         role="alert" th:text=${confirmationMessage}></div>
+
+                    <div th:if="${errorMessage}"
+                         class="alert alert-danger" role="alert"
+                         th:text="${errorMessage}"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">General Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="productCode">Product Code</label>
+                                            <input type="text" th:field="*{productCode}" class="form-control"
+                                                   id="productCode" placeholder="Product Code" readonly/>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="productName">Product Name</label>
+                                            <input type="text" th:field="*{productName}" class="form-control"
+                                                   id="productName" placeholder="Product Name" required/>
+                                            <div class="invalid-feedback">
+                                                Invlaid Product name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="productDescription">Product Description</label>
+                                            <textarea th:field="*{productDescription}" class="form-control"
+                                                      id="productDescription" placeholder="Product Description" cols="30"
+                                                      rows="5"></textarea>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" th:if="${id != null}">
+                                        <div class="form-group mt-3">
+                                            <label class="mr-2">Status</label>
+                                            <label for="publish" class="checkboxtoggle pt-2">
+                                                <input type="checkbox" id="publish" th:field="*{publish}" class="checkbox_input" checked>
+                                                <div class="checkboxtoggle_fill"></div>
+                                            </label>
+                                            <div class="invalid-feedback">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-box">
+                                <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Owner Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="ownerName">Owner Name</label>
+                                            <input type="text" th:field="*{ownerName}" class="form-control"
+                                                   id="ownerName" placeholder="Owner Name" required/>
+                                            <div class="invalid-feedback">
+                                                Invalid Owner Name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="ownerDesignation">Owner Designation</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn"
+                                                    data-dropup-auto="false"
+                                                    th:field="*{ownerDesignation}" id="ownerDesignation"
+                                                    name="*ownerDesignation" required>
+
+                                                <option th:each="designations : ${ownerDesignation}"
+                                                        th:value="${designations.id}"
+                                                        th:text="${designations.designation}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="officialEmail">Official Email Address</label>
+                                            <input type="email" th:field="*{officialEmail}" class="form-control"
+                                                   id="officialEmail" placeholder="Email Id" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                                            <div class="invalid-feedback">
+                                                Invlaid Email Address
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="countryCode">Mobile Number</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <select class="selectpicker show-tick border border-right-0"
+                                                            required title="code" data-style="btn"
+                                                            data-dropup-auto="false" th:field="*{countryCode}" id="countryCode"
+                                                            name="*countryCode" >
+                                                        <option th:each="country : ${countries}"
+                                                                th:value="${country.dialingCode}"
+                                                                th:text="${country.dialingCode}"
+                                                                selected="${partner.countryCode == country.dialingCode}"></option>
+                                                    </select>
+                                                </div>
+                                                <input class="form-control" type="tel" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Phone Number"
+                                                       maxlength="10" minlength="10" required>
+                                                <div class="invalid-feedback">
+                                                    Invlaid Mobile Number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="locationMaster">Location</label>
+                                            <select class="selectpicker border rounded show-tick" data-style="btn" data-dropup-auto="false"
+                                                    th:field="*{locationMaster}" id="locationMaster" name="*locationMaster" required>
+
+                                                <option th:each="location : ${locationMasters}"
+                                                        th:value="${location.id}"
+                                                        th:text="${location.locationName}"
+                                                        selected="${location.id == locationMaster}"></option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center" th:if="${id == null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Add Product</button>
+                    </div>
+                    <div class="text-center" th:if="${id != null}">
+                        <button class="btn btn-primary w-sm waves-effect waves-light" type="submit"> Update Product</button>
+                    </div>
+                    <input type="hidden" id="id" th:field="*{id}">
+                </form>
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+        <!-- Footer Start -->
+        <footer th:replace="base/footer :: footer"></footer>
+        <!-- end Footer -->
+    </div>
+</div>
+</body>
+<script th:src="@{/js/vendor.min.js}"></script>
+<script th:src="@{/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/libs/bootstrap-select/js/bootstrap-select.min.js}"></script>
+<!-- App js -->
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</html>

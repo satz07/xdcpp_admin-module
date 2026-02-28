@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>XDC Payments</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+			*{font-family: 'Poppins' !important;}
+			body, table, p, a, div {font-family: 'Poppins' !important;}
+			#outlook a{padding:0}a,blockquote,body,li,p,table,td{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;line-height:1em}table,td{mso-table-lspace:0;mso-table-rspace:0}body{margin:0;padding:0}img{-ms-interpolation-mode:bicubic; border: 0;height:auto;line-height:100%;outline:0;text-decoration:none; max-width: 100%}table{border-collapse:collapse!important}#bodyCell,#bodyTable,body{height:100%!important;margin:0;padding:0;width:100%!important}#bodyCell{padding:20px}#bodyTable,body{background-color:#eee}#bodyCell{border-top:0 solid #bbb}
+			@media only screen and (max-width:480px) {
+				a,blockquote,body,li,p,table,td{-webkit-text-size-adjust:none!important}body{width:100%!important;min-width:100%!important}#bodyCell{padding:10px!important}
+				
+			}
+	</style>
+</head>
+
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+	<center>
+		<!--[if (gte mso 9)|(IE)]>
+        <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td>
+        <![endif]-->
+		<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+			<tr>
+				<td align="center" valign="top" id="bodyCell">
+
+					<table border="0" cellpadding="0" cellspacing="0" id="templateHeader" width="100%" style="max-width:600px !important;">
+						<tr>
+							<td>
+								<table style="background: #ffffff;width: 100%;box-shadow: 0 0 6px rgba(0, 0, 0, .34);display: inline-block;">
+									<tr>
+										<td>
+											<p style="display: none;">XDC Payments | Registartion Sucessful Verify Email</p>
+											<table border="0" style="width: 100%;">
+												<tr>
+													<td align="left" style="padding-left: 20px;background: #ffffff;padding: 20px 24px">
+														<a href="#" target="_blank">
+														<img src="https://xdcforpayments.org/img/xdc-payments-logo.png" alt="XDC Payments logo" style="width: 200px;max-width: 100%;">
+														</a>
+													</td>
+													
+												</tr>
+											</table>
+										</td>
+									</tr>
+					
+									<tr>
+										<td align="center" style="background: #ffffff; padding: 20px 24px;padding-top: 0;">
+											<img src="data:image/png;base64,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" alt="Reg sucess" style="max-width: 100%; margin-bottom: 15px;">
+											<p style="text-align: left; font-size: 14px; color: #181818;line-height: 19px;">
+Hello <span th:text="${remitter_name}">remitter_name</span>,<br/><br/>
+Thank you for choosing XDC Payments as your preferred option to send money home.<br/><br/>
+												We would like to inform you that in order to process your transaction, we require the following documents in downloaded (pdf) format.
+												<br/><br/>
+												Kindly upload the documents mentioned below:
+												{Bank Statement}
+												{3 months bank statement - Date range should be mentioned)}
+												{Pay Stubs}
+												{Tax Statement}
+												<br/><br/>
+												We look forward to your continued patronage and always assure you of our best services.
+												<br/><br/>
+
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding: 0px 24px;">
+											<p style="font-size:14px; color: #181818;margin:0;line-height: 23px;">Should you seek any clarifications, <a href="mailto:help@xdcforpayments.org" style="color: #125cfc;text-decoration: underline;font-size:14px" target="_blank">click here</a> to drop us a line.</p>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding: 20px 24px;">
+											<p style="font-size:14px; color: #181818;margin:0;line-height: 23px;">Warm regards,</p>
+											<p style="font-size:14px; color: #181818;margin:0;">Team XDC Payments</p>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<!-- footer -->
+						<tr>
+							<td>
+								<table style="width: 100%;">
+									<tr>
+										<td style="padding: 20px 24px;background: #eeeeee;text-align: center;padding-top: 15px;">
+											<table style="margin:0 auto;margin-bottom: 20px;">
+												<tr>
+													<td colspan="2" style="font-weight: bold; font-size:14px; color: #181818;margin:0;">Follow us on</td>
+												</tr>
+												<tr>
+													<td>
+														<a href="https://www.facebook.com/Zyuper-234999148424277" style="display: inline-block;margin-right: 5px;">
+															<img src="https://xdcforpayments.org/australia/images/facebook.png" alt="fb">
+														</a>
+													</td>
+													<td>
+														<a href="https://www.instagram.com/zyupernow/" style="display: inline-block;">
+															<img src="https://xdcforpayments.org/australia/images/instagram.png" alt="Instagram">
+														</a>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding: 20px 24px;background: #eeeeee; text-align: justify" colspan="2">
+											<p style="font-size:12px; color: #181818;margin:0;line-height: 23px;">XDC Payments is the registered business name of XDC Payments Pty Ltd (ACN 645 354 605), which is regulated by the Australian Securities and Investments Commission (ASIC) and registered with the Australian Transaction Reports and Analysis Centre (AUSTRAC)</p>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+			</table>
+
+			<!--[if (gte mso 9)|(IE)]>
+        </td>
+    </tr>
+</table>
+<![endif]-->
+	</center>
+</body>
+
+</html>

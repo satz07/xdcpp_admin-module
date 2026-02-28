@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="viewtransmodal" th:remove="tag">
+
+    <div id="viewtransaction" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog  modal-full-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Transaction</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body p-4">
+                    <h4 class="mb-2">Statement Details</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-3">
+                            <thead>
+                            <tr>
+                                <th>Value Date</th>
+                                <th>Dr / Cr</th>
+                                <th>Currency	Amount</th>
+                                <th>Transaction Reference</th>
+                                <th>Bank Reference</th>
+                                <th>Account Name</th>
+                                <th>Classification</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="stmtvaluedate">8/4/2020</td>
+                                <td id="stmtaccounttype">CR</td>
+                                <td id="stmtcurrencyamount">AUD 1,000.00</td>
+                                <td id="stmttransid">AU123456789I</td>
+                                <td id="stmtbankrefid">CMS1234</td>
+                                <td id="stmtaccname">Anil Kumar</td>
+                                <td id="stmtclass">Fund Confimration</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h4 class="mb-2">Selected Transaction</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-2">
+                            <thead>
+                            <tr>
+                                <th>User Type</th>
+                                <th>Email address</th>
+                                <th>Remitter Name</th>
+                                <th>Transaction Number</th>
+                                <th>Booking Date</th>
+                                <th>Booking Time</th>
+                                <th>Originating Currency</th>
+                                <th>Originating Amount</th>
+                                <th>Disbursement Currency</th>
+                                <th>Disbursement Amount</th>
+                                <th>Payment mode code</th>
+                                <th>Receivemode Code</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="transuseracctype">Personal</td>
+                                <td id="transemail">xyz@gmail.com</td>
+                                <td id="transsendername">Anil Kumar</td>
+                                <td id="transtransid">12345672567</td>
+                                <td id="transbookeddate">8-Jul-20</td>
+                                <td id="transbookedtime">13:05</td>
+                                <td id="transfromcurrency">AUD</td>
+                                <td id="transfromamt">600</td>
+                                <td id="transdisbCurrency">INR</td>
+                                <td id="transdisbamt">30,000 </td>
+                                <td id="transpaymode">DCT</td>
+                                <td id="transrecmode">BAC</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>

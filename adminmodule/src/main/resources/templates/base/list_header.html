@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Remittance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" th:href="@{/img/xdc-primary-icon.png}">
+    <link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" th:href="@{/img/xdc-inverted-primary-icon.png}">
+    <link rel="shortcut icon" th:href="@{/img/xdc-primary-icon.png}">
+    <!-- third party css -->
+    <link th:href="@{/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/libs/bootstrap-select/css/bootstrap-select.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/override.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css" />
+    <style>
+        .dataTable > thead > tr > th[class*="sorting"]:last-child:before,.dataTable > thead > tr > th[class*="sorting"]:last-child:after {
+            content: "" !important;
+        }
+    </style>
+    <script>
+        function redirect(url) {
+            window.location.href=url;
+        }
+    </script>
+</head>
+<body class="loding">
