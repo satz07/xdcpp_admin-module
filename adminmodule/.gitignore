@@ -58,3 +58,6 @@ Thumbs.db
 
 # Local env and secrets (never commit)
 .env
+
+# PM2 / app logs
+logs/

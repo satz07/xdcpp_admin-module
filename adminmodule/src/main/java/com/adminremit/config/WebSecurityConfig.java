@@ -70,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/backoffice/disbursment/**").permitAll()
                 .antMatchers(
                         "/js/**",
+                        "/libs/**",
                         "/images/**",
                         "../images/**",
                         "/css/**",
@@ -116,6 +117,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity webSecurity) {
         webSecurity.ignoring().antMatchers(
                 "/js/**",
+                "/libs/**",
                 "/images/**",
                 "../images/**",
                 "/css/**",
