@@ -49,8 +49,8 @@
 										class="selectpicker show-tick border" id="partnerid"
 										name="partnerid" title="Select Partner ID" data-style="btn"
 										data-dropup-auto="false">
-										<option value="">Select All</option>
-										<option th:value="'XDC Payments'">XDC Payments</option>
+                                        <option value="">Select All</option>
+                                        <option th:value="${brand.name}" th:text="${brand.name}">XDC Payments</option>
 									</select>
 								</div>
 								<div class="col-md-3 mt-2">
@@ -125,8 +125,8 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="Registration : ${Registrations}">
-										<td th:text="'XDC Payments'"></td>
+                                    <tr th:each="Registration : ${Registrations}">
+                                        <td th:text="${brand.name}">XDC Payments</td>
 										<td th:text="${#dates.format(Registration.createAt, 'dd-MMM-yyyy HH:mm:ss')}"></td>
 										<td th:text="Active"></td>
 										<td th:text="Personal"></td>

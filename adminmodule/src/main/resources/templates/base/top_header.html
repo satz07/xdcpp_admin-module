@@ -49,8 +49,13 @@
         </ul>
         <div class="logo-box px-3">
             <a href="#" class="logo logo-light text-center">
-                <span class="logo-sm pt-3"> <img th:src="@{/img/xdc-inverted-primary-icon.png}" alt="XDC Payments" height="24" class="xdc-logo-sm"> </span>
-                <span class="logo-lg pt-2 xdc-logo-lg"> <img th:src="@{/img/xdc-payments-logo-light.svg}" alt="XDC Payments" class="xdc-header-logo" onerror="this.onerror=null; this.src='/img/xdc-payments-logo.png';" /> </span>
+                <span class="logo-sm pt-3">
+                    <img th:src="@{${brand.darkFavicon}}" th:alt="${brand.name}" height="24" class="xdc-logo-sm">
+                </span>
+                <span class="logo-lg pt-2 xdc-logo-lg">
+                    <img th:src="@{${brand.logo}}" th:alt="${brand.name}" class="xdc-header-logo"
+                         onerror="this.onerror=null; this.src='/img/xdc-payments-logo.png';" />
+                </span>
             </a>
         </div>
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
@@ -58,6 +63,8 @@
                 <button class="button-menu-mobile waves-effect waves-light">
                     <i class="fe-menu"></i>
                 </button>
+
+                r
             </li>
             <li>
                 <a class="navbar-toggle nav-link" data-toggle="collapse" data-target="#topnav-menu-content">

@@ -50,7 +50,7 @@
                                         name="partnerid" title="Select Partner ID" data-style="btn"
                                         data-dropup-auto="false">
                                     <option value="">Select All</option>
-                                    <option th:value="'XDC Payments'">XDC Payments</option>
+                                    <option th:value="${brand.name}" th:text="${brand.name}">XDC Payments</option>
                                 </select>
                                 </div>
                                 <div class="col-md-3 mt-2">
@@ -108,7 +108,7 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="Signup : ${Signups}">
-                                    <td th:text="'XDC Payments'"></td>
+                                    <td th:text="${brand.name}">XDC Payments</td>
                                     <td th:text="${#dates.format(Signup.createAt, 'dd-MMM-yyyy HH:mm:ss')}"></td>
                                     <td th:text="${Signup.type}"></td>
                                     <td th:text="${Signup.email}"></td>

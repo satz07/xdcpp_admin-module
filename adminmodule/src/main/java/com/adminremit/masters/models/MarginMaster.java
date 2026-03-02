@@ -30,13 +30,13 @@ public class MarginMaster extends FeeSettingBaseModel {
     private BigDecimal txnSpread;
 
     @Column(name = "is_txn_spread_applicable")
-    private boolean isTxnSpreadApplicable;
+    private Boolean isTxnSpreadApplicable;
 
     @Column(name = "vendor_spread",columnDefinition="Decimal(20,5) default '0.00'")
     private BigDecimal vendorSpread;
 
     @Column(name = "is_vendor_spread_applicable")
-    private boolean isVendorSpreadApplicable;
+    private Boolean isVendorSpreadApplicable;
 
     @Column(name = "total_spread",columnDefinition="Decimal(20,5) default '0.00'")
     private BigDecimal totalSpread;
@@ -82,7 +82,7 @@ public class MarginMaster extends FeeSettingBaseModel {
     }
 
     public boolean isTxnSpreadApplicable() {
-        return isTxnSpreadApplicable;
+        return Boolean.TRUE.equals(isTxnSpreadApplicable);
     }
 
     public void setIsTxnSpreadApplicable(boolean txnSpreadApplicable) {
@@ -90,7 +90,7 @@ public class MarginMaster extends FeeSettingBaseModel {
     }
 
     public boolean getIsTxnSpreadApplicable() {
-        return isTxnSpreadApplicable;
+        return Boolean.TRUE.equals(isTxnSpreadApplicable);
     }
 
     public BigDecimal getVendorSpread() {
@@ -102,11 +102,11 @@ public class MarginMaster extends FeeSettingBaseModel {
     }
 
     public boolean isVendorSpreadApplicable() {
-        return isVendorSpreadApplicable;
+        return Boolean.TRUE.equals(isVendorSpreadApplicable);
     }
 
     public boolean getIsVendorSpreadApplicable() {
-        return isVendorSpreadApplicable;
+        return Boolean.TRUE.equals(isVendorSpreadApplicable);
     }
 
     public void setIsVendorSpreadApplicable(boolean vendorSpreadApplicable) {

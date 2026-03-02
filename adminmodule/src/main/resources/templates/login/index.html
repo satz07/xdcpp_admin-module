@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Log In</title>
+    <title th:text="${brand.name} + ' - Log In'">Log In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
     <link th:href="@{/css/app.min.css}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/xdc-primary-icon.png}">
-    <link rel="icon" type="image/png" sizes="16x16" media="(prefers-color-scheme: dark)" th:href="@{/img/xdc-inverted-primary-icon.png}">
-    <link rel="shortcut icon" th:href="@{/img/xdc-primary-icon.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{${brand.favicon}}">
+    <link rel="icon" type="image/png" sizes="16x16" media="(prefers-color-scheme: dark)" th:href="@{${brand.darkFavicon}}">
+    <link rel="shortcut icon" th:href="@{${brand.favicon}}">
     <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" th:href="@{/css/override.css}">
     <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
                     <div class="card-body p-4">
                         <div class="text-center w-75 m-auto">
                             <div class="auth-logo text-center">
-                                <img th:src="@{/img/xdc-payments-logo.png}" alt="XDC Payments" class="img-fluid">
+                                <img th:src="@{${brand.loginImage}}" th:alt="${brand.name}" class="img-fluid">
                             </div>
                             <div th:if="${param.error != null}" style="color: red;">Wrong credentials!!</div>
                             <p class="text-muted mb-4 mt-3 text-center">Enter your email address and password to access admin panel.</p>

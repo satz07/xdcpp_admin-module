@@ -38,8 +38,8 @@
 										class="selectpicker show-tick border" id="partnerid"
 										title="Select Partner ID" data-style="btn" name="partnerId"
 										data-dropup-auto="false">
-										<option value="">Select All</option>
-										<option th:value="'XDC Payments'">XDC Payments</option>
+                                        <option value="">Select All</option>
+                                        <option th:value="${brand.name}" th:text="${brand.name}">XDC Payments</option>
 									</select>
 								</div>
 								<div class="col-md-3 mt-2">

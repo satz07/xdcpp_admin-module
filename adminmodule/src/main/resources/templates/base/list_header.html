@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Remittance</title>
+    <title th:text="${brand.name}">Remittance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="icon" type="image/png" th:href="@{/img/xdc-primary-icon.png}">
-    <link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" th:href="@{/img/xdc-inverted-primary-icon.png}">
-    <link rel="shortcut icon" th:href="@{/img/xdc-primary-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{${brand.favicon}}">
+    <link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" th:href="@{${brand.darkFavicon}}">
+    <link rel="shortcut icon" th:href="@{${brand.favicon}}">
     <!-- third party css -->
     <link th:href="@{/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}" rel="stylesheet" type="text/css" />

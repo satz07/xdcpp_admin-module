@@ -12,9 +12,9 @@
 
 
     <link th:href="@{/css/icons.min.css}" rel="stylesheet" type="text/css" />
-    <link rel="icon" type="image/png" th:href="@{/img/xdc-primary-icon.png}">
-    <link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" th:href="@{/img/xdc-inverted-primary-icon.png}">
-    <link rel="shortcut icon" th:href="@{/img/xdc-primary-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{${brand.favicon}}">
+    <link rel="icon" type="image/png" media="(prefers-color-scheme: dark)" th:href="@{${brand.darkFavicon}}">
+    <link rel="shortcut icon" th:href="@{${brand.favicon}}">
 </head>
 <body class="loading authentication-bg authentication-bg-pattern">
 <div class="account-pages mt-5 mb-5">
@@ -26,7 +26,7 @@
                     <div class="card-body p-4">
                         <div class="text-center w-75 m-auto">
                             <div class="auth-logo">
-                                <p class="text-center">XDC Payments</p>
+                                <p class="text-center" th:text="${brand.name}">XDC Payments</p>
                             </div>
                         </div>
 

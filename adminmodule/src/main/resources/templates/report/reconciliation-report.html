@@ -33,7 +33,7 @@
                                             <div class="col-md-3 mt-2">
                                                 <label for="partner_id">Select Partner ID</label>
                                                 <select class="selectpicker show-tick border" id="partner_id" title="Select Partner ID" data-style="btn" data-dropup-auto="false">
-                                                    <option value="XDC Payments">XDC Payments</option>
+                                                    <option th:value="${brand.name}" th:text="${brand.name}">XDC Payments</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-3 mt-2">
